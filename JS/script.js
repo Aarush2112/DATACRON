@@ -128,7 +128,7 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  // ---------- Hero starfield / node network ----------
+  // ---------- Ultra-Lightweight Hero Starfield ----------
   const canvas = qs("#starfield");
   if (!canvas) return;
 
@@ -144,7 +144,10 @@
   let nodes = [];
   let rafId = 0;
   let lastTime = 0;
-  const FPS = 30; // Reduced to 30 FPS for Vercel performance optimization
+  let isRunning = false;
+  
+  // High performance cap: ~80-120ms per frame update (approx 10 FPS)
+  const FPS = 10;
   const frameInterval = 1000 / FPS;
 
   const rand = (min, max) => min + Math.random() * (max - min);
@@ -161,17 +164,18 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
     const isMobile = w < 768;
-    const maxParticles = isMobile ? 20 : 40; // Aggressive reduction
-    const target = clamp(Math.floor((w * h) / 18000), 10, maxParticles);
+    // Aggressive particle reduction
+    const maxParticles = isMobile ? 12 : 25;
+    const target = clamp(Math.floor((w * h) / 25000), 8, maxParticles);
     
-    // Slow down velocity for calm cosmic dust (0.1 - 0.3)
     nodes = Array.from({ length: target }, () => ({
       x: rand(0, w),
       y: rand(0, h),
-      vx: rand(-0.3, 0.3) * (Math.random() > 0.5 ? 1 : -1) * 0.5, // Map 0.1-0.3 feel to our delta logic
-      vy: rand(-0.3, 0.3) * (Math.random() > 0.5 ? 1 : -1) * 0.5,
-      r: rand(0.8, 1.9),
-      a: rand(0.35, 0.9),
+      // Very slow cosmic dust drift speed (mapped slightly differently for 10 FPS delta bounds)
+      vx: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
+      vy: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
+      r: rand(1.0, 2.2),
+      a: rand(0.5, 0.9),
     }));
   };
 
@@ -182,91 +186,86 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    // Update positions - completely decoupled from mouse
-    for (const n of nodes) {
-      n.x += n.vx;
-      n.y += n.vy;
-      if (n.x < -20) n.x = w + 20;
-      if (n.x > w + 20) n.x = -20;
-      if (n.y < -20) n.y = h + 20;
-      if (n.y > h + 20) n.y = -20;
-    }
-
-    // Connections
+    // Update positions - completely decoupled from mouse tracking/repulsion
+    // Mobile entirely disables movement for zero computation overhead
     if (!isMobile) {
-      const maxDist = 120;
-      ctx.lineWidth = 1;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d > maxDist) continue;
-
-          // Reduced connection logic: capped opacity and simpler lines
-          const t = 1 - d / maxDist;
-          const alpha = 0.2 * t; // Explicit 0.2 maximum opacity as requested
-
-          const hue = (i + j) % 3;
-          const stroke =
-            hue === 0
-              ? `rgba(0,242,255,${alpha})`
-              : hue === 1
-                ? `rgba(123,97,255,${alpha})`
-                : `rgba(255,0,230,${alpha * 0.85})`;
-
-          ctx.strokeStyle = stroke;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
+      for (const n of nodes) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < -20) n.x = w + 20;
+        if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20;
+        if (n.y > h + 20) n.y = -20;
       }
     }
 
-    // Nodes / stars - highly optimized render, reduced glow blur logic
+    // Draw only standalone stars/particles (no expensive neural connections)
     for (const n of nodes) {
+      // Small core star
       ctx.beginPath();
-      ctx.fillStyle = `rgba(255,255,255,${0.12 + n.a * 0.18})`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${n.a})`;
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
-      // Simplified, tighter glow dot
+      // Simple, tight glowing ring without heavy filters or shadow gradients
       ctx.beginPath();
-      ctx.fillStyle = `rgba(0,242,255,${0.06 + n.a * 0.08})`;
-      ctx.arc(n.x, n.y, n.r * 1.5, 0, Math.PI * 2); // Reduced from 2.3 to 1.5
+      ctx.fillStyle = `rgba(0, 242, 255, ${n.a * 0.3})`;
+      ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2); 
       ctx.fill();
     }
   };
 
   const loop = (timestamp) => {
+    if (!isRunning) return;
     rafId = window.requestAnimationFrame(loop);
 
     if (!lastTime) lastTime = timestamp;
     const elapsed = timestamp - lastTime;
 
+    // Throttle rendering tightly to FPS cap
     if (elapsed > frameInterval) {
       lastTime = timestamp - (elapsed % frameInterval);
       draw();
     }
   };
 
-  const start = () => {
-    window.cancelAnimationFrame(rafId);
+  const play = () => {
+    if (isRunning) return;
+    isRunning = true;
     lastTime = 0;
-    resize();
-    if (!prefersReduced) loop(performance.now());
-    else draw();
+    if (!prefersReduced && canvas.clientWidth >= 768) {
+      loop(performance.now());
+    } else {
+      draw(); // Render statically once if reduced motion or mobile
+    }
   };
 
-  // Resize + start
+  const pause = () => {
+    isRunning = false;
+    window.cancelAnimationFrame(rafId);
+  };
+
+  const start = () => {
+    pause();
+    resize();
+    play();
+  };
+
+  // Tab visibility logic (Pauses everything instantly off-screen)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pause();
+    } else {
+      play();
+    }
+  });
+
+  // Resize listener
   start();
 
   let resizeTimer = 0;
   window.addEventListener("resize", () => {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(start, 120);
+    resizeTimer = window.setTimeout(start, 200);
   });
 })();
