@@ -144,18 +144,8 @@
   let nodes = [];
   let rafId = 0;
   let lastTime = 0;
-  const FPS = 45;
+  const FPS = 30; // Reduced to 30 FPS for Vercel performance optimization
   const frameInterval = 1000 / FPS;
-
-  let mouseX = -1000;
-  let mouseY = -1000;
-  const interactionRadius = 80;
-
-  document.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = (e.clientX - rect.left) * DPR;
-    mouseY = (e.clientY - rect.top) * DPR;
-  });
 
   const rand = (min, max) => min + Math.random() * (max - min);
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
@@ -171,15 +161,15 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
     const isMobile = w < 768;
-    const maxParticles = isMobile ? 30 : 60;
+    const maxParticles = isMobile ? 20 : 40; // Aggressive reduction
     const target = clamp(Math.floor((w * h) / 18000), 10, maxParticles);
     
-    // Slow down velocity for calm floating dust effect
+    // Slow down velocity for calm cosmic dust (0.1 - 0.3)
     nodes = Array.from({ length: target }, () => ({
       x: rand(0, w),
       y: rand(0, h),
-      vx: rand(-0.08, 0.08),
-      vy: rand(-0.06, 0.06),
+      vx: rand(-0.3, 0.3) * (Math.random() > 0.5 ? 1 : -1) * 0.5, // Map 0.1-0.3 feel to our delta logic
+      vy: rand(-0.3, 0.3) * (Math.random() > 0.5 ? 1 : -1) * 0.5,
       r: rand(0.8, 1.9),
       a: rand(0.35, 0.9),
     }));
@@ -192,27 +182,8 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    // Soft vignette
-    const vignette = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.7);
-    vignette.addColorStop(0, "rgba(0,242,255,0.05)");
-    vignette.addColorStop(1, "rgba(0,0,0,0.0)");
-    ctx.fillStyle = vignette;
-    ctx.fillRect(0, 0, w, h);
-
-    // Update positions
+    // Update positions - completely decoupled from mouse
     for (const n of nodes) {
-      // Subtle mouse repulsion logic
-      if (!isMobile) {
-        const dx = (mouseX / DPR) - n.x;
-        const dy = (mouseY / DPR) - n.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < interactionRadius) {
-          const force = (interactionRadius - dist) / interactionRadius;
-          n.x -= (dx / dist) * force * 0.5; // Very subtle repulsion
-          n.y -= (dy / dist) * force * 0.5;
-        }
-      }
-
       n.x += n.vx;
       n.y += n.vy;
       if (n.x < -20) n.x = w + 20;
@@ -234,8 +205,9 @@
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d > maxDist) continue;
 
+          // Reduced connection logic: capped opacity and simpler lines
           const t = 1 - d / maxDist;
-          const alpha = 0.06 * t; // subtle lines
+          const alpha = 0.2 * t; // Explicit 0.2 maximum opacity as requested
 
           const hue = (i + j) % 3;
           const stroke =
@@ -254,17 +226,17 @@
       }
     }
 
-    // Nodes / stars
+    // Nodes / stars - highly optimized render, reduced glow blur logic
     for (const n of nodes) {
       ctx.beginPath();
       ctx.fillStyle = `rgba(255,255,255,${0.12 + n.a * 0.18})`;
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
-      // Glow dot
+      // Simplified, tighter glow dot
       ctx.beginPath();
       ctx.fillStyle = `rgba(0,242,255,${0.06 + n.a * 0.08})`;
-      ctx.arc(n.x, n.y, n.r * 2.3, 0, Math.PI * 2);
+      ctx.arc(n.x, n.y, n.r * 1.5, 0, Math.PI * 2); // Reduced from 2.3 to 1.5
       ctx.fill();
     }
   };
