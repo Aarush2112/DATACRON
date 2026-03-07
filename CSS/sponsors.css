@@ -1,0 +1,47 @@
+/* =========================
+   Sponsors Hero
+   ========================= */
+.section--sponsors-hero {
+    position: relative;
+    padding: 120px 0 60px;
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.08), transparent 70%);
+}
+
+.section--sponsors-hero .section__title {
+    font-size: clamp(36px, 5vw, 64px);
+}
+
+/* =========================
+   Sponsors Preview on Homepage
+   ========================= */
+.sponsors-preview {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+/* =========================
+   Coming Soon Generic
+   ========================= */
+.sponsors-coming-soon {
+    font-family: "Orbitron", system-ui, sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #00f2ff;
+    text-align: center;
+    text-shadow:
+        0 0 8px rgba(0,242,255,0.7),
+        0 0 16px rgba(0,242,255,0.5);
+    margin: 0;
+}
+
+/* =========================
+   Sponsors Listing Page Helper
+   ========================= */
+.sponsors-coming-soon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}

@@ -30,6 +30,8 @@
 
 html{
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body{
@@ -142,12 +144,13 @@ body::before{
 .nav{
     position: relative;
     z-index: 1;
-    width: min(var(--max), calc(100% - 40px));
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 0;
+    padding: 12px 18px;
 }
 
 .nav__brand{
@@ -488,6 +491,27 @@ body::before{
     margin-top: 26px;
     display: flex;
     justify-content: center;
+}
+
+/* =========================
+   Coming Soon Generic Styles
+   ========================= */
+.coming-soon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coming-soon-text {
+    font-family: "Orbitron", system-ui, sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #00f2ff;
+    text-align: center;
+    text-shadow:
+        0 0 10px rgba(0,242,255,0.7),
+        0 0 20px rgba(0,242,255,0.5);
+    margin: 30px 0 0 0;
 }
 
 /* About decorative nodes */
