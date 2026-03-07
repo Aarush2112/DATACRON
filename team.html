@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team | Datacron 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/team.css">
+</head>
+<body>
+    <!-- Galaxy Background -->
+    <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary">
+            <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
+                <span class="nav__brandText">Datacron 2026</span>
+            </a>
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+                <span class="nav__toggleBars" aria-hidden="true"></span>
+            </button>
+            <div class="nav__menu" id="navMenu">
+                <a class="nav__link" href="index.html">Home</a>
+                <a class="nav__link" href="competitions.html">Competitions</a>
+                <a class="nav__link" href="speakers.html">Speakers</a>
+                <a class="nav__link is-active" href="team.html">Team</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top" class="page-main">
+        <section class="section">
+            <div class="container">
+                <h1 class="section__title">Team</h1>
+                <p class="section__lead">Content coming soon.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Footer">
+        <div class="container footer-container">
+            <div class="left-section">
+                <div class="university-badge">
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="auto" height="44" />
+                </div>
+                <span class="footer__logo">Datacron 2026</span>
+            </div>
+            <nav class="center-section" aria-label="Footer navigation">
+                <a class="footer__link" href="index.html">Home</a>
+                <a class="footer__link" href="competitions.html">Competitions</a>
+                <a class="footer__link" href="speakers.html">Speakers</a>
+                <a class="footer__link" href="team.html">Team</a>
+            </nav>
+            <div class="right-section">
+                <div class="footer__block">
+                    <h4 class="footer__title">Connect</h4>
+                    <div class="social">
+                        <a class="social__icon" href="#" aria-label="Instagram (placeholder)">IG</a>
+                        <a class="social__icon" href="#" aria-label="LinkedIn (placeholder)">in</a>
+                        <a class="social__icon" href="#" aria-label="YouTube (placeholder)">YT</a>
+                    </div>
+                </div>
+                <div class="footer__block">
+                    <h4 class="footer__title">Contact Us</h4>
+                    <p class="footer__text">Email: your-email@domain.com</p>
+                    <p class="footer__text">Phone: +91 XXXXXXXXXX</p>
+                    <p class="footer__text">
+                        <a class="footer__location" href="https://maps.app.goo.gl/PZGfSiCdk2HM8J666" target="_blank" rel="noopener noreferrer">Location: Rishihood University Campus</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© <span id="year"></span> Datacron 2026. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="./JS/script.js" defer></script>
+    <script src="./JS/background.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datacron 2026</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+    <!-- Galaxy Background -->
+    <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
+
+    <!-- Sticky Glass Navbar -->
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary">
+            <a class="nav__brand" href="#top" aria-label="Datacron 2026 Home">
+                <span class="nav__brandText">Datacron 2026</span>
+            </a>
+
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+                <span class="nav__toggleBars" aria-hidden="true"></span>
+            </button>
+
+            <div class="nav__menu" id="navMenu">
+                <a class="nav__link is-active" href="#top">Home</a>
+                <a class="nav__link" href="#competitions">Competitions</a>
+                <a class="nav__link" href="#speakers">Speakers</a>
+                <a class="nav__link" href="team.html">Team</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <!-- Hero -->
+        <section class="hero" aria-label="Datacron 2026 hero">
+            <canvas class="hero__canvas" id="starfield" aria-hidden="true"></canvas>
+            <div class="hero__bgGlow" aria-hidden="true"></div>
+
+            <div class="hero__content">
+                <!-- <p class="hero__kicker reveal">Enter the AI Data Galaxy</p> -->
+                <h1 class="hero__title reveal">DATACRON 2026</h1>
+                <p class="hero__subtitle reveal">Where Data Meets Intelligence</p>
+
+                <div class="hero__actions reveal">
+                    <a class="btn btn--primary" href="#competitions">Explore Competitions</a>
+                    <a class="btn btn--ghost" href="#about">Know More</a>
+                    <a class="btn btn--ghost" href="#speakers">Speakers</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section section--about" id="about" aria-label="About Datacron 2026">
+            <div class="container">
+                <div class="section__header reveal">
+                    <h2 class="section__title">About Datacron 2026</h2>
+                    <p class="section__lead">
+                        Datacron 2026 is the flagship tech fest of the B.Tech Computer Science &amp; Data Science department.
+                        Replace this text with your fest story—mission, energy, and what makes Datacron 2026 unique.
+                    </p>
+                </div>
+
+                <!-- Decorative AI data nodes -->
+                <div class="nodes" aria-hidden="true">
+                    <span class="node node--a"></span>
+                    <span class="node node--b"></span>
+                    <span class="node node--c"></span>
+                    <span class="node node--d"></span>
+                    <span class="node node--e"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitions Preview -->
+        <section class="section" id="competitions" aria-label="Featured Competitions">
+            <div class="container">
+                <div class="section__header reveal">
+                    <h2 class="section__title">Featured Competitions</h2>
+                    <p class="section__lead">Competitions are coming soon. Stay tuned for the full lineup from the Datacron 2026 arena.</p>
+                </div>
+
+                <div class="grid grid--3">
+                    <article class="card reveal">
+                        <div class="card__media mediaPlaceholder" role="img" aria-label="Competition image placeholder"></div>
+                        <div class="card__body">
+                            <h3 class="card__title">Coming Soon</h3>
+                            <p class="card__text">Competition details will be announced soon.</p>
+                        </div>
+                    </article>
+
+                    <article class="card reveal">
+                        <div class="card__media mediaPlaceholder" role="img" aria-label="Competition image placeholder"></div>
+                        <div class="card__body">
+                            <h3 class="card__title">Coming Soon</h3>
+                            <p class="card__text">Competition details will be announced soon.</p>
+                        </div>
+                    </article>
+
+                    <article class="card reveal">
+                        <div class="card__media mediaPlaceholder" role="img" aria-label="Competition image placeholder"></div>
+                        <div class="card__body">
+                            <h3 class="card__title">Coming Soon</h3>
+                            <p class="card__text">Competition details will be announced soon.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="section__actions reveal">
+                    <a class="btn btn--secondary" href="competitions.html">View All Competitions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Speakers Preview -->
+        <section class="section section--alt" id="speakers" aria-label="Featured Speakers">
+            <div class="container">
+                <div class="section__header reveal">
+                    <h2 class="section__title">Featured Speakers</h2>
+                    <p class="section__lead">Industry voices and researchers shaping tomorrow’s AI data galaxy.</p>
+                </div>
+
+                <div class="grid grid--3">
+                    <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/joybanerjee/" target="_blank" rel="noopener noreferrer">
+                        <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
+                            <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" />
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">Joy Banerjee</h3>
+                            <p class="card__meta">VP of Design • Blinkit</p>
+                        </div>
+                    </a>
+
+                    <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/anildesign/" target="_blank" rel="noopener noreferrer">
+                        <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
+                            <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" />
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">Anil Reddy</h3>
+                            <p class="card__meta">Founder &amp; Design Director • Happy Pet Care</p>
+                        </div>
+                    </a>
+
+                    <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/ankit-goswami/" target="_blank" rel="noopener noreferrer">
+                        <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
+                            <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" />
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">Ankit Goswami</h3>
+                            <p class="card__meta">PM Leader • Expedia Group</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="section__actions reveal">
+                    <a class="btn btn--secondary" href="speakers.html" target="_blank" rel="noopener noreferrer">View All Speakers</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" aria-label="Footer">
+        <div class="container footer-container">
+            <div class="left-section">
+                <div class="university-badge">
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="auto" height="44" />
+                </div>
+                <span class="footer__logo">Datacron 2026</span>
+            </div>
+
+            <nav class="center-section" aria-label="Footer navigation">
+                <a class="footer__link" href="index.html">Home</a>
+                <a class="footer__link" href="competitions.html">Competitions</a>
+                <a class="footer__link" href="speakers.html">Speakers</a>
+                <a class="footer__link" href="team.html">Team</a>
+            </nav>
+
+            <div class="right-section">
+                <div class="footer__block">
+                    <h4 class="footer__title">Connect</h4>
+                    <div class="social">
+                        <a class="social__icon" href="#" aria-label="Instagram (placeholder)">IG</a>
+                        <a class="social__icon" href="#" aria-label="LinkedIn (placeholder)">in</a>
+                        <a class="social__icon" href="#" aria-label="YouTube (placeholder)">YT</a>
+                    </div>
+                </div>
+                <div class="footer__block">
+                    <h4 class="footer__title">Contact Us</h4>
+                    <p class="footer__text">Email: your-email@domain.com</p>
+                    <p class="footer__text">Phone: +91 XXXXXXXXXX</p>
+                    <p class="footer__text">
+                        <a class="footer__location" href="https://maps.app.goo.gl/PZGfSiCdk2HM8J666" target="_blank" rel="noopener noreferrer">Location: Rishihood University Campus</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <span>© <span id="year"></span> Datacron 2026. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="./JS/script.js" defer></script>
+    <script src="./JS/background.js" defer></script>
+</body>
+</html>
