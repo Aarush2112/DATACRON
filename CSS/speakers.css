@@ -1,0 +1,18 @@
+/* =========================================================
+   Speakers Page — Card Link & Hover Styles
+   ========================================================= */
+
+/* Make the anchor-tag card behave like a block (no underline, inherit text color) */
+a.card--speaker {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+/* Hover: lift + cyan glow */
+.card--speaker:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+    border-color: rgba(0, 242, 255, 0.5);
+}
