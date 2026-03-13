@@ -209,7 +209,7 @@
 
       // Simple, tight glowing ring without heavy filters or shadow gradients
       ctx.beginPath();
-      ctx.fillStyle = `rgba(0, 242, 255, ${n.a * 0.3})`;
+      ctx.fillStyle = `rgba(0, 255, 179, ${n.a * 0.3})`;
       ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2); 
       ctx.fill();
     }

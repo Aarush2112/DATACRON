@@ -1,247 +1,145 @@
 /* ============================================
-   AI Data Galaxy — Canvas Background Animation
+   AI Energy Waves — Canvas Background Animation
    Datacron 2026
    ============================================ */
 (function () {
   'use strict';
 
-  /* ---------- DOM ---------- */
   const canvas = document.getElementById('galaxy-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  /* ---------- Config ---------- */
-  const COLORS = ['#00f2ff', '#7b61ff', '#ff00e6'];
-  const CONNECTION_DIST = 140;       // px – max distance for neural-net lines
-  const MOUSE_RADIUS = 160;          // px – repulsion radius
-  const MOUSE_REPEL_STRENGTH = 0.6;  // how strongly particles move away
-  const PARALLAX_FACTOR = 0.35;      // how much slower than scroll
-  const TRAIL_SPAWN_INTERVAL = 60;   // ms between mouse-trail particles
-
+  let W, H;
   let particles = [];
-  let mouseX = -9999;
-  let mouseY = -9999;
   let scrollY = 0;
-  let W = 0;
-  let H = 0;
-  let trailParticles = [];
-  let lastTrailTime = 0;
+  const particleCount = window.innerWidth < 768 ? 40 : 120;
+  
+  // Colors: Emerald, Soft Green, Subtle Gold
+  const COLORS = ['#00ffb3', '#1affc6', '#e6d5a3'];
 
-  /* ---------- Helpers ---------- */
-  function isMobile() {
-    return window.innerWidth < 768;
-  }
-
-  function particleCount() {
-    if (isMobile()) return 50;
-    const area = window.innerWidth * window.innerHeight;
-    // Scale between 80 and 120 based on viewport area
-    return Math.min(120, Math.max(80, Math.round(area / 18000)));
-  }
-
-  function randomColor() {
-    return COLORS[Math.floor(Math.random() * COLORS.length)];
-  }
-
-  function hexToRGBA(hex, alpha) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r},${g},${b},${alpha})`;
-  }
-
-  /* ---------- Resize ---------- */
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth;
     H = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
     canvas.width = W * dpr;
     canvas.height = H * dpr;
+    ctx.scale(dpr, dpr);
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  /* ---------- Particle class ---------- */
   class Particle {
-    constructor(x, y, isTrail) {
-      this.x = x !== undefined ? x : Math.random() * W;
-      this.y = y !== undefined ? y : Math.random() * H;
-      this.baseRadius = isTrail
-        ? Math.random() * 1.5 + 0.8
-        : Math.random() * 2.5 + 1;
-      this.radius = this.baseRadius;
-      this.color = randomColor();
-      this.vx = (Math.random() - 0.5) * 0.35;
-      this.vy = (Math.random() - 0.5) * 0.35;
-      this.isTrail = !!isTrail;
-      this.life = isTrail ? 1.0 : -1; // -1 means permanent
-      this.decay = isTrail ? 0.012 + Math.random() * 0.008 : 0;
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.size = Math.random() * 2 + 0.5;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.speedX = Math.random() * 0.4 + 0.1;
+      this.frequency = Math.random() * 0.005 + 0.002;
+      this.phase = Math.random() * Math.PI * 2;
+      this.opacity = Math.random() * 0.4 + 0.1;
+      this.parallax = Math.random() * 0.15 + 0.05;
     }
 
     update() {
-      /* Parallax offset (visual only, stored scroll delta) */
-      const pY = scrollY * PARALLAX_FACTOR;
-
-      /* Mouse repulsion */
-      const dx = this.x - mouseX;
-      const dy = this.y - (mouseY + pY);
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < MOUSE_RADIUS && dist > 0.1) {
-        const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_REPEL_STRENGTH;
-        this.vx += (dx / dist) * force;
-        this.vy += (dy / dist) * force;
-      }
-
-      /* Friction */
-      this.vx *= 0.98;
-      this.vy *= 0.98;
-
-      this.x += this.vx;
-      this.y += this.vy;
-
-      /* Wrap edges */
-      if (this.x < -10) this.x = W + 10;
-      if (this.x > W + 10) this.x = -10;
-      if (this.y < -10) this.y = H + 10;
-      if (this.y > H + 10) this.y = -10;
-
-      /* Trail particle fading */
-      if (this.isTrail) {
-        this.life -= this.decay;
+      this.x += this.speedX;
+      // Wave motion
+      this.y += Math.sin(this.x * this.frequency + this.phase) * 0.3;
+      
+      if (this.x > W + 20) {
+        this.x = -20;
+        this.y = Math.random() * H;
       }
     }
 
-    draw(offset) {
-      const alpha = this.isTrail ? Math.max(this.life, 0) : 0.9;
-      const drawY = this.y - offset;
-
+    draw() {
+      const drawY = this.y - scrollY * this.parallax;
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
       ctx.beginPath();
-      ctx.arc(this.x, drawY, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = hexToRGBA(this.color, alpha);
-      ctx.shadowBlur = 14 + this.radius * 3;
-      ctx.shadowColor = hexToRGBA(this.color, alpha * 0.7);
+      ctx.arc(this.x, drawY, this.size, 0, Math.PI * 2);
       ctx.fill();
-      ctx.closePath();
     }
   }
 
-  /* ---------- Init particles ---------- */
-  function initParticles() {
+  function createParticles() {
     particles = [];
-    const count = particleCount();
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
   }
 
-  /* ---------- Draw connections ---------- */
-  function drawConnections(offset) {
-    const all = particles.concat(trailParticles);
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i < all.length; i++) {
-      for (let j = i + 1; j < all.length; j++) {
-        const dx = all[i].x - all[j].x;
-        const dy = (all[i].y - offset) - (all[j].y - offset);
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECTION_DIST) {
-          const alphaBase = 1 - dist / CONNECTION_DIST;
-          const alpha = alphaBase * 0.25;
-          // Blend colors between the two particles
-          ctx.strokeStyle = hexToRGBA(all[i].color, alpha);
-          ctx.shadowBlur = 6;
-          ctx.shadowColor = hexToRGBA(all[i].color, alpha * 0.5);
-          ctx.beginPath();
-          ctx.moveTo(all[i].x, all[i].y - offset);
-          ctx.lineTo(all[j].x, all[j].y - offset);
-          ctx.stroke();
-        }
-      }
+  function drawWave(t, speed, amplitude, color, yOffset) {
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = color;
+    
+    for (let i = -50; i < W + 50; i += 20) {
+      const y = (H / 2 + yOffset) + 
+                Math.sin(i * 0.003 + t * speed * 0.001) * amplitude + 
+                Math.sin(i * 0.008 + t * speed * 0.0015) * (amplitude / 2);
+      if (i === -50) ctx.moveTo(i, y);
+      else ctx.lineTo(i, y);
     }
-    ctx.shadowBlur = 0;
+    ctx.stroke();
   }
 
-  /* ---------- Animation Loop ---------- */
+  function drawVortex(t) {
+    const cx = W / 2;
+    const cy = H / 2;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(t * 0.0002);
+    
+    for (let i = 0; i < 3; i++) {
+      ctx.rotate((Math.PI * 2) / 3);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 150 + Math.sin(t * 0.001 + i) * 20, 50, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0, 255, 179, 0.03)';
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  let time = 0;
   function animate() {
     ctx.clearRect(0, 0, W, H);
-
-    const pOffset = scrollY * PARALLAX_FACTOR;
-
-    /* Update & draw permanent particles */
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw(pOffset);
-    }
-
-    /* Update & draw trail particles, remove dead ones */
-    for (let i = trailParticles.length - 1; i >= 0; i--) {
-      trailParticles[i].update();
-      trailParticles[i].draw(pOffset);
-      if (trailParticles[i].life <= 0) {
-        trailParticles.splice(i, 1);
-      }
-    }
-
-    /* Neural-network connections */
-    drawConnections(pOffset);
-
-    /* Reset canvas shadow */
-    ctx.shadowBlur = 0;
-    ctx.shadowColor = 'transparent';
+    
+    time++;
+    
+    // Low particle count on mobile check
+    const currentParticles = window.innerWidth < 768 ? particles.slice(0, 40) : particles;
+    
+    // Draw background waves
+    drawWave(time, 1, 40, 'rgba(0, 255, 179, 0.04)', -20);
+    drawWave(time, 0.7, 30, 'rgba(230, 213, 163, 0.03)', 20);
+    
+    // Center vortex pattern
+    drawVortex(time);
+    
+    // Draw particles
+    currentParticles.forEach(p => {
+      p.update();
+      p.draw();
+    });
 
     requestAnimationFrame(animate);
   }
 
-  /* ---------- Events ---------- */
-  function onMouseMove(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+  window.addEventListener('resize', () => {
+    resize();
+    createParticles();
+  });
 
-    const now = performance.now();
-    if (now - lastTrailTime > TRAIL_SPAWN_INTERVAL && trailParticles.length < 20) {
-      const offsetX = (Math.random() - 0.5) * 20;
-      const offsetY = (Math.random() - 0.5) * 20;
-      trailParticles.push(
-        new Particle(mouseX + offsetX, mouseY + scrollY * PARALLAX_FACTOR + offsetY, true)
-      );
-      lastTrailTime = now;
-    }
-  }
-
-  function onTouchMove(e) {
-    if (e.touches.length > 0) {
-      mouseX = e.touches[0].clientX;
-      mouseY = e.touches[0].clientY;
-    }
-  }
-
-  function onMouseLeave() {
-    mouseX = -9999;
-    mouseY = -9999;
-  }
-
-  function onScroll() {
-    scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-  }
-
-  let resizeTimer;
-  function onResize() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      resize();
-      initParticles();
-    }, 200);
-  }
-
-  /* ---------- Boot ---------- */
-  window.addEventListener('mousemove', onMouseMove, { passive: true });
-  window.addEventListener('touchmove', onTouchMove, { passive: true });
-  window.addEventListener('mouseleave', onMouseLeave);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onResize);
+  window.addEventListener('scroll', () => {
+    scrollY = window.pageYOffset || document.documentElement.scrollTop;
+  }, { passive: true });
 
   resize();
-  initParticles();
-  onScroll();
-  requestAnimationFrame(animate);
+  createParticles();
+  animate();
 })();
