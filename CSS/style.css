@@ -517,11 +517,9 @@ body::before{
     font-family: "Orbitron", system-ui, sans-serif;
     font-size: 28px;
     letter-spacing: 2px;
-    color: #00f2ff;
+    color: var(--accent);
     text-align: center;
-    text-shadow:
-        0 0 10px rgba(0,242,255,0.7),
-        0 0 20px rgba(0,242,255,0.5);
+    text-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
     margin: 30px 0 0 0;
 }
 
@@ -913,13 +911,20 @@ body::before{
     line-height: 1.7;
 }
 
+.footer__contact-person{
+    margin-top: 4px;
+    color: rgba(255,255,255,0.70);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 .footer__location{
     color: rgba(255,255,255,0.78);
     transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .footer__location:hover{
-    color: #00f2ff;
+    color: var(--accent);
     text-shadow: 0 0 8px rgba(0,242,255,0.4);
 }
 
