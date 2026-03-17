@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="./Assets/Logo.jpeg">
     <title>Datacron 2026</title>
-
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,8 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <span class="nav__brandText">Datacron</span>
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo">
+                <span class="nav__brandText">DATACRON 2026</span>
             </a>
 
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -61,7 +63,7 @@
         <section class="section section--about" id="about" aria-label="About Datacron 2026">
             <div class="container">
                 <div class="section__header reveal">
-                    <h2 class="section__title">About Datacron 2026</h2>
+                    <h2 class="section__title">About Datacron</h2>
                     <p class="section__lead">
                         Datacron 2026 is the flagship tech fest of the B.Tech Computer Science &amp; Data Science department.
                         Replace this text with your fest story—mission, energy, and what makes Datacron 2026 unique.
@@ -84,42 +86,28 @@
             <div class="container">
                 <div class="section__header reveal">
                     <h2 class="section__title">Event Countdown</h2>
-                </div>
-
-                <div class="countdown reveal" id="flip-countdown">
+                </div>                <div class="countdown reveal" id="countdown-timer">
                     <!-- Days -->
-                    <div class="countdown__block">
-                        <div class="flip-card" data-days>
-                            <div class="flip-card__top">00</div>
-                            <div class="flip-card__bottom">00</div>
-                        </div>
+                    <div class="countdown__card">
+                        <span class="countdown__value" data-days>00</span>
                         <span class="countdown__label">Days</span>
                     </div>
-
+    
                     <!-- Hours -->
-                    <div class="countdown__block">
-                        <div class="flip-card" data-hours>
-                            <div class="flip-card__top">00</div>
-                            <div class="flip-card__bottom">00</div>
-                        </div>
+                    <div class="countdown__card">
+                        <span class="countdown__value" data-hours>00</span>
                         <span class="countdown__label">Hours</span>
                     </div>
-
+    
                     <!-- Minutes -->
-                    <div class="countdown__block">
-                        <div class="flip-card" data-minutes>
-                            <div class="flip-card__top">00</div>
-                            <div class="flip-card__bottom">00</div>
-                        </div>
+                    <div class="countdown__card">
+                        <span class="countdown__value" data-minutes>00</span>
                         <span class="countdown__label">Minutes</span>
                     </div>
-
+    
                     <!-- Seconds -->
-                    <div class="countdown__block">
-                        <div class="flip-card" data-seconds>
-                            <div class="flip-card__top">00</div>
-                            <div class="flip-card__bottom">00</div>
-                        </div>
+                    <div class="countdown__card">
+                        <span class="countdown__value" data-seconds>00</span>
                         <span class="countdown__label">Seconds</span>
                     </div>
                 </div>

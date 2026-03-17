@@ -156,7 +156,19 @@ body::before{
 .nav__brand{
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 0;
+}
+
+.nav__logo {
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.nav__brand:hover .nav__logo {
+    filter: drop-shadow(0 0 8px var(--glow));
+    transform: scale(1.05);
 }
 
 .nav__brandText{
@@ -169,6 +181,7 @@ body::before{
     text-shadow:
         0 0 14px rgba(0,255,179,0.4),
         0 0 26px rgba(230,213,163,0.2);
+    white-space: nowrap;
 }
 
 .nav__menu{
@@ -567,103 +580,66 @@ body::before{
 }
 
 /* =========================
-   Flip Countdown
+   Digital Countdown
    ========================= */
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 24px;
-    perspective: 1000px;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.countdown__block {
+.countdown__card {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 24px 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.countdown__card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 179, 0.2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 179, 0.1);
+}
+
+.countdown__value {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    color: var(--accent);
+    text-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
+    line-height: 1;
 }
 
 .countdown__label {
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--muted);
-}
-
-.flip-card {
-    position: relative;
-    width: 80px;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    font-family: "Orbitron", sans-serif;
-    font-size: 44px;
-    font-weight: 600;
-    color: #e6d5a3;
-    line-height: 100px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: box-shadow 0.3s ease;
-}
-
-.flip-card:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 179, 0.2);
-}
-
-.flip-card__top,
-.flip-card__bottom {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
-    text-shadow: 0 0 15px rgba(0, 255, 179, 0.6);
-}
-
-.flip-card__top {
-    top: 0;
-    line-height: 100px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px 8px 0 0;
-}
-
-.flip-card__bottom {
-    bottom: 0;
-    line-height: 0;
-    border-radius: 0 0 8px 8px;
-}
-
-/* Flip Animation Classes */
-.flip-card-animating {
-    animation: flipTop 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-}
-
-@keyframes flipTop {
-    0% { transform: rotateX(0); }
-    100% { transform: rotateX(-360deg); }
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .countdown {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        max-width: 240px;
-        margin: 0 auto;
+        gap: 16px;
+        padding: 0 10px;
     }
 
-    .flip-card {
-        width: 70px;
-        height: 80px;
-        font-size: 32px;
-        line-height: 80px;
+    .countdown__card {
+        padding: 20px 15px;
     }
-
-    .flip-card__top { line-height: 80px; }
 }
 
 /* =========================
@@ -1097,6 +1073,15 @@ body::before{
     }
     .right-section .social{
         justify-content: center;
+    }
+
+    .nav__logo {
+        height: 32px;
+        margin-right: 8px;
+    }
+
+    .nav__brandText {
+        font-size: 16px;
     }
 }
 

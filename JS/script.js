@@ -263,39 +263,14 @@
   // ---------- Flip Countdown Logic ----------
   const initCountdown = () => {
     const targetDate = new Date("April 17, 2026 09:00:00").getTime();
-    const countdownEl = qs("#flip-countdown");
+    const countdownEl = qs("#countdown-timer");
     if (!countdownEl) return;
 
-    const blocks = {
+    const elements = {
       days: qs("[data-days]", countdownEl),
       hours: qs("[data-hours]", countdownEl),
       minutes: qs("[data-minutes]", countdownEl),
       seconds: qs("[data-seconds]", countdownEl),
-    };
-
-    let lastValues = { days: -1, hours: -1, minutes: -1, seconds: -1 };
-
-    const updateBlock = (type, value) => {
-      if (lastValues[type] === value) return;
-      
-      const block = blocks[type];
-      if (!block) return;
-
-      const formattedValue = String(value).padStart(2, "0");
-      
-      // Update values
-      const top = block.querySelector(".flip-card__top");
-      const bottom = block.querySelector(".flip-card__bottom");
-      
-      if (top) top.textContent = formattedValue;
-      if (bottom) bottom.textContent = formattedValue;
-
-      // Trigger animation
-      block.classList.remove("flip-card-animating");
-      void block.offsetWidth; // Trigger reflow
-      block.classList.add("flip-card-animating");
-
-      lastValues[type] = value;
     };
 
     const updateCountdown = () => {
@@ -303,10 +278,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        updateBlock("days", 0);
-        updateBlock("hours", 0);
-        updateBlock("minutes", 0);
-        updateBlock("seconds", 0);
+        Object.values(elements).forEach(el => { if (el) el.textContent = "00"; });
         return;
       }
 
@@ -315,10 +287,10 @@
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-      updateBlock("days", d);
-      updateBlock("hours", h);
-      updateBlock("minutes", m);
-      updateBlock("seconds", s);
+      if (elements.days) elements.days.textContent = String(d).padStart(2, "0");
+      if (elements.hours) elements.hours.textContent = String(h).padStart(2, "0");
+      if (elements.minutes) elements.minutes.textContent = String(m).padStart(2, "0");
+      if (elements.seconds) elements.seconds.textContent = String(s).padStart(2, "0");
     };
 
     updateCountdown();
