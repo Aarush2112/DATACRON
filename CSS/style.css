@@ -923,10 +923,24 @@ body::before{
     transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
+.social__icon-img{
+    width: 18px;
+    height: 18px;
+    opacity: 0.88;
+    filter: invert(1);
+    transition: opacity 220ms ease, filter 220ms ease, transform 220ms ease;
+}
+
 .social__icon:hover{
     transform: translateY(-2px);
     border-color: rgba(0,242,255,0.38);
     box-shadow: 0 0 22px rgba(0,242,255,0.14);
+}
+
+.social__icon:hover .social__icon-img{
+    opacity: 1;
+    transform: translateY(-0.5px);
+    filter: invert(1) drop-shadow(0 0 8px rgba(0,242,255,0.35));
 }
 
 .footer__bottom{
