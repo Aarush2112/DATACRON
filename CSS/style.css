@@ -357,10 +357,16 @@ body::before{
 .hero__title{
     margin-top: 22px;
     font-family: "Orbitron", system-ui, sans-serif;
-    font-size: clamp(46px, 8vw, 96px);
+    font-size: clamp(42px, 10vw, 110px);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    line-height: 1.02;
+    line-height: 1.1;
+    width: 100%;
+    text-align: center;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    display: inline-block;
+    padding: 10px 5px;
     background: linear-gradient(90deg, #ffffff 0%, var(--glow) 50%, var(--accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -1096,6 +1102,13 @@ body::before{
 
     .nav__brandText {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 480px){
+    .hero__title{
+        letter-spacing: 4px;
+        font-size: clamp(36px, 12vw, 70px);
     }
 }
 
