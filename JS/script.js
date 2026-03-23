@@ -130,10 +130,9 @@
 
   // ---------- Ultra-Lightweight Hero Starfield ----------
   const canvas = qs("#starfield");
-  if (!canvas) return;
-
-  const ctx = canvas.getContext("2d", { alpha: true });
-  if (!ctx) return;
+  if (canvas) {
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (ctx) {
 
   const prefersReduced =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -251,14 +250,16 @@
     play();
   };
 
-  // Tab visibility logic (Pauses everything instantly off-screen)
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      pause();
-    } else {
-      play();
+      // Tab visibility logic (Pauses everything instantly off-screen)
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          pause();
+        } else {
+          play();
+        }
+      });
     }
-  });
+  }
 
   // ---------- Flip Countdown Logic ----------
   const initCountdown = () => {
@@ -299,12 +300,44 @@
 
   initCountdown();
 
-  // Resize listener
-  start();
+  // ---------- Team Mobile "View More" Toggle ----------
+  const initTeamToggle = () => {
+    const viewMoreBtns = qsa(".view-more-btn");
+    
+    viewMoreBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const section = btn.closest(".department");
+        if (!section) return;
+        
+        const isExpanded = section.classList.toggle("expanded");
+        
+        // Update button text and accessibility
+        btn.textContent = isExpanded ? "View Less" : "View More";
+        btn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+        
+        // Smooth scroll back to section title when collapsing for better UX
+        if (!isExpanded) {
+          const header = qs(".department__header", section);
+          if (header) {
+            header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  };
 
-  let resizeTimer = 0;
-  window.addEventListener("resize", () => {
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(start, 200);
-  });
+  initTeamToggle();
+
+  // Resize listener
+  if (typeof start !== 'undefined') {
+    start();
+
+    let resizeTimer = 0;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(start, 200);
+    });
+  }
 })();
