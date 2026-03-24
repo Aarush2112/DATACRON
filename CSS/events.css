@@ -104,15 +104,29 @@
   pointer-events: none;
 }
 
-.event-card__media{
-  height: 148px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background:
-    linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-    radial-gradient(900px 180px at 22% 20%, rgba(0,255,179,0.22), rgba(0,0,0,0) 62%),
-    radial-gradient(700px 160px at 80% 20%, rgba(0,242,255,0.18), rgba(0,0,0,0) 58%);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18);
+.event-card__banner{
+  position: relative;
+  height: 160px;
+  margin: -16px -16px 14px; /* Offset card padding to make banner full width */
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+}
+
+/* Dark overlay gradient at bottom of banner */
+.event-card__banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+  pointer-events: none;
+}
+
+.event-card__banner-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .event-card__title{
@@ -158,11 +172,15 @@
 }
 
 .event-card:hover{
-  transform: translateY(-6px);
-  border-color: rgba(0,242,255,0.34);
+  transform: translateY(-8px);
+  border-color: rgba(0,242,255,0.5);
   box-shadow:
-    0 22px 54px rgba(0,0,0,0.46),
-    0 0 26px rgba(0,242,255,0.16);
+    0 22px 54px rgba(0,0,0,0.5),
+    0 0 30px rgba(0,242,255,0.25);
+}
+
+.event-card:hover .event-card__banner-img {
+  transform: scale(1.12);
 }
 
 /* ---------- Pre-fest: subtle blue warm-up glow ---------- */
@@ -219,4 +237,222 @@
   box-shadow:
     0 0 24px rgba(255,0,230,0.18),
     0 0 24px rgba(0,242,255,0.12);
+}
+
+/* ---------- Modal Popup System ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  padding: 20px;
+}
+
+.modal-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background: rgba(10, 11, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #00f2ff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 30px rgba(0, 242, 255, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.8);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  opacity: 0;
+}
+
+.modal-overlay.is-visible .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.25s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: rgba(0, 242, 255, 0.15);
+  border-color: #00f2ff;
+  color: #00f2ff;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.modal-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 242, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03); /* Fallback background */
+}
+
+.modal-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modal-overlay.is-visible .modal-banner img {
+  opacity: 1;
+}
+
+.modal-banner img.error {
+  display: none;
+}
+
+.modal-body {
+  padding: 24px 28px 28px;
+}
+
+.modal-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(20px, 4vw, 26px);
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+.modal-desc {
+  font-family: "Poppins", sans-serif;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.modal-btn--primary {
+  background: linear-gradient(90deg, #00f2ff, #006eff);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
+  border: none;
+}
+
+.modal-btn--primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 242, 255, 0.5);
+}
+
+.modal-btn--secondary {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  border: 1px solid rgba(0, 242, 255, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.modal-btn--secondary:hover {
+  background: rgba(0, 242, 255, 0.1);
+  border-color: #00f2ff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 242, 255, 0.2);
+}
+
+/* Mobile responsive modal */
+@media (max-width: 640px) {
+  .event-card__banner {
+    height: 130px;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+  
+  .modal-banner {
+    height: 140px;
+  }
+
+  .modal-banner img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .modal-desc {
+    font-size: 13.5px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .modal-btn {
+    width: 100%;
+    height: 44px;
+  }
 }

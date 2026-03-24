@@ -261,6 +261,106 @@
     }
   }
 
+  // ---------- Event Modal Logic ----------
+  const initEventModal = () => {
+    const modal = qs("#eventModal");
+    if (!modal) return;
+
+    const modalClose = qs("#modalClose", modal);
+    const modalBanner = qs("#modalBanner", modal);
+    const modalTitle = qs("#modalTitle", modal);
+    const modalDesc = qs("#modalDesc", modal);
+    const modalRegister = qs("#modalRegister", modal);
+    const modalRules = qs("#modalRules", modal);
+    const eventCards = qsa(".event-card");
+
+    // Initialize event card banners from data attributes
+    eventCards.forEach(card => {
+      const cardBannerImg = qs(".event-card__banner-img", card);
+      const bannerPath = card.getAttribute("data-banner");
+      if (cardBannerImg && bannerPath) {
+        cardBannerImg.src = bannerPath;
+      }
+
+      // Preload image on hover
+      card.addEventListener("mouseenter", () => {
+        if (bannerPath && bannerPath !== "#") {
+          const img = new Image();
+          img.src = bannerPath;
+        }
+      }, { once: true }); // Only preload once per card
+    });
+
+    const openModal = (card) => {
+      const data = {
+        title: card.getAttribute("data-title"),
+        brief: card.getAttribute("data-brief"),
+        banner: card.getAttribute("data-banner"),
+        register: card.getAttribute("data-register"),
+        rules: card.getAttribute("data-rules")
+      };
+
+      if (modalTitle) modalTitle.textContent = data.title || "";
+      if (modalDesc) modalDesc.textContent = data.brief || "";
+      
+      if (modalBanner) {
+        modalBanner.classList.remove("error");
+        modalBanner.src = data.banner || "";
+      }
+
+      if (modalRegister) modalRegister.href = data.register || "#";
+      if (modalRules) modalRules.href = data.rules || "#";
+
+      modal.classList.add("is-visible");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("is-visible");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      
+      // Reset banner after transition to prevent flicker on next open
+      setTimeout(() => {
+        if (modalBanner) {
+          modalBanner.src = "";
+          modalBanner.classList.remove("error");
+        }
+      }, 350);
+    };
+
+    // Handle banner loading error
+    if (modalBanner) {
+      modalBanner.onerror = () => {
+        modalBanner.classList.add("error");
+      };
+    }
+
+    eventCards.forEach(card => {
+      const btn = qs(".js-view-details", card);
+      if (btn) {
+        btn.addEventListener("click", () => openModal(card));
+      }
+    });
+
+    if (modalClose) {
+      modalClose.addEventListener("click", closeModal);
+    }
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-visible")) {
+        closeModal();
+      }
+    });
+  };
+
+  initEventModal();
+
   // ---------- Flip Countdown Logic ----------
   const initCountdown = () => {
     const targetDate = new Date("April 17, 2026 09:00:00").getTime();
