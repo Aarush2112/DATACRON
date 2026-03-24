@@ -274,21 +274,15 @@
     const modalRules = qs("#modalRules", modal);
     const eventCards = qsa(".event-card");
 
-    // Initialize event card banners from data attributes
+    // Preload modal banner on hover
     eventCards.forEach(card => {
-      const cardBannerImg = qs(".event-card__banner-img", card);
-      const bannerPath = card.getAttribute("data-banner");
-      if (cardBannerImg && bannerPath) {
-        cardBannerImg.src = bannerPath;
-      }
-
-      // Preload image on hover
       card.addEventListener("mouseenter", () => {
+        const bannerPath = card.getAttribute("data-banner");
         if (bannerPath && bannerPath !== "#") {
           const img = new Image();
           img.src = bannerPath;
         }
-      }, { once: true }); // Only preload once per card
+      }, { once: true });
     });
 
     const openModal = (card) => {
