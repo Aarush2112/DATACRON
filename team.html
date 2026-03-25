@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="./Assets/Logo.jpeg">
     <title>Team | Datacron 2026</title>
+    
+    <!-- Preload Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +22,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -49,7 +53,7 @@
                     <div class="team-grid" role="list">
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_3921 - Kapish Garg.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_3921 - Kapish Garg.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kapish Garg</h3>
@@ -67,7 +71,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/8ff1db64-51c5-4111-9042-8d919cd1eb4f - Bhavya.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/8ff1db64-51c5-4111-9042-8d919cd1eb4f - Bhavya.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Bhavya</h3>
@@ -85,7 +89,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260318-WA0005 - Shubh Mehrotra.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG-20260318-WA0005 - Shubh Mehrotra.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Shubh Mehrotra</h3>
@@ -103,7 +107,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/20260212_165543 - Poorak Pandey.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/20260212_165543 - Poorak Pandey.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Poorak Pandey</h3>
@@ -121,7 +125,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260317_235356 - Shivam Mugaji.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_20260317_235356 - Shivam Mugaji.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Shivam Jahane</h3>
@@ -149,7 +153,7 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/1761627824082 - Aaditya Prakash.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/1761627824082 - Aaditya Prakash.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Aaditya Prakash</h3>
@@ -167,7 +171,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260222-WA0035~2 - Mannat Bansal.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG-20260222-WA0035~2 - Mannat Bansal.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Mannat Bansal</h3>
@@ -185,7 +189,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Vansh_jain_pfp - Vansh Jain.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/Vansh_jain_pfp - Vansh Jain.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Vansh jain</h3>
@@ -203,7 +207,7 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-18 at 11.01.47 - Sumati Sen.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-18 at 11.01.47 - Sumati Sen.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sumati Sen</h3>
@@ -221,7 +225,7 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260317_233644 - Nimisha Goyal.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_20260317_233644 - Nimisha Goyal.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Nimisha Goyal</h3>
@@ -239,7 +243,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Screenshot 2026-03-17 at 21.57.32 - Sourabh Pal.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/Screenshot 2026-03-17 at 21.57.32 - Sourabh Pal.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sourabh Pal</h3>
@@ -257,7 +261,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260209-WA0016 - Sakshi Patel.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG-20260209-WA0016 - Sakshi Patel.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sakshi Patel</h3>
@@ -275,7 +279,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/C8357341-7E21-4FC3-A0E1-7F94CF827E1C - Prakriti Rautela.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/C8357341-7E21-4FC3-A0E1-7F94CF827E1C - Prakriti Rautela.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Prakriti Rautela</h3>
@@ -293,7 +297,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_1515 - Khushbu Lamboria.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_1515 - Khushbu Lamboria.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Khushbu Lamboria</h3>
@@ -321,7 +325,7 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Aarush_Gupta.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/Aarush_Gupta.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Aarush Gupta</h3>
@@ -339,7 +343,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Screenshot 2026-03-18 at 10.56.05 AM - Kashish.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/Screenshot 2026-03-18 at 10.56.05 AM - Kashish.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kashish</h3>
@@ -357,7 +361,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260318_115950 - Jatin.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_20260318_115950 - Jatin.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Jatin</h3>
@@ -385,7 +389,7 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260216_005214_655 - Alok Rawat.jpg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_20260216_005214_655 - Alok Rawat.jpg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Alok Rawat</h3>
@@ -403,7 +407,7 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/1773770457344 - Sarthak Kumar.png" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/1773770457344 - Sarthak Kumar.png" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sarthak Kumar</h3>
@@ -421,7 +425,7 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_0215 - Mayank Yadav.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_0215 - Mayank Yadav.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Mayank Yadav</h3>
@@ -439,7 +443,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20251227_211225_898 - Kunal Kumar.webp" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/IMG_20251227_211225_898 - Kunal Kumar.webp" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kunal Kumar</h3>
@@ -467,7 +471,7 @@
                     <div class="team-grid" role="list">
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-12 at 20.46.14 - Gunj Tibrewala.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-12 at 20.46.14 - Gunj Tibrewala.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Gunj Tibrewala</h3>
@@ -485,7 +489,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-17 at 21.46.14 - Nirav Jain.jpeg" alt="Team Member" class="team-card__img">
+                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-17 at 21.46.14 - Nirav Jain.jpeg" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Nirav Jain</h3>
@@ -503,7 +507,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -521,7 +525,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -539,7 +543,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -557,7 +561,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -575,7 +579,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -593,7 +597,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -611,7 +615,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -629,7 +633,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -647,7 +651,7 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="#" alt="Team Member" class="team-card__img">
+                                <img src="#" alt="Team Member" class="team-card__img"> loading="lazy"
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Name</h3>
@@ -674,7 +678,7 @@
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
-                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="auto" height="44" />
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
                 </div>
                 <span class="footer__logo">Datacron 2026</span>
             </div>
@@ -692,7 +696,7 @@
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest/" aria-label="Instagram (placeholder)" target="_blank" rel="noopener noreferrer">IG</a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn (placeholder)" target="_blank" rel="noopener noreferrer">in</a>
                         <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
-                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" />
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy" />
                         </a>
                     </div>
                 </div>
@@ -713,6 +717,5 @@
     </footer>
 
     <script src="./JS/script.js" defer></script>
-    <script src="./JS/background.js" defer></script>
 </body>
 </html>

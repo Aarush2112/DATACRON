@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="./Assets/Logo.jpeg">
     <title>Sponsors | Datacron 2026</title>
+    
+    <!-- Preload Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +22,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -55,7 +59,7 @@
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
-                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="auto" height="44" />
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
                 </div>
                 <span class="footer__logo">Datacron 2026</span>
             </div>
@@ -73,7 +77,7 @@
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest/" aria-label="Instagram (placeholder)" target="_blank" rel="noopener noreferrer">IG</a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn (placeholder)" target="_blank" rel="noopener noreferrer">in</a>
                         <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
-                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" />
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy" />
                         </a>
                     </div>
                 </div>
@@ -94,6 +98,5 @@
     </footer>
 
     <script src="./JS/script.js" defer></script>
-    <script src="./JS/background.js" defer></script>
 </body>
 </html>

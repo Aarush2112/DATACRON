@@ -558,6 +558,8 @@ body::before{
     border-top: none;
     border-bottom: none;
     box-shadow: none;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
 }
 
 .section--alt{
@@ -702,6 +704,7 @@ body::before{
     transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    contain: layout style paint;
 }
 
 .card::before{
@@ -791,6 +794,8 @@ body::before{
     backdrop-filter: blur(10px); /* Add glass futuristic effect */
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 -10px 40px rgba(0,242,255,0.05); /* Add very subtle neon glow (footer glow effect) */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
 }
 
 /* Footer: three sections in a row */
@@ -994,13 +999,13 @@ body::before{
 /* =========================
    Scroll reveal animations
    ========================= */
-.reveal{
+.js-ready .reveal{
     opacity: 0;
     transform: translateY(14px);
     transition: opacity 700ms ease, transform 700ms ease;
 }
 
-.reveal.is-visible{
+.js-ready .reveal.is-visible{
     opacity: 1;
     transform: translateY(0);
 }
@@ -1047,6 +1052,11 @@ body::before{
 }
 
 @media (max-width: 720px){
+    .site-header{
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
     .nav__toggle{
         display: inline-flex;
         align-items: center;
@@ -1331,6 +1341,8 @@ body::before{
     border-radius: 14px;
     text-align: center;
     transition: border-color 0.3s ease;
+    min-height: 80px;
+    contain: layout style paint;
 }
 
 .countdown-num {
@@ -1342,6 +1354,7 @@ body::before{
     margin-bottom: 4px;
     will-change: opacity;
     transition: opacity 0.2s ease;
+    min-height: 36px;
 }
 
 .countdown-unit {
@@ -1391,6 +1404,7 @@ body::before{
     gap: 20px;
     align-items: center;
     transition: transform 0.3s ease, border-color 0.3s ease;
+    contain: layout style paint;
 }
 
 .feature-card:hover {

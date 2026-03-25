@@ -106,40 +106,95 @@
   }
 
   let time = 0;
-  function animate() {
+  let rafId = 0;
+  let isRunning = false;
+  let lastTime = 0;
+  const FPS = window.innerWidth < 768 ? 20 : 60; // Throttle to 20 FPS on mobile
+  const frameInterval = 1000 / FPS;
+
+  function drawFrame() {
     ctx.clearRect(0, 0, W, H);
     
     time++;
     
-    // Low particle count on mobile check
     const currentParticles = window.innerWidth < 768 ? particles.slice(0, 40) : particles;
     
-    // Draw background waves
     drawWave(time, 1, 40, 'rgba(0, 255, 179, 0.04)', -20);
     drawWave(time, 0.7, 30, 'rgba(230, 213, 163, 0.03)', 20);
     
-    // Center vortex pattern
     drawVortex(time);
     
-    // Draw particles
     currentParticles.forEach(p => {
       p.update();
       p.draw();
     });
-
-    requestAnimationFrame(animate);
   }
 
+  function animate(timestamp) {
+    if (!isRunning) return;
+    rafId = requestAnimationFrame(animate);
+
+    if (!lastTime) lastTime = timestamp;
+    const elapsed = timestamp - lastTime;
+
+    if (elapsed > frameInterval) {
+      lastTime = timestamp - (elapsed % frameInterval);
+      drawFrame();
+    }
+  }
+
+  function startAnimation() {
+    if (isRunning) return;
+    isRunning = true;
+    lastTime = 0;
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function stopAnimation() {
+    isRunning = false;
+    cancelAnimationFrame(rafId);
+  }
+
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    resize();
-    createParticles();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resize();
+      createParticles();
+      // Only draw static frame if paused
+      if (!isRunning) drawFrame();
+    }, 200);
   });
 
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
   }, { passive: true });
 
-  resize();
-  createParticles();
-  animate();
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+  });
+
+  const init = () => {
+    resize();
+    createParticles();
+    drawFrame();
+    startAnimation();
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(init);
+  } else {
+    setTimeout(init, 100);
+  }
 })();

@@ -1,0 +1,15 @@
+/*
+  # Long-term caching for immutable assets
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  # Short caching for HTML (1 hour)
+  Cache-Control: public, max-age=3600
+
+# Explicit content types
+/*.css
+  Content-Type: text/css
+/*.js
+  Content-Type: text/javascript
+/*.svg
+  Content-Type: image/svg+xml

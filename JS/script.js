@@ -8,6 +8,9 @@
 (() => {
   "use strict";
 
+  // Mark JS ready immediately so .reveal hiding activates
+  document.documentElement.classList.add("js-ready");
+
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
@@ -136,59 +139,62 @@
   const cubeWrapper = qs(".cube-wrapper");
 
   if (heroSection && heroContent && featuredSection) {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const intensity = isMobile ? 0.7 : 1.0; // 30% reduction on mobile
+    const initCinematicScroll = () => {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const intensity = isMobile ? 0.7 : 1.0;
 
-    let ticking = false;
-    let lastScrollY = 0;
+      let ticking = false;
+      let lastScrollY = 0;
 
-    const handleCinematicScroll = () => {
-      const scrollY = lastScrollY;
-      const heroHeight = heroSection.offsetHeight;
-      const heroBottom = heroSection.offsetTop + heroHeight;
+      const handleCinematicScroll = () => {
+        const scrollY = lastScrollY;
+        const heroHeight = heroSection.offsetHeight;
 
-      // Progress: 0 at top of hero, 1 when hero bottom reaches viewport top
-      const rawProgress = Math.max(0, Math.min(1, scrollY / heroHeight));
+        const rawProgress = Math.max(0, Math.min(1, scrollY / heroHeight));
 
-      // Hero content: fade out and move up
-      const contentOffset = rawProgress * 60 * intensity;
-      const contentOpacity = 1 - rawProgress * 1.2; // fades out before fully scrolled
-      heroContent.style.transform = `translate3d(0, -${contentOffset}px, 0)`;
-      heroContent.style.opacity = Math.max(0, contentOpacity);
+        const contentOffset = rawProgress * 60 * intensity;
+        const contentOpacity = 1 - rawProgress * 1.2;
+        heroContent.style.transform = `translate3d(0, -${contentOffset}px, 0)`;
+        heroContent.style.opacity = Math.max(0, contentOpacity);
 
-      // Background glow: subtle zoom (desktop only)
-      if (heroBgGlow && !isMobile) {
-        const zoomScale = 1 + rawProgress * 0.08 * intensity;
-        heroBgGlow.style.transform = `scale(${zoomScale})`;
-      }
+        if (heroBgGlow && !isMobile) {
+          const zoomScale = 1 + rawProgress * 0.08 * intensity;
+          heroBgGlow.style.transform = `scale(${zoomScale})`;
+        }
 
-      // Featured cube: scale entrance (applied to wrapper to preserve rotation)
-      if (cubeWrapper) {
-        const featuredRect = featuredSection.getBoundingClientRect();
-        const viewH = window.innerHeight;
-        const featuredProgress = Math.max(0, Math.min(1,
-          (viewH - featuredRect.top) / (viewH * 0.4)
-        ));
-        const cubeScale = 0.9 + featuredProgress * 0.1;
-        cubeWrapper.style.transform = `scale(${cubeScale})`;
-      }
+        if (cubeWrapper) {
+          const featuredRect = featuredSection.getBoundingClientRect();
+          const viewH = window.innerHeight;
+          const featuredProgress = Math.max(0, Math.min(1,
+            (viewH - featuredRect.top) / (viewH * 0.4)
+          ));
+          const cubeScale = 0.9 + featuredProgress * 0.1;
+          cubeWrapper.style.transform = `scale(${cubeScale})`;
+        }
 
-      ticking = false;
-    };
+        ticking = false;
+      };
 
-    const onScroll = () => {
+      const onScroll = () => {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(handleCinematicScroll);
+        }
+      };
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
       lastScrollY = window.scrollY;
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(handleCinematicScroll);
-      }
+      handleCinematicScroll();
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    // Initial call
-    lastScrollY = window.scrollY;
-    handleCinematicScroll();
+    // Defer cinematic scroll setup to avoid blocking first paint
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initCinematicScroll);
+    } else {
+      setTimeout(initCinematicScroll, 80);
+    }
   }
 
   // ---------- Ultra-Lightweight Hero Starfield ----------
@@ -202,13 +208,11 @@
 
   const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
 
-  /** @type {{x:number,y:number,vx:number,vy:number,r:number,a:number}[]} */
   let nodes = [];
   let rafId = 0;
   let lastTime = 0;
   let isRunning = false;
   
-  // High performance cap: ~80-120ms per frame update (approx 10 FPS)
   const FPS = 10;
   const frameInterval = 1000 / FPS;
 
@@ -226,14 +230,12 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
     const isMobile = w < 768;
-    // Aggressive particle reduction
     const maxParticles = isMobile ? 12 : 25;
     const target = clamp(Math.floor((w * h) / 25000), 8, maxParticles);
     
     nodes = Array.from({ length: target }, () => ({
       x: rand(0, w),
       y: rand(0, h),
-      // Very slow cosmic dust drift speed (mapped slightly differently for 10 FPS delta bounds)
       vx: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
       vy: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
       r: rand(1.0, 2.2),
@@ -248,8 +250,6 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    // Update positions - completely decoupled from mouse tracking/repulsion
-    // Mobile entirely disables movement for zero computation overhead
     if (!isMobile) {
       for (const n of nodes) {
         n.x += n.vx;
@@ -261,15 +261,12 @@
       }
     }
 
-    // Draw only standalone stars/particles (no expensive neural connections)
     for (const n of nodes) {
-      // Small core star
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 255, 255, ${n.a})`;
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
-      // Simple, tight glowing ring without heavy filters or shadow gradients
       ctx.beginPath();
       ctx.fillStyle = `rgba(0, 255, 179, ${n.a * 0.3})`;
       ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2); 
@@ -284,7 +281,6 @@
     if (!lastTime) lastTime = timestamp;
     const elapsed = timestamp - lastTime;
 
-    // Throttle rendering tightly to FPS cap
     if (elapsed > frameInterval) {
       lastTime = timestamp - (elapsed % frameInterval);
       draw();
@@ -298,7 +294,7 @@
     if (!prefersReduced && canvas.clientWidth >= 768) {
       loop(performance.now());
     } else {
-      draw(); // Render statically once if reduced motion or mobile
+      draw();
     }
   };
 
@@ -313,7 +309,7 @@
     play();
   };
 
-      // Tab visibility logic (Pauses everything instantly off-screen)
+      // Tab visibility
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           pause();
@@ -321,6 +317,26 @@
           play();
         }
       });
+
+      // Draw one static frame immediately for visual parity, defer animation loop
+      resize();
+      draw();
+
+      // Start animation loop after idle
+      const startLoop = () => {
+        play();
+        let resizeTimer = 0;
+        window.addEventListener("resize", () => {
+          window.clearTimeout(resizeTimer);
+          resizeTimer = window.setTimeout(start, 200);
+        });
+      };
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(startLoop);
+      } else {
+        setTimeout(startLoop, 150);
+      }
     }
   }
 
@@ -500,16 +516,7 @@
 
   initTeamToggle();
 
-  // Resize listener
-  if (typeof start !== 'undefined') {
-    start();
 
-    let resizeTimer = 0;
-    window.addEventListener("resize", () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(start, 200);
-    });
-  }
 
   // ---------- Auto-Reload Logic ----------
   // If tab hidden for 30+ mins, reload on return
@@ -531,4 +538,18 @@
       }
     }
   });
+
+  // ---------- Lazy-load background.js after first paint ----------
+  const loadBackground = () => {
+    const bgScript = document.createElement('script');
+    bgScript.src = './JS/background.js';
+    bgScript.defer = true;
+    document.body.appendChild(bgScript);
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadBackground, { timeout: 2000 });
+  } else {
+    window.addEventListener('load', () => setTimeout(loadBackground, 100));
+  }
 })();

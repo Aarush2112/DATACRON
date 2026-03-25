@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="./Assets/Logo.jpeg">
     <title>Speakers | Datacron 2026</title>
+    
+    <!-- Preload Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +22,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -46,52 +50,52 @@
                     <!-- Tulshekar first as required -->
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/tulshekar-gangireddy/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Tulshekar.jpeg" alt="Tulshekar Gangireddy" class="speaker-img">
+                            <img src="./Assets/Tulshekar.jpeg" alt="Tulshekar Gangireddy" class="speaker-img" width="400" height="400" loading="lazy">
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Tulshekar Gangireddy</h3>
                             <p class="card__meta speaker-role">Executive Director &amp; Head of Data Strategy • JPMorgan Chase &amp; Co.</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/jpmorgan.png" alt="JPMorgan Chase & Co. Logo">
+                                <img src="./Assets/logos/jpmorgan.png" alt="JPMorgan Chase & Co. Logo" width="80" height="24" loading="lazy">
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/joybanerjee/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img">
+                            <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img" width="400" height="400" loading="lazy">
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Joy Banerjee</h3>
                             <p class="card__meta speaker-role">VP of Design • Blinkit</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/blinkit.svg" alt="Blinkit Logo">
+                                <img src="./Assets/logos/blinkit.svg" alt="Blinkit Logo" width="80" height="24" loading="lazy">
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/anildesign/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img">
+                            <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img" width="400" height="400" loading="lazy">
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Anil Reddy</h3>
                             <p class="card__meta speaker-role">Founder &amp; Design Director • Happy Pet Care</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/happypetcare.jpeg" alt="Happy Pet Care Logo">
+                                <img src="./Assets/logos/happypetcare.jpeg" alt="Happy Pet Care Logo" width="80" height="24" loading="lazy">
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/ankit-goswami/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img">
+                            <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy">
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Ankit Goswami</h3>
                             <p class="card__meta speaker-role">PM Leader • Expedia Group</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/expedia.png" alt="Expedia Group Logo">
+                                <img src="./Assets/logos/expedia.png" alt="Expedia Group Logo" width="80" height="24" loading="lazy">
                             </div>
                         </div>
                     </a>
@@ -104,7 +108,7 @@
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
-                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="auto" height="44" />
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
                 </div>
                 <span class="footer__logo">Datacron 2026</span>
             </div>
@@ -122,7 +126,7 @@
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest/" aria-label="Instagram (placeholder)" target="_blank" rel="noopener noreferrer">IG</a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn (placeholder)" target="_blank" rel="noopener noreferrer">in</a>
                         <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
-                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" />
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy" />
                         </a>
                     </div>
                 </div>
@@ -143,6 +147,5 @@
     </footer>
 
     <script src="./JS/script.js" defer></script>
-    <script src="./JS/background.js" defer></script>
 </body>
 </html>
