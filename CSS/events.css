@@ -40,17 +40,6 @@
 .events-divider{
   height: 2px;
   margin: 44px 0 44px;
-  border-radius: 999px;
-  background: linear-gradient(90deg,
-    rgba(0,0,0,0) 0%,
-    rgba(0,242,255,0.30) 22%,
-    rgba(255,0,230,0.28) 50%,
-    rgba(0,242,255,0.30) 78%,
-    rgba(0,0,0,0) 100%
-  );
-  box-shadow:
-    0 0 18px rgba(0,242,255,0.14),
-    0 0 18px rgba(255,0,230,0.10);
 }
 
 /* ---------- Responsive grids ---------- */

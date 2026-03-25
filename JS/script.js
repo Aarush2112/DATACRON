@@ -128,6 +128,69 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
+  // ---------- Cinematic Scroll Transition ----------
+  const heroSection = qs(".hero");
+  const heroContent = qs(".hero__content");
+  const heroBgGlow = qs(".hero__bgGlow");
+  const featuredSection = qs("#featured");
+  const cubeWrapper = qs(".cube-wrapper");
+
+  if (heroSection && heroContent && featuredSection) {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const intensity = isMobile ? 0.7 : 1.0; // 30% reduction on mobile
+
+    let ticking = false;
+    let lastScrollY = 0;
+
+    const handleCinematicScroll = () => {
+      const scrollY = lastScrollY;
+      const heroHeight = heroSection.offsetHeight;
+      const heroBottom = heroSection.offsetTop + heroHeight;
+
+      // Progress: 0 at top of hero, 1 when hero bottom reaches viewport top
+      const rawProgress = Math.max(0, Math.min(1, scrollY / heroHeight));
+
+      // Hero content: fade out and move up
+      const contentOffset = rawProgress * 60 * intensity;
+      const contentOpacity = 1 - rawProgress * 1.2; // fades out before fully scrolled
+      heroContent.style.transform = `translate3d(0, -${contentOffset}px, 0)`;
+      heroContent.style.opacity = Math.max(0, contentOpacity);
+
+      // Background glow: subtle zoom (desktop only)
+      if (heroBgGlow && !isMobile) {
+        const zoomScale = 1 + rawProgress * 0.08 * intensity;
+        heroBgGlow.style.transform = `scale(${zoomScale})`;
+      }
+
+      // Featured cube: scale entrance (applied to wrapper to preserve rotation)
+      if (cubeWrapper) {
+        const featuredRect = featuredSection.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        const featuredProgress = Math.max(0, Math.min(1,
+          (viewH - featuredRect.top) / (viewH * 0.4)
+        ));
+        const cubeScale = 0.9 + featuredProgress * 0.1;
+        cubeWrapper.style.transform = `scale(${cubeScale})`;
+      }
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(handleCinematicScroll);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Initial call
+    lastScrollY = window.scrollY;
+    handleCinematicScroll();
+  }
+
   // ---------- Ultra-Lightweight Hero Starfield ----------
   const canvas = qs("#starfield");
   if (canvas) {
@@ -357,8 +420,9 @@
 
   // ---------- Flip Countdown Logic ----------
   const initCountdown = () => {
-    const targetDate = new Date("April 17, 2026 09:00:00").getTime();
-    const countdownEl = qs("#countdown-timer");
+    // Target date set to April 18, 2026
+    const targetDate = new Date("April 17, 2026 00:00:00").getTime();
+    const countdownEl = qs("#featured-countdown");
     if (!countdownEl) return;
 
     const elements = {
@@ -366,6 +430,18 @@
       hours: qs("[data-hours]", countdownEl),
       minutes: qs("[data-minutes]", countdownEl),
       seconds: qs("[data-seconds]", countdownEl),
+    };
+
+    const lastValues = { days: "", hours: "", minutes: "", seconds: "" };
+
+    const animateValue = (el, newVal) => {
+      if (el.textContent !== newVal) {
+        el.style.opacity = "0.4";
+        setTimeout(() => {
+          el.textContent = newVal;
+          el.style.opacity = "1";
+        }, 200);
+      }
     };
 
     const updateCountdown = () => {
@@ -377,15 +453,15 @@
         return;
       }
 
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
+      const d = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, "0");
+      const h = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0");
+      const m = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+      const s = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, "0");
 
-      if (elements.days) elements.days.textContent = String(d).padStart(2, "0");
-      if (elements.hours) elements.hours.textContent = String(h).padStart(2, "0");
-      if (elements.minutes) elements.minutes.textContent = String(m).padStart(2, "0");
-      if (elements.seconds) elements.seconds.textContent = String(s).padStart(2, "0");
+      if (elements.days) animateValue(elements.days, d);
+      if (elements.hours) animateValue(elements.hours, h);
+      if (elements.minutes) animateValue(elements.minutes, m);
+      if (elements.seconds) animateValue(elements.seconds, s);
     };
 
     updateCountdown();
@@ -434,4 +510,25 @@
       resizeTimer = window.setTimeout(start, 200);
     });
   }
+
+  // ---------- Auto-Reload Logic ----------
+  // If tab hidden for 30+ mins, reload on return
+  let reloadTimeoutToken = null;
+  let reloadRequired = false;
+  const THIRTY_MINUTES = 30 * 60 * 1000;
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      // Start timer when tab is hidden
+      reloadTimeoutToken = setTimeout(() => {
+        reloadRequired = true;
+      }, THIRTY_MINUTES);
+    } else {
+      // User returned
+      clearTimeout(reloadTimeoutToken);
+      if (reloadRequired) {
+        location.reload();
+      }
+    }
+  });
 })();
