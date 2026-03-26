@@ -1211,13 +1211,19 @@ body::before{
 .cube-wrapper {
     perspective: 800px;
     padding: 20px;
+    transform: scale(1.12);
+    margin-bottom: 40px;
     will-change: transform;
+    z-index: 2;
 }
 
 .cube-container {
     width: 160px;
     height: 160px;
     position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 16s infinite linear;
+    will-change: transform;
     transform-style: preserve-3d;
     animation: rotateCube 16s infinite linear;
     will-change: transform;
@@ -1261,17 +1267,21 @@ body::before{
     100% { transform: rotateX(-15deg) rotateY(360deg); }
 }
 
-.glass-card {
+.glass-card,
+.datacron-glass-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
-    padding: 24px;
+    padding: 28px 40px;
     text-align: center;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     width: 100%;
     max-width: 340px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transform: scale(1.08);
+    margin-top: 10px;
+    z-index: 1;
 }
 
 .glass-card__title {
@@ -1308,13 +1318,21 @@ body::before{
 }
 
 /* Event Countdown */
-.event-countdown {
+.countdown-wrapper {
     width: 100%;
-    max-width: 400px;
-    padding: 28px 24px;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.event-countdown {
+    width: 90%;
+    max-width: 700px;
+    padding: 40px 50px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.15);
 }
 
 .countdown-heading {
@@ -1330,25 +1348,42 @@ body::before{
 .countdown-timer {
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 22px;
 }
 
 .countdown-box {
-    flex: 1;
+    width: 110px;
+    height: 110px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 18px 10px;
     border-radius: 14px;
     text-align: center;
-    transition: border-color 0.3s ease;
-    min-height: 80px;
+    transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s;
     contain: layout style paint;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    will-change: transform;
+}
+
+.countdown-box:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow:
+        0 15px 30px rgba(0,255,200,0.18),
+        0 0 20px rgba(0,255,200,0.12);
+}
+
+@media (hover: none) {
+    .countdown-box:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }
 
 .countdown-num {
     display: block;
     font-family: "Orbitron", sans-serif;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 800;
     color: #fff;
     margin-bottom: 4px;
@@ -1359,7 +1394,7 @@ body::before{
 
 .countdown-unit {
     display: block;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--muted);
@@ -1452,7 +1487,14 @@ body::before{
     }
 
     .event-countdown {
-        max-width: 440px;
+        width: 90%;
+        max-width: 600px;
+        padding: 36px 40px;
+    }
+
+    .countdown-box {
+        width: 90px;
+        height: 90px;
     }
 
     .featured-header, .featured-text {
@@ -1469,6 +1511,20 @@ body::before{
 
     .event-countdown {
         max-width: 100%;
+        padding: 30px 24px;
+    }
+
+    .countdown-timer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        justify-items: center;
+    }
+
+    .countdown-box {
+        width: 100%;
+        max-width: 120px;
+        height: 100px;
     }
     
     .section--featured {
@@ -1500,9 +1556,14 @@ body::before{
     }
 
     .countdown-timer {
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        justify-items: center;
     }
     .countdown-box {
-        min-width: calc(50% - 7px);
+        width: 100%;
+        max-width: 110px;
+        height: 90px;
     }
 }
