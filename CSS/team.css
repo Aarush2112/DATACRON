@@ -63,30 +63,35 @@
 /* ---------- Grid Layout ---------- */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    justify-items: center;
+    grid-template-columns: repeat(4, 280px);
+    justify-content: center;
+    gap: 40px;
+    margin: 0 auto;
     margin-top: 20px;
 }
 
 @media (max-width: 1200px) {
     .team-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 280px);
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 800px) {
     .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
+        grid-template-columns: repeat(2, 280px);
+    }
+}
+
+@media (max-width: 500px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: auto;
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 576px) {
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
     .team-divider {
         box-shadow:
             0 0 4px rgba(0, 255, 200, 0.6),

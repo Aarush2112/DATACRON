@@ -487,6 +487,65 @@
   initCountdown();
 
   // ---------- Team Mobile "View More" Toggle ----------
+  // Ensures the last row is visually centered when using fixed-width CSS grid columns.
+  const centerTeamGridLastRow = () => {
+    const grids = qsa(".team-grid");
+    const isVisible = (el) => {
+      const style = window.getComputedStyle(el);
+      return style.display !== "none" && el.getClientRects().length > 0;
+    };
+
+    const getCols = () => {
+      const w = window.innerWidth;
+      if (w <= 500) return 1;
+      if (w <= 800) return 2;
+      if (w <= 1200) return 3;
+      return 4;
+    };
+
+    grids.forEach((grid) => {
+      const cards = qsa(".team-card", grid);
+      cards.forEach((c) => {
+        c.style.marginLeft = "";
+      });
+
+      const visibleCards = cards.filter(isVisible);
+      const cols = getCols();
+      if (cols <= 1) return;
+
+      const n = visibleCards.length;
+      const r = n % cols;
+      if (r === 0) return;
+
+      const lastRowCards = visibleCards.slice(n - r);
+      if (!lastRowCards.length) return;
+
+      const gridRect = grid.getBoundingClientRect();
+      const rects = lastRowCards.map((c) => c.getBoundingClientRect());
+
+      const left = Math.min(...rects.map((rct) => rct.left));
+      const right = Math.max(...rects.map((rct) => rct.right));
+      const groupWidth = right - left;
+
+      const desiredLeft = gridRect.left + (gridRect.width - groupWidth) / 2;
+      const dx = desiredLeft - left;
+
+      lastRowCards.forEach((card) => {
+        card.style.marginLeft = `${dx}px`;
+      });
+    });
+  };
+
+  let centerScheduled = false;
+  const scheduleCenterTeamGridLastRow = () => {
+    if (centerScheduled) return;
+    centerScheduled = true;
+    window.requestAnimationFrame(() => {
+      centerScheduled = false;
+      centerTeamGridLastRow();
+    });
+  };
+
   const initTeamToggle = () => {
     const viewMoreBtns = qsa(".view-more-btn");
     
@@ -510,11 +569,21 @@
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }
+
+        // Recalculate centering after cards visibility changes.
+        scheduleCenterTeamGridLastRow();
       });
     });
   };
 
   initTeamToggle();
+  scheduleCenterTeamGridLastRow();
+
+  let teamGridResizeTimer = null;
+  window.addEventListener("resize", () => {
+    window.clearTimeout(teamGridResizeTimer);
+    teamGridResizeTimer = window.setTimeout(scheduleCenterTeamGridLastRow, 100);
+  });
 
 
 
