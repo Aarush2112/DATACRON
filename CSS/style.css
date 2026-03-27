@@ -165,7 +165,7 @@ body::before{
 .nav__logo {
     height: 40px;
     width: auto;
-    margin-right: 12px;
+    margin-right: 6px;
     transition: filter 0.3s ease, transform 0.3s ease;
     opacity: 0.975;
 }
@@ -1148,7 +1148,7 @@ body::before{
 
     .nav__logo {
         height: 32px;
-        margin-right: 8px;
+        margin-right: 6px;
     }
 
     .nav__brandText {
