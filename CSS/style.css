@@ -1,6 +1,6 @@
 /* =========================
    Datacron — Home Page CSS
-   Theme: AI Data Galaxy
+   Theme: Data Galaxy
    ========================= */
 
 :root{
@@ -790,7 +790,7 @@ body::before{
     z-index: 1;
     padding: 60px 0 22px; /* padding-top: 60px; */
     border-top: 1px solid rgba(255,255,255,0.08); /* Restore top partition line only for footer */
-    background: transparent; /* Dark and match AI Data Galaxy theme */
+    background: transparent; /* Dark and match Data Galaxy theme */
     backdrop-filter: blur(10px); /* Add glass futuristic effect */
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 -10px 40px rgba(0,242,255,0.05); /* Add very subtle neon glow (footer glow effect) */
