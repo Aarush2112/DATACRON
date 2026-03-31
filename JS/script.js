@@ -87,9 +87,10 @@
         cursor.classList.add("is-hovering");
         
         // Handle Magnetic attraction
-        if (target.classList.contains('btn') || target.classList.contains('social__icon') || target.classList.contains('nav__register-btn')) {
-          target.addEventListener('mousemove', handleMagnetic);
-          target.addEventListener('mouseleave', resetMagnetic);
+        if (target.classList.contains('btn') || target.classList.contains('social__icon') || target.classList.contains('nav__register-btn') || target.closest('.hero__actions .btn')) {
+          const actualTarget = target.classList.contains('btn') ? target : target.closest('.btn'); 
+          actualTarget.addEventListener('mousemove', handleMagnetic);
+          actualTarget.addEventListener('mouseleave', resetMagnetic);
         }
       }
     });
@@ -100,9 +101,9 @@
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
       
-      magneticX = x * 0.35;
-      magneticY = y * 0.35;
-      item.style.transform = `translate3d(${x * 0.2}px, ${y * 0.2}px, 0) scale(1.05)`;
+      magneticX = x * 0.45;
+      magneticY = y * 0.45;
+      item.style.transform = `translate3d(${x * 0.35}px, ${y * 0.35}px, 0) scale(1.08)`;
     };
 
     const resetMagnetic = (e) => {
@@ -342,6 +343,13 @@
   const FPS = 10;
   const frameInterval = 1000 / FPS;
 
+  const mouse = { x: -1000, y: -1000 };
+  canvas.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
   const rand = (min, max) => min + Math.random() * (max - min);
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
@@ -362,10 +370,12 @@
     nodes = Array.from({ length: target }, () => ({
       x: rand(0, w),
       y: rand(0, h),
-      vx: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
-      vy: rand(-0.25, 0.25) * (Math.random() > 0.5 ? 1 : -1),
+      vx: rand(-0.25, 0.25),
+      vy: rand(-0.25, 0.25),
       r: rand(1.0, 2.2),
       a: rand(0.5, 0.9),
+      dx: 0,
+      dy: 0,
     }));
   };
 
@@ -376,26 +386,40 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    if (!isMobile) {
-      for (const n of nodes) {
+    for (const n of nodes) {
+      if (!isMobile) {
         n.x += n.vx;
         n.y += n.vy;
+        
+        // Mouse reactivity
+        const dx = mouse.x - n.x;
+        const dy = mouse.y - n.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 120;
+        
+        if (dist < maxDist) {
+          const force = (maxDist - dist) / maxDist;
+          n.dx -= (dx / dist) * force * 1.2;
+          n.dy -= (dy / dist) * force * 1.2;
+        }
+        
+        n.dx *= 0.92;
+        n.dy *= 0.92;
+
         if (n.x < -20) n.x = w + 20;
         if (n.x > w + 20) n.x = -20;
         if (n.y < -20) n.y = h + 20;
         if (n.y > h + 20) n.y = -20;
       }
-    }
 
-    for (const n of nodes) {
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 255, 255, ${n.a})`;
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.arc(n.x + n.dx, n.y + n.dy, n.r, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.beginPath();
       ctx.fillStyle = `rgba(0, 255, 179, ${n.a * 0.3})`;
-      ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2); 
+      ctx.arc(n.x + n.dx, n.y + n.dy, n.r + 3, 0, Math.PI * 2); 
       ctx.fill();
     }
   };
@@ -417,7 +441,7 @@
     if (isRunning) return;
     isRunning = true;
     lastTime = 0;
-    if (!prefersReduced && canvas.clientWidth >= 768) {
+    if (!prefersReduced) {
       loop(performance.now());
     } else {
       draw();
@@ -612,6 +636,81 @@
 
   initCountdown();
 
+  // ---------- Typewriter Effect ----------
+  const initTypewriter = () => {
+    const target = qs(".hero__event-date");
+    if (!target) return;
+    
+    const text = target.textContent.trim();
+    target.textContent = "";
+    target.style.opacity = "1";
+    target.style.visibility = "visible";
+    
+    let i = 0;
+    const speed = 100;
+    
+    function type() {
+      if (i < text.length) {
+        target.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      }
+    }
+    
+    // Start after cinematic delay
+    setTimeout(type, 800);
+  };
+
+  // ---------- Staggered Letter Reveal ----------
+  const initStaggeredReveal = () => {
+    const headings = qsa(".featured-title, .section__title");
+    
+    headings.forEach(heading => {
+      const text = heading.textContent.trim();
+      heading.innerHTML = "";
+      heading.setAttribute('aria-label', text);
+      
+      const words = text.split(" ");
+      words.forEach((word, wIndex) => {
+        const wordSpan = document.createElement("span");
+        wordSpan.style.display = "inline-block";
+        wordSpan.style.whiteSpace = "nowrap";
+        
+        [...word].forEach((char, cIndex) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.className = "letter-reveal";
+          span.style.display = "inline-block";
+          span.style.opacity = "0";
+          span.style.transform = "translateY(20px)";
+          span.style.transition = "opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
+          wordSpan.appendChild(span);
+        });
+        
+        heading.appendChild(wordSpan);
+        if (wIndex < words.length - 1) {
+          heading.appendChild(document.createTextNode(" "));
+        }
+      });
+      
+      // Use Observer to trigger
+      const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          const letters = heading.querySelectorAll(".letter-reveal");
+          letters.forEach((l, index) => {
+            setTimeout(() => {
+              l.style.opacity = "1";
+              l.style.transform = "translateY(0)";
+            }, index * 40);
+          });
+          io.unobserve(heading);
+        }
+      }, { threshold: 0.5 });
+      
+      io.observe(heading);
+    });
+  };
+
   // ---------- Team Mobile "View More" Toggle ----------
   // Ensures the last row is visually centered when using fixed-width CSS grid columns.
   const centerTeamGridLastRow = () => {
@@ -792,6 +891,8 @@
     initCardInteractions();
     triggerHeroEntrance();
     updateScrollProgress();
+    initTypewriter();
+    initStaggeredReveal();
   };
 
   if (document.readyState === 'loading') {

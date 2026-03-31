@@ -440,7 +440,63 @@ body::before{
     text-shadow:
         0 0 20px rgba(0,255,179,0.18),
         0 0 44px rgba(230,213,163,0.12);
-    animation: neonPulse 3.8s ease-in-out infinite;
+    animation: neonPulse 3.8s ease-in-out infinite, glitch 5s infinite;
+    position: relative;
+}
+
+.hero__title::before,
+.hero__title::after {
+    content: "DATACRON 2026";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.8;
+}
+
+.hero__title::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    clip-path: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.hero__title::after {
+    left: -2px;
+    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+    clip-path: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+    0%, 90%, 100% { transform: translate(0); }
+    91% { transform: translate(-2px, 1px); }
+    92% { transform: translate(2px, -1px); }
+    93% { transform: translate(-2px, -1px); }
+    94% { transform: translate(2px, 1px); }
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(80% 0 0 0); }
+    20% { clip-path: inset(20% 0 60% 0); }
+    40% { clip-path: inset(50% 0 10% 0); }
+    60% { clip-path: inset(10% 0 70% 0); }
+    80% { clip-path: inset(40% 0 40% 0); }
+    100% { clip-path: inset(70% 0 20% 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip-path: inset(10% 0 80% 0); }
+    20% { clip-path: inset(60% 0 20% 0); }
+    40% { clip-path: inset(30% 0 50% 0); }
+    60% { clip-path: inset(70% 0 10% 0); }
+    80% { clip-path: inset(15% 0 75% 0); }
+    100% { clip-path: inset(45% 0 35% 0); }
 }
 
 @keyframes neonPulse{
@@ -1092,13 +1148,18 @@ body::before{
    ========================= */
 .js-ready .reveal{
     opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 700ms ease, transform 700ms ease;
+    transform: translateY(30px);
+    transition: opacity 800ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .js-ready .reveal.is-visible{
     opacity: 1;
     transform: translateY(0);
+}
+
+.letter-reveal {
+    display: inline-block;
+    will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1315,9 +1376,13 @@ body::before{
     transform-style: preserve-3d;
     animation: rotateCube 16s infinite linear;
     will-change: transform;
-    transform-style: preserve-3d;
-    animation: rotateCube 16s infinite linear;
-    will-change: transform;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.cube-container:hover {
+    animation-duration: 4s;
+    transform: scale(1.1);
 }
 
 .cube {
@@ -1537,6 +1602,9 @@ body::before{
     transform: translateY(-5px);
     border-color: var(--glow);
     background: rgba(255, 255, 255, 0.04);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 179, 0.2),
+        inset 0 0 15px rgba(0, 255, 179, 0.1);
 }
 
 .feature-card__icon {

@@ -28,6 +28,14 @@
     canvas.style.height = H + 'px';
   }
 
+  let mouseX = -1000;
+  let mouseY = -1000;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
   class Particle {
     constructor() {
       this.init();
@@ -36,6 +44,8 @@
     init() {
       this.x = Math.random() * W;
       this.y = Math.random() * H;
+      this.baseX = this.x;
+      this.baseY = this.y;
       this.size = Math.random() * 2 + 0.5;
       this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
       this.speedX = Math.random() * 0.4 + 0.1;
@@ -43,6 +53,8 @@
       this.phase = Math.random() * Math.PI * 2;
       this.opacity = Math.random() * 0.4 + 0.1;
       this.parallax = Math.random() * 0.15 + 0.05;
+      this.dx = 0;
+      this.dy = 0;
     }
 
     update() {
@@ -50,18 +62,40 @@
       // Wave motion
       this.y += Math.sin(this.x * this.frequency + this.phase) * 0.3;
       
+      // Mouse Reactivity (Drift away)
+      const drawY = this.y - scrollY * this.parallax;
+      const dx = mouseX - this.x;
+      const dy = mouseY - drawY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = 150;
+      
+      if (distance < maxDistance) {
+        const force = (maxDistance - distance) / maxDistance;
+        const directionX = dx / distance;
+        const directionY = dy / distance;
+        this.dx -= directionX * force * 1.5;
+        this.dy -= directionY * force * 1.5;
+      }
+
+      // Return to path
+      this.dx *= 0.95;
+      this.dy *= 0.95;
+      
       if (this.x > W + 20) {
         this.x = -20;
         this.y = Math.random() * H;
+        this.dx = 0;
+        this.dy = 0;
       }
     }
 
     draw() {
-      const drawY = this.y - scrollY * this.parallax;
+      const drawX = this.x + this.dx;
+      const drawY = this.y - scrollY * this.parallax + this.dy;
       ctx.globalAlpha = this.opacity;
       ctx.fillStyle = this.color;
       ctx.beginPath();
-      ctx.arc(this.x, drawY, this.size, 0, Math.PI * 2);
+      ctx.arc(drawX, drawY, this.size, 0, Math.PI * 2);
       ctx.fill();
     }
   }
