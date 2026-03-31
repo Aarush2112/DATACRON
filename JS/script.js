@@ -237,7 +237,8 @@
             const staggerIndex = siblings.indexOf(entry.target);
             
             if (staggerIndex !== -1) {
-              entry.target.style.transitionDelay = `${staggerIndex * 0.1}s`;
+              const isEventCard = entry.target.classList.contains('event-card') || entry.target.classList.contains('speaker-card');
+              entry.target.style.transitionDelay = `${staggerIndex * (isEventCard ? 0.15 : 0.1)}s`;
             }
 
             entry.target.classList.add("is-visible");
