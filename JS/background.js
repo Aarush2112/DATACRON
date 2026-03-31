@@ -158,10 +158,7 @@
     
     drawVortex(time);
     
-    // Draw connections (Neural Network Effect)
-    if (window.innerWidth > 768) {
-      drawConnections();
-    }
+    // Draw connections (Neural Network Effect) - Fixed: Removed broken reference
     
     currentParticles.forEach(p => {
       p.update();
@@ -228,7 +225,15 @@
     resize();
     createParticles();
     drawFrame();
-    startAnimation();
+    
+    // IntersectionObserver to pause when off-screen
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) startAnimation();
+        else stopAnimation();
+      });
+    }, { threshold: 0.01 });
+    obs.observe(canvas);
   };
 
   if ('requestIdleCallback' in window) {

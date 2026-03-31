@@ -36,14 +36,21 @@
 
   // ---------- Scroll Progress Bar ----------
   const scrollProgress = qs("#scroll-progress");
+  let scrollTicking = false;
   const updateScrollProgress = () => {
     if (!scrollProgress) return;
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
     scrollProgress.style.width = scrolled + "%";
+    scrollTicking = false;
   };
-  window.addEventListener("scroll", updateScrollProgress);
+  window.addEventListener("scroll", () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(updateScrollProgress);
+    }
+  }, { passive: true });
 
   // ---------- Custom highlight cursor ----------
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window;
@@ -69,6 +76,7 @@
     let magneticX = 0;
     let magneticY = 0;
 
+    let mouseTicking = false;
     document.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -78,7 +86,7 @@
         cursorY = mouseY;
         cursor.style.opacity = "1";
       }
-    });
+    }, { passive: true });
 
     document.addEventListener("mouseover", (e) => {
       const target = e.target.closest("a, button, .card, .feature-card, .event-card, .speaker-card, .nav__register-btn, .nav__link");
@@ -330,6 +338,14 @@
   if (canvas) {
     const ctx = canvas.getContext("2d", { alpha: true });
     if (ctx) {
+      // IntersectionObserver to pause when off-screen
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) play();
+          else pause();
+        });
+      }, { threshold: 0.01 });
+      obs.observe(canvas);
 
   const prefersReduced =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -365,7 +381,9 @@
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
     const isMobile = w < 768;
-    const maxParticles = isMobile ? 12 : 25;
+    // Performance Guard: Check for low-end device or battery saver
+    const isLowEnd = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+    const maxParticles = isMobile ? (isLowEnd ? 8 : 12) : 25;
     const target = clamp(Math.floor((w * h) / 25000), 8, maxParticles);
     
     nodes = Array.from({ length: target }, () => ({
