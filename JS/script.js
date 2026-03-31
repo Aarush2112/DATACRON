@@ -14,6 +14,37 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  // ---------- Smooth Scroll (Lenis) ----------
+  let lenis;
+  const initLenis = () => {
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+  };
+
+  // ---------- Scroll Progress Bar ----------
+  const scrollProgress = qs("#scroll-progress");
+  const updateScrollProgress = () => {
+    if (!scrollProgress) return;
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    scrollProgress.style.width = scrolled + "%";
+  };
+  window.addEventListener("scroll", updateScrollProgress);
+
   // ---------- Custom highlight cursor ----------
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window;
   const prefersReducedMotion =
@@ -33,6 +64,10 @@
     let hasMoved = false;
     let currentScale = 1;
     let targetScale = 1;
+    
+    // Magnetic intensity
+    let magneticX = 0;
+    let magneticY = 0;
 
     document.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
@@ -46,25 +81,102 @@
     });
 
     document.addEventListener("mouseover", (e) => {
-      if (e.target.closest("a, button, .card")) {
-        targetScale = 1.5;
+      const target = e.target.closest("a, button, .card, .feature-card, .event-card, .speaker-card, .nav__register-btn, .nav__link");
+      if (target) {
+        targetScale = 1.35;
         cursor.classList.add("is-hovering");
+        
+        // Handle Magnetic attraction
+        if (target.classList.contains('btn') || target.classList.contains('social__icon') || target.classList.contains('nav__register-btn')) {
+          target.addEventListener('mousemove', handleMagnetic);
+          target.addEventListener('mouseleave', resetMagnetic);
+        }
       }
     });
 
+    const handleMagnetic = (e) => {
+      const item = e.currentTarget;
+      const rect = item.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      magneticX = x * 0.35;
+      magneticY = y * 0.35;
+      item.style.transform = `translate3d(${x * 0.2}px, ${y * 0.2}px, 0) scale(1.05)`;
+    };
+
+    const resetMagnetic = (e) => {
+      const item = e.currentTarget;
+      magneticX = 0;
+      magneticY = 0;
+      item.style.transform = '';
+      item.removeEventListener('mousemove', handleMagnetic);
+      item.removeEventListener('mouseleave', resetMagnetic);
+    };
+
     document.addEventListener("mouseout", (e) => {
-      if (e.target.closest("a, button, .card")) {
+      if (e.target.closest("a, button, .card, .feature-card, .event-card, .speaker-card")) {
         targetScale = 1;
         cursor.classList.remove("is-hovering");
       }
     });
 
+    // Particle Burst on Click
+    document.addEventListener("click", (e) => {
+      createClickParticles(e.clientX, e.clientY);
+      
+      // Button Ripple effect
+      const btn = e.target.closest(".btn, .nav__register-btn");
+      if (btn) {
+        const ripple = document.createElement("span");
+        ripple.className = "btn-ripple";
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+        ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      }
+    });
+
+    const createClickParticles = (x, y) => {
+      const count = 8;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement("div");
+        p.className = "cursor-particle";
+        p.style.backgroundColor = i % 2 === 0 ? "var(--glow)" : "var(--accent)";
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+        
+        const angle = (Math.PI * 2 / count) * i;
+        const velocity = 2 + Math.random() * 3;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        
+        document.body.appendChild(p);
+        
+        let px = x, py = y, opacity = 1;
+        const anim = () => {
+          px += vx;
+          py += vy;
+          opacity -= 0.04;
+          p.style.transform = `translate(${px - x}px, ${py - y}px) scale(${opacity})`;
+          p.style.opacity = opacity;
+          
+          if (opacity > 0) requestAnimationFrame(anim);
+          else p.remove();
+        };
+        requestAnimationFrame(anim);
+      }
+    };
+
     function tick() {
       if (hasMoved) {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        currentScale += (targetScale - currentScale) * 0.2;
-        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) scale(${currentScale})`;
+        cursorX += (mouseX + magneticX - cursorX) * 0.16;
+        cursorY += (mouseY + magneticY - cursorY) * 0.16;
+        currentScale += (targetScale - currentScale) * 0.16;
+        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) scale(${currentScale})`;
       }
       requestAnimationFrame(tick);
     }
@@ -117,14 +229,28 @@
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
+        entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
+            // Apply staggered delay if multiple elements are intersecting at once
+            const siblings = Array.from(entry.target.parentElement.children).filter(el => el.classList.contains('reveal'));
+            const staggerIndex = siblings.indexOf(entry.target);
+            
+            if (staggerIndex !== -1) {
+              entry.target.style.transitionDelay = `${staggerIndex * 0.1}s`;
+            }
+
             entry.target.classList.add("is-visible");
+            
+            // Add glow pulse for headings
+            if (entry.target.querySelector('.section__title')) {
+               entry.target.querySelector('.section__title').classList.add('glow-pulse');
+            }
+            
             io.unobserve(entry.target);
           }
-        }
+        });
       },
-      { threshold: 0.14, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
     revealEls.forEach((el) => io.observe(el));
   } else {
@@ -607,6 +733,72 @@
       }
     }
   });
+
+  // ---------- Card Interactions (Tilt & Spotlight) ----------
+  const initCardInteractions = () => {
+    const interactiveEls = qsa(".card, .feature-card, .event-card, .speaker-card, .cube-wrapper, .nav__register-btn");
+    
+    interactiveEls.forEach(el => {
+      // Add spotlight div
+      const spotlight = document.createElement('div');
+      spotlight.className = 'spotlight';
+      el.appendChild(spotlight);
+      
+      // Add shimmer div for event cards and register button
+      if (el.classList.contains('event-card') || el.classList.contains('nav__register-btn')) {
+        const shimmer = document.createElement('div');
+        shimmer.className = 'card-shimmer';
+        el.appendChild(shimmer);
+      }
+
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Spotlight position
+        el.style.setProperty('--mouse-x', `${x}px`);
+        el.style.setProperty('--mouse-y', `${y}px`);
+        
+        // 3D Tilt calculation
+        if (!isTouchDevice) {
+           const centerX = rect.width / 2;
+           const centerY = rect.height / 2;
+           const rotateX = (y - centerY) / 14;
+           const rotateY = (centerX - x) / 14;
+           el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        }
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  };
+
+  // ---------- Hero Cinematic Entrance ----------
+  const triggerHeroEntrance = () => {
+    const hero = qs(".hero__content");
+    if (hero) {
+      setTimeout(() => {
+        hero.classList.add("is-ready");
+      }, 300);
+    }
+  };
+
+  // ---------- Initialize All ----------
+  const initAll = () => {
+    initLenis();
+    initCardInteractions();
+    triggerHeroEntrance();
+    updateScrollProgress();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 
   // ---------- Lazy-load background.js after first paint ----------
   const loadBackground = () => {

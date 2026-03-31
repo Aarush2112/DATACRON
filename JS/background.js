@@ -124,6 +124,11 @@
     
     drawVortex(time);
     
+    // Draw connections (Neural Network Effect)
+    if (window.innerWidth > 768) {
+      drawConnections();
+    }
+    
     currentParticles.forEach(p => {
       p.update();
       p.draw();
