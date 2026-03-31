@@ -904,6 +904,40 @@
     }
   };
 
+  // ---------- Featured Events Sequential Flash ----------
+  const initEventsFlash = () => {
+    const eventsSection = qs("#events");
+    const eventCards = qsa(".event-card--initial", eventsSection);
+    
+    if (!eventsSection || eventCards.length === 0) return;
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          eventCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.remove("event-card--initial");
+              card.classList.add("event-card--flash");
+
+              // Add subtle pulse after flash ends
+              setTimeout(() => {
+                card.classList.add("event-card--pulse");
+              }, 550);
+            }, index * 250);
+          });
+          observer.unobserve(eventsSection);
+        }
+      }, { threshold: 0.15 });
+
+      observer.observe(eventsSection);
+    } else {
+      eventCards.forEach(card => {
+        card.classList.remove("event-card--initial");
+        card.classList.add("event-card--flash");
+      });
+    }
+  };
+
   // ---------- Initialize All ----------
   const initAll = () => {
     initLenis();
@@ -912,6 +946,7 @@
     updateScrollProgress();
     initTypewriter();
     initStaggeredReveal();
+    initEventsFlash();
   };
 
   if (document.readyState === 'loading') {
