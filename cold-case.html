@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
+    <title>Cold Case | Datacron 2026</title>
+    <meta name="description" content="Cold Case — Analyse clues, uncover patterns, and solve a simulated mystery case using logic, deduction, and data interpretation at Datacron 2026.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="./CSS/style.css?v=3">
+</head>
+<body>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary">
+            <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <span class="nav__brandText">DATACRON 2026</span>
+            </a>
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+                <span class="nav__toggleBars" aria-hidden="true"></span>
+            </button>
+            <div class="nav__menu" id="navMenu">
+                <a class="nav__link" href="index.html">Home</a>
+                <a class="nav__link is-active" href="events.html">Events</a>
+                <a class="nav__link" href="speakers.html">Speakers</a>
+                <a class="nav__link" href="sponsors.html">Sponsors</a>
+                <a class="nav__link" href="team.html">Team</a>
+                <a class="nav__register-btn" href="https://unstop.com/college-fests/datacron-rishihood-university-450778" target="_blank" rel="noopener noreferrer">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <!-- Hero -->
+        <section class="event-detail-hero" aria-label="Cold Case hero">
+            <div class="event-detail-hero__overlay" aria-hidden="true"></div>
+            <div class="event-detail-hero__content container">
+                <a href="events.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All Events</a>
+                <div class="event-type-badge">
+                    <i class="fas fa-search" aria-hidden="true"></i> Investigation / Data Analysis
+                </div>
+                <h1 class="event-detail-hero__title">Cold Case</h1>
+                <p class="event-detail-hero__tagline">Solve the mystery. Crack the case.</p>
+            </div>
+        </section>
+
+        <!-- Body -->
+        <section class="event-detail-body">
+            <div class="container">
+                <div class="event-detail-grid">
+
+                    <!-- Left: Description + Chips + Rules -->
+                    <div>
+                        <p class="event-desc__label">About the Event</p>
+                        <h2 class="event-desc__heading">What is Cold Case?</h2>
+                        <p class="event-desc__text">
+                            Cold Case is a data detective challenge where teams receive a dossier on a failed startup. Using data analysis, logical deduction, and investigative thinking, they must uncover the key mistakes that led to the failure.
+                        </p>
+                        <p class="event-desc__text">
+                            Teams analyse clues hidden across datasets, financial reports, and market data, then present a compelling case — arguing what went wrong and how data-driven decisions could have saved the company.
+                        </p>
+
+                        <!-- Meta chips -->
+                        <div class="event-meta-chips" aria-label="Event details">
+                            <span class="meta-chip"><i class="fas fa-tag" aria-hidden="true"></i> Investigation / Data Analysis</span>
+                            <span class="meta-chip"><i class="fas fa-users" aria-hidden="true"></i> Team of 2–3</span>
+                            <span class="meta-chip"><i class="fas fa-signal" aria-hidden="true"></i> Intermediate–Advanced</span>
+                            <span class="meta-chip"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Pre-Fest Event</span>
+                        </div>
+
+                        <div class="rules-block">
+                            <h3 class="rules-block__title">Rules &amp; Guidelines</h3>
+                            <ul class="rules-list">
+                                <li>Teams of 2–3 members only. Solo entries are not accepted.</li>
+                                <li>All team members must be currently enrolled students.</li>
+                                <li>A case dossier (dataset + context) will be provided at the start.</li>
+                                <li>Permitted tools: Excel, Python, Tableau (free), Google Sheets.</li>
+                                <li>Each team must submit a final report (max 6 slides) within the time limit.</li>
+                                <li>Presentation time: 6 minutes + 2 minutes Q&amp;A from judges.</li>
+                                <li>Judging criteria: Accuracy of analysis, strength of argument, data use, clarity.</li>
+                                <li>No sharing of findings between teams — violation leads to disqualification.</li>
+                                <li>Organiser's decision on all scoring is final.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right: Sidebar -->
+                    <aside class="event-sidebar" aria-label="Event quick info">
+                        <div class="event-sidebar-card">
+                            <p class="event-sidebar-card__title">Event Details</p>
+
+                            <div class="event-meta-row">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span><strong>Date:</strong> 17–18 April 2026</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span><strong>Venue:</strong> Rishihood University Campus</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span><strong>Team Size:</strong> 2–3 members</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-layer-group" aria-hidden="true"></i>
+                                <span><strong>Type:</strong> Pre-Fest</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-trophy" aria-hidden="true"></i>
+                                <span><strong>Prizes:</strong> Cash + Goodies</span>
+                            </div>
+
+                            <div class="event-cta-btns">
+                                <a href="https://unstop.com/competitions/cold-case-datacron-rishihood-university-1662283"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-register"
+                                   id="cold-case-register-btn">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
+                                </a>
+                                <a href="https://drive.google.com/file/d/1STFAMkm6RayDEoXEUapW0PnxSL_rtfbM/view?usp=share_link"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-rulebook"
+                                   id="cold-case-rulebook-btn">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i> Full Rulebook
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Footer">
+        <div class="container footer-container">
+            <div class="left-section">
+                <div class="university-badge">
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy">
+                </div>
+                <span class="footer__logo">Datacron 2026</span>
+            </div>
+            <nav class="center-section" aria-label="Footer navigation">
+                <a class="footer__link" href="index.html">Home</a>
+                <a class="footer__link" href="events.html">Events</a>
+                <a class="footer__link" href="speakers.html">Speakers</a>
+                <a class="footer__link" href="sponsors.html">Sponsors</a>
+                <a class="footer__link" href="team.html">Team</a>
+            </nav>
+            <div class="right-section">
+                <div class="footer__block">
+                    <h4 class="footer__title">Connect</h4>
+                    <div class="social">
+                        <a class="social__icon" href="https://www.instagram.com/datacron.fest" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© <span id="year"></span> Datacron 2026. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="./JS/script.js" defer></script>
+</body>
+</html>

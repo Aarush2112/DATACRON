@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
+    <title>Data Desk | Datacron 2026</title>
+    <meta name="description" content="Data Desk — A fast-paced real-world data science simulation where teams analyse business datasets, extract insights, and make strategic decisions under time pressure.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="./CSS/style.css?v=2">
+
+    <style>
+        .event-detail-hero {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0,242,255,0.15);
+        }
+        .event-detail-hero__img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.45;
+            filter: saturate(1.2);
+        }
+        .event-detail-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(3,5,10,0.3) 0%, rgba(3,5,10,0.85) 80%, #03050a 100%);
+        }
+        .event-detail-hero__content { position: relative; z-index: 2; padding: 40px 0 48px; }
+        .event-detail-hero__title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 7vw, 64px);
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 24px rgba(0,242,255,0.4), 0 0 60px rgba(0,242,255,0.15);
+            line-height: 1.1;
+            margin-bottom: 14px;
+        }
+        .event-detail-hero__tagline {
+            font-size: clamp(15px, 2vw, 18px);
+            color: rgba(255,255,255,0.75);
+            max-width: 52ch;
+            line-height: 1.6;
+        }
+        .event-detail-body { padding: 72px 0 90px; }
+        .event-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 48px;
+            align-items: start;
+        }
+        @media (max-width: 900px) { .event-detail-grid { grid-template-columns: 1fr; } }
+        .event-desc__label { font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #00f2ff; margin-bottom: 10px; }
+        .event-desc__heading { font-family: 'Orbitron', sans-serif; font-size: clamp(20px, 3vw, 28px); font-weight: 700; color: #fff; margin-bottom: 20px; text-shadow: 0 0 14px rgba(0,242,255,0.25); }
+        .event-desc__text { color: rgba(255,255,255,0.78); font-size: 15px; line-height: 1.8; margin-bottom: 18px; }
+        .rules-block { margin-top: 40px; }
+        .rules-block__title { font-family: 'Orbitron', sans-serif; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .rules-block__title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,242,255,0.3), transparent); }
+        .rules-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .rules-list li { display: flex; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.6; }
+        .rules-list li::before { content: '▸'; color: #00f2ff; flex-shrink: 0; margin-top: 1px; }
+        .event-sidebar { position: sticky; top: 90px; }
+        .event-sidebar-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(0,242,255,0.2); border-radius: 20px; padding: 28px 24px 30px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 0 30px rgba(0,242,255,0.08), 0 18px 40px rgba(0,0,0,0.4); }
+        .event-sidebar-card__title { font-family: 'Orbitron', sans-serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+        .event-meta-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); font-size: 14px; }
+        .event-meta-row:last-of-type { border-bottom: none; }
+        .event-meta-row i { width: 20px; color: #00f2ff; flex-shrink: 0; }
+        .event-meta-row strong { color: #fff; font-weight: 600; }
+        .event-cta-btns { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+        .btn-register { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 20px; border-radius: 12px; background: linear-gradient(90deg, #00f2ff 0%, #006eff 100%); color: #000; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: none; box-shadow: 0 4px 20px rgba(0,242,255,0.35); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,242,255,0.55); filter: brightness(1.07); }
+        .btn-rulebook { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; border-radius: 12px; border: 1px solid rgba(0,242,255,0.35); background: rgba(0,242,255,0.06); color: rgba(0,242,255,0.9); font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .btn-rulebook:hover { background: rgba(0,242,255,0.12); border-color: #00f2ff; box-shadow: 0 0 18px rgba(0,242,255,0.3); color: #fff; transform: translateY(-2px); }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.6); font-size: 13px; padding: 28px 0 0; transition: color 0.2s ease; text-decoration: none; }
+        .back-link:hover { color: #00f2ff; }
+    </style>
+</head>
+<body>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary">
+            <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <span class="nav__brandText">DATACRON 2026</span>
+            </a>
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+                <span class="nav__toggleBars" aria-hidden="true"></span>
+            </button>
+            <div class="nav__menu" id="navMenu">
+                <a class="nav__link" href="index.html">Home</a>
+                <a class="nav__link is-active" href="events.html">Events</a>
+                <a class="nav__link" href="speakers.html">Speakers</a>
+                <a class="nav__link" href="sponsors.html">Sponsors</a>
+                <a class="nav__link" href="team.html">Team</a>
+                <a class="nav__register-btn" href="https://unstop.com/college-fests/datacron-rishihood-university-450778" target="_blank" rel="noopener noreferrer">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="event-detail-hero" aria-label="Data Desk hero">
+            <img src="./Assets/images/desk.png" alt="" class="event-detail-hero__img" aria-hidden="true">
+            <div class="event-detail-hero__overlay" aria-hidden="true"></div>
+            <div class="event-detail-hero__content container">
+                <a href="events.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All Events</a>
+                <h1 class="event-detail-hero__title">Data Desk</h1>
+                <p class="event-detail-hero__tagline">A fast-paced simulation where teams analyse real data and make smart business decisions.</p>
+            </div>
+        </section>
+
+        <section class="event-detail-body">
+            <div class="container">
+                <div class="event-detail-grid">
+                    <div>
+                        <p class="event-desc__label">About the Event</p>
+                        <h2 class="event-desc__heading">What is Data Desk?</h2>
+                        <p class="event-desc__text">
+                            Data Desk puts you in the shoes of a data analyst at a fast-paced company. Teams receive real-world business datasets and must extract actionable insights, identify key trends, and present strategic recommendations — all under a ticking clock.
+                        </p>
+                        <p class="event-desc__text">
+                            This isn't just about crunching numbers — it's about telling a compelling data story. You'll be judged on the quality of your analysis, the clarity of your visuals, and the strength of your business narrative. Think fast, analyse smart, decide sharp.
+                        </p>
+
+                        <div class="rules-block">
+                            <h3 class="rules-block__title">Key Rules</h3>
+                            <ul class="rules-list">
+                                <li>Teams of 2–3 members per group.</li>
+                                <li>Business dataset provided at the start of the session. No external data.</li>
+                                <li>Permitted tools: Excel, Google Sheets, Tableau (free version), Python (optional).</li>
+                                <li>Each team must submit a presentation (max 5 slides) at the end of the event.</li>
+                                <li>Judging criteria: insight quality, visualisation, business relevance, and delivery.</li>
+                                <li>Presentation time: 5 minutes per team + 2 minutes Q&amp;A.</li>
+                                <li>No plagiarism or use of pre-built analyses — all work must be done live.</li>
+                                <li>Organiser's decision on scoring and rankings is final.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <aside class="event-sidebar" aria-label="Event quick info">
+                        <div class="event-sidebar-card">
+                            <p class="event-sidebar-card__title">Event Details</p>
+                            <div class="event-meta-row">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span><strong>Date:</strong> 17–18 April 2026</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span><strong>Venue:</strong> Rishihood University Campus</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span><strong>Team Size:</strong> 2–3 members</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                                <span><strong>Format:</strong> Analysis + Presentation</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-trophy" aria-hidden="true"></i>
+                                <span><strong>Prizes:</strong> Cash + Goodies</span>
+                            </div>
+                            <div class="event-cta-btns">
+                                <a href="https://unstop.com/o/Sc0zVyT?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-register"
+                                   id="data-desk-register-btn">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
+                                </a>
+                                <a href="https://drive.google.com/file/d/19obrXbCdgjmqautewVz2D70HQMr3AWkJ/view?usp=share_link"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-rulebook"
+                                   id="data-desk-rulebook-btn">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i> Full Rulebook
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Footer">
+        <div class="container footer-container">
+            <div class="left-section">
+                <div class="university-badge">
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy">
+                </div>
+                <span class="footer__logo">Datacron 2026</span>
+            </div>
+            <nav class="center-section" aria-label="Footer navigation">
+                <a class="footer__link" href="index.html">Home</a>
+                <a class="footer__link" href="events.html">Events</a>
+                <a class="footer__link" href="speakers.html">Speakers</a>
+                <a class="footer__link" href="sponsors.html">Sponsors</a>
+                <a class="footer__link" href="team.html">Team</a>
+            </nav>
+            <div class="right-section">
+                <div class="footer__block">
+                    <h4 class="footer__title">Connect</h4>
+                    <div class="social">
+                        <a class="social__icon" href="https://www.instagram.com/datacron.fest" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© <span id="year"></span> Datacron 2026. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="./JS/script.js" defer></script>
+</body>
+</html>

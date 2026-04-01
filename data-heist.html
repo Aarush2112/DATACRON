@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
+    <title>Data Heist | Datacron 2026</title>
+    <meta name="description" content="Data Heist — Datacron 2026's flagship event. Decode clues, bid smart, and conquer data in this thrilling multi-stage team challenge.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="./CSS/style.css?v=2">
+
+</head>
+<body>
+    <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+    <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary">
+            <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
+                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <span class="nav__brandText">DATACRON 2026</span>
+            </a>
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+                <span class="nav__toggleBars" aria-hidden="true"></span>
+            </button>
+            <div class="nav__menu" id="navMenu">
+                <a class="nav__link" href="index.html">Home</a>
+                <a class="nav__link is-active" href="events.html">Events</a>
+                <a class="nav__link" href="speakers.html">Speakers</a>
+                <a class="nav__link" href="sponsors.html">Sponsors</a>
+                <a class="nav__link" href="team.html">Team</a>
+                <a class="nav__register-btn" href="https://unstop.com/college-fests/datacron-rishihood-university-450778" target="_blank" rel="noopener noreferrer">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <!-- Hero Banner -->
+        <section class="event-detail-hero" aria-label="Data Heist hero">
+            <img src="./Assets/images/Data_Hiest.png" alt="" class="event-detail-hero__img" aria-hidden="true">
+            <div class="event-detail-hero__overlay" aria-hidden="true"></div>
+            <div class="event-detail-hero__content container">
+                <a href="events.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All Events</a>
+                <div class="event-detail-hero__badge">
+                    <span class="fire-icon" aria-hidden="true"></span> Flagship Event
+                </div>
+                <h1 class="event-detail-hero__title">Data Heist</h1>
+                <p class="event-detail-hero__tagline">Decode clues. Bid smart. Conquer data.</p>
+            </div>
+        </section>
+
+        <!-- Body -->
+        <section class="event-detail-body">
+            <div class="container">
+                <div class="event-detail-grid">
+
+                    <!-- Left: Description + Rules -->
+                    <div>
+                        <p class="event-desc__label">About the Event</p>
+                        <h2 class="event-desc__heading">What is Data Heist?</h2>
+                        <p class="event-desc__text">
+                            Data Heist is Datacron 2026's flagship multi-stage team challenge. Participants dive into a thrilling world where data strategy meets high-stakes decision-making. Teams decode hidden clues, strategize in a live auction round, and then analyse real-world datasets to outsmart rival teams and claim victory.
+                        </p>
+                        <p class="event-desc__text">
+                            Each round tests a different set of skills — analytical thinking in the decode phase, financial acumen and team coordination in the auction, and deep data interpretation in the final analysis stage. Only the sharpest minds rise to the top.
+                        </p>
+
+                        <div class="rules-block">
+                            <h3 class="rules-block__title">Key Rules</h3>
+                            <ul class="rules-list">
+                                <li>Teams of 2–3 members. Solo participation is not allowed.</li>
+                                <li>All team members must be currently enrolled students.</li>
+                                <li>Three rounds: Decode → Live Auction → Data Analysis.</li>
+                                <li>Teams eliminated after each round based on cumulative score.</li>
+                                <li>No use of AI tools during the Live Auction and Decode rounds.</li>
+                                <li>Dataset tools (Python / Excel) permitted in the Analysis round.</li>
+                                <li>Decisions made during the auction are final and non-reversible.</li>
+                                <li>The organiser's decision on scoring and tie-breakers is final.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right: Sidebar -->
+                    <aside class="event-sidebar" aria-label="Event quick info">
+                        <div class="event-sidebar-card">
+                            <p class="event-sidebar-card__title">Event Details</p>
+
+                            <div class="event-meta-row">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span><strong>Date:</strong> 17–18 April 2026</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span><strong>Venue:</strong> Rishihood University Campus</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span><strong>Team Size:</strong> 2–3 members</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-layer-group" aria-hidden="true"></i>
+                                <span><strong>Rounds:</strong> 3 stages</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-trophy" aria-hidden="true"></i>
+                                <span><strong>Prizes:</strong> Cash + Goodies</span>
+                            </div>
+
+                            <div class="event-cta-btns">
+                                <a href="https://unstop.com/o/1P7ERc6?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-register"
+                                   id="data-heist-register-btn">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
+                                </a>
+                                <a href="https://drive.google.com/file/d/1wYGbeTJsqEBlEJQ3hv2HbJoKMczWKU8s/view?usp=share_link"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-rulebook"
+                                   id="data-heist-rulebook-btn">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i> Full Rulebook
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Footer">
+        <div class="container footer-container">
+            <div class="left-section">
+                <div class="university-badge">
+                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy">
+                </div>
+                <span class="footer__logo">Datacron 2026</span>
+            </div>
+            <nav class="center-section" aria-label="Footer navigation">
+                <a class="footer__link" href="index.html">Home</a>
+                <a class="footer__link" href="events.html">Events</a>
+                <a class="footer__link" href="speakers.html">Speakers</a>
+                <a class="footer__link" href="sponsors.html">Sponsors</a>
+                <a class="footer__link" href="team.html">Team</a>
+            </nav>
+            <div class="right-section">
+                <div class="footer__block">
+                    <h4 class="footer__title">Connect</h4>
+                    <div class="social">
+                        <a class="social__icon" href="https://www.instagram.com/datacron.fest" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a class="social__icon" href="mailto:datacron@rishihood.edu.in" aria-label="Email">
+                            <img class="social__icon-img" src="./Assets/email-icon.svg" alt="" aria-hidden="true" width="18" height="18" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© <span id="year"></span> Datacron 2026. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="./JS/script.js" defer></script>
+</body>
+</html>
