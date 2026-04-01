@@ -448,6 +448,28 @@ body::before{
     flex-wrap: wrap;
 }
 
+/* Sponsors — logo only (no card) */
+.sponsor-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.sponsor-logo img{
+    height: 56px;
+    width: auto;
+    max-width: min(360px, 90vw);
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 159, 0.3));
+}
+
+@media (max-width: 480px){
+    .sponsor-logo img{
+        height: 48px;
+    }
+}
+
 .btn{
     display: inline-flex;
     align-items: center;
@@ -580,27 +602,6 @@ body::before{
 }
 
 /* =========================
-   Coming Soon Generic Styles
-   ========================= */
-.coming-soon-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.coming-soon-text {
-    font-family: "Orbitron", system-ui, sans-serif;
-    font-size: 28px;
-    letter-spacing: 2px;
-    color: var(--accent);
-    text-align: center;
-    text-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
-    margin: 30px 0 0 0;
-}
-
-
-
-/* =========================
    Digital Countdown
    ========================= */
 .countdown {
@@ -681,6 +682,11 @@ body::before{
 
 .grid--featured-events .data-heist-card{
     z-index: 2;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.26),
+        0 0 16px rgba(255, 120, 0, 0.25);
 }
 
 .card{
@@ -837,10 +843,6 @@ body::before{
     transform: translateY(-6px);
 }
 
-.data-heist-card {
-    border-color: rgba(255, 80, 0, 0.35);
-}
-
 .event-card-image {
     height: 120px;
     overflow: hidden;
@@ -901,8 +903,12 @@ body::before{
     pointer-events: none;
 }
 
-.data-heist-card:hover {
-    box-shadow: 0 0 20px rgba(255, 80, 0, 0.4);
+.grid--featured-events .data-heist-card:hover {
+    box-shadow:
+        0 24px 50px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(0, 255, 179, 0.2),
+        inset 0 0 15px rgba(230, 213, 163, 0.08),
+        0 0 18px rgba(255, 120, 0, 0.3);
 }
 
 @media (max-width: 768px) {
