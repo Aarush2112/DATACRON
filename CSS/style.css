@@ -457,16 +457,17 @@ body::before{
 }
 
 .sponsor-logo img{
-    height: 56px;
+    height: 40px;
     width: auto;
-    max-width: min(360px, 90vw);
+    max-width: min(220px, 78vw);
     object-fit: contain;
     filter: drop-shadow(0 0 6px rgba(0, 255, 159, 0.3));
 }
 
 @media (max-width: 480px){
     .sponsor-logo img{
-        height: 48px;
+        height: 32px;
+        max-width: min(200px, 82vw);
     }
 }
 
