@@ -34,7 +34,7 @@
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
         .hero{position:relative;min-height:calc(100vh-74px);display:grid;place-items:center;padding:92px 0 70px;background:#03050a;overflow:hidden}
-        .hero__title{font-family:"Orbitron",sans-serif;font-size:clamp(42px,10vw,110px);letter-spacing:.12em;text-transform:uppercase;line-height:1.1;text-align:center;color:transparent;-webkit-background-clip:text;background-clip:text;background:linear-gradient(90deg,#fff 0%,var(--glow) 50%,var(--accent) 100%)}
+        .hero__title{font-family:"Orbitron",sans-serif;font-size:clamp(42px,10vw,110px);letter-spacing:.12em;text-transform:uppercase;line-height:1.1;text-align:center;color:transparent;-webkit-background-clip:text;background-clip:text;background:linear-gradient(90deg,#fff 0%,var(--glow) 50%,var(--accent) 100%);text-shadow:0 0 20px rgba(0,255,159,0.4)}
         .reveal{opacity:0;transform:translateY(30px)}
     </style>
 
@@ -196,26 +196,14 @@
                     <p class="section__lead">Explore the featured challenges of Datacron 2026 and compete in the ultimate data-driven arena.</p>
                 </div>
 
-                <div class="grid grid--3">
-                    <!-- DATA HEIST — Flagship Event -->
-                    <article class="card event-card event-card--initial">
-                        <!-- Flagship badge (top-left) -->
-                        <span class="badge badge--flagship" aria-label="Flagship Event"><span class="fire-icon" aria-hidden="true"></span> Flagship Event</span>
-                        <!-- Reg Open badge (top-right) -->
-                        <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
-                        <img src="./Assets/images/Data_Hiest.png" class="card-banner" alt="DATA HEIST banner" loading="lazy" decoding="async" width="350" height="180">
-                        <div class="card__body">
-                            <h3 class="card__title">DATA HEIST</h3>
-                            <p class="card__text">Decode clues. Bid smart. Conquer data.</p>
-                            <a href="data-heist.html" class="event-btn" aria-label="View Data Heist details"><span>View Details</span></a>
-                        </div>
-                    </article>
-
+                <div class="grid grid--3 grid--featured-events">
                     <!-- CODE & CONQUER -->
                     <article class="card event-card event-card--initial">
                         <!-- Reg Open badge (top-right) -->
                         <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
-                        <img src="./Assets/images/code.png" class="card-banner" alt="CODE &amp; CONQUER banner" loading="lazy" decoding="async" width="350" height="180">
+                        <div class="event-card-image">
+                            <img src="./Assets/images/code.png" class="card-banner" alt="CODE &amp; CONQUER banner" loading="lazy" decoding="async" width="350" height="180">
+                        </div>
                         <div class="card__body">
                             <h3 class="card__title">CODE &amp; CONQUER</h3>
                             <p class="card__text">Strategy, statistics, and machine learning showdown.</p>
@@ -223,11 +211,28 @@
                         </div>
                     </article>
 
+                    <!-- DATA HEIST (center spotlight) -->
+                    <article class="card event-card event-card--initial data-heist-card">
+                        <div class="flagship-badge">🔥 Flagship Event</div>
+                        <!-- Reg Open badge (top-right) -->
+                        <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
+                        <div class="event-card-image">
+                            <img src="./Assets/images/Data_Hiest.png" class="card-banner" alt="DATA HEIST banner" loading="lazy" decoding="async" width="350" height="180">
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">DATA HEIST</h3>
+                            <p class="card__text">Decode clues. Bid smart. Conquer data.</p>
+                            <a href="data-heist.html" class="event-btn" aria-label="View Data Heist details"><span>View Details</span></a>
+                        </div>
+                    </article>
+
                     <!-- DATA DESK -->
                     <article class="card event-card event-card--initial">
                         <!-- Reg Open badge (top-right) -->
                         <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
-                        <img src="./Assets/images/desk.png" class="card-banner" alt="DATA DESK banner" loading="lazy" decoding="async" width="350" height="180">
+                        <div class="event-card-image">
+                            <img src="./Assets/images/desk.png" class="card-banner" alt="DATA DESK banner" loading="lazy" decoding="async" width="350" height="180">
+                        </div>
                         <div class="card__body">
                             <h3 class="card__title">DATA DESK</h3>
                             <p class="card__text">A fast-paced simulation where teams analyse real data and make smart business decisions.</p>

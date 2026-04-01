@@ -229,7 +229,7 @@ body::before{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #FFD700, #FFC107, #FFB300);
+    background: linear-gradient(135deg, #ffd700, #ffb700);
     color: #000;
     font-weight: 600;
     font-size: 14px;
@@ -237,57 +237,50 @@ body::before{
     border-radius: 40px;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, color 0.2s ease;
     border: none;
     white-space: nowrap;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-    box-shadow: 
-        0 0 12px rgba(255, 215, 0, 0.6),
-        0 0 24px rgba(255, 215, 0, 0.4);
+    box-shadow:
+        0 0 12px rgba(255, 215, 0, 0.5),
+        0 0 22px rgba(255, 183, 0, 0.28);
 }
 
-/* Shimmer Effect */
-.nav__register-btn::before {
+.nav__register-btn::after {
     content: "";
     position: absolute;
     top: 0;
     left: -100%;
-    width: 100%;
+    width: 50%;
     height: 100%;
     background: linear-gradient(
         120deg,
         transparent,
-        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0.7),
         transparent
     );
-    transition: all 0.5s;
-    animation: shimmer 2.5s infinite;
+    transform: skewX(-20deg);
+    transition: left 0.8s ease;
+    pointer-events: none;
 }
 
-@keyframes shimmer {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
+.nav__register-btn:hover::after {
+    left: 120%;
 }
 
 .nav__register-btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 
-        0 0 18px rgba(255, 215, 0, 0.9),
-        0 0 32px rgba(255, 215, 0, 0.7);
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.6);
+    transform: translateY(-2px) scale(1.03);
     color: #000;
 }
 
 .nav__register-btn:active {
-    transform: scale(0.95);
-    box-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.6),
-        0 0 18px rgba(255, 215, 0, 0.4);
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+        0 0 10px rgba(255, 215, 0, 0.5),
+        0 0 18px rgba(255, 183, 0, 0.3);
 }
 
 .nav__toggle{
@@ -437,75 +430,8 @@ body::before{
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow:
-        0 0 20px rgba(0,255,179,0.18),
-        0 0 44px rgba(230,213,163,0.12);
-    animation: neonPulse 3.8s ease-in-out infinite, glitch 5s infinite;
+    text-shadow: 0 0 20px rgba(0, 255, 159, 0.4);
     position: relative;
-}
-
-.hero__title::before,
-.hero__title::after {
-    content: "DATACRON 2026";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0.8;
-}
-
-.hero__title::before {
-    left: 2px;
-    text-shadow: -2px 0 #ff00c1;
-    clip-path: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-}
-
-.hero__title::after {
-    left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
-    clip-path: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-}
-
-@keyframes glitch {
-    0%, 90%, 100% { transform: translate(0); }
-    91% { transform: translate(-2px, 1px); }
-    92% { transform: translate(2px, -1px); }
-    93% { transform: translate(-2px, -1px); }
-    94% { transform: translate(2px, 1px); }
-}
-
-@keyframes glitch-anim {
-    0% { clip-path: inset(80% 0 0 0); }
-    20% { clip-path: inset(20% 0 60% 0); }
-    40% { clip-path: inset(50% 0 10% 0); }
-    60% { clip-path: inset(10% 0 70% 0); }
-    80% { clip-path: inset(40% 0 40% 0); }
-    100% { clip-path: inset(70% 0 20% 0); }
-}
-
-@keyframes glitch-anim2 {
-    0% { clip-path: inset(10% 0 80% 0); }
-    20% { clip-path: inset(60% 0 20% 0); }
-    40% { clip-path: inset(30% 0 50% 0); }
-    60% { clip-path: inset(70% 0 10% 0); }
-    80% { clip-path: inset(15% 0 75% 0); }
-    100% { clip-path: inset(45% 0 35% 0); }
-}
-
-@keyframes neonPulse{
-    0%, 100%{
-        filter: drop-shadow(0 0 10px rgba(0,255,179,0.14)) drop-shadow(0 0 18px rgba(230,213,163,0.10));
-    }
-    50%{
-        filter: drop-shadow(0 0 18px rgba(0,255,179,0.24)) drop-shadow(0 0 26px rgba(230,213,163,0.16));
-    }
 }
 
 .hero__subtitle{
@@ -749,6 +675,14 @@ body::before{
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid--featured-events{
+    align-items: stretch;
+}
+
+.grid--featured-events .data-heist-card{
+    z-index: 2;
+}
+
 .card{
     position: relative;
     border-radius: var(--radius);
@@ -880,7 +814,10 @@ body::before{
    Event Cards (Home Page)
    ========================= */
 .event-card {
+    height: 100%;
+    border-radius: 16px;
     overflow: hidden;
+    position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -891,17 +828,36 @@ body::before{
 }
 
 .event-card:hover {
-    transform: translateY(-5px) scale(1.03) !important;
-    transition: transform 0.3s ease-out !important;
+    transform: translateY(-6px);
+    transition: transform 0.3s ease-out;
     z-index: 10;
+}
+
+.card.event-card:hover {
+    transform: translateY(-6px);
+}
+
+.data-heist-card {
+    border-color: rgba(255, 80, 0, 0.35);
+}
+
+.event-card-image {
+    height: 120px;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.event-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .card-banner {
     width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-top-left-radius: var(--radius); /* Matching card radius */
-    border-top-right-radius: var(--radius);
+    height: 100%;
     opacity: 0.9;
     transition: transform 0.4s ease, opacity 0.3s ease;
 }
@@ -925,8 +881,32 @@ body::before{
     z-index: 2;
 }
 
+.flagship-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 6;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255, 80, 0, 0.15);
+    border: 1px solid rgba(255, 80, 0, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 0 10px rgba(255, 80, 0, 0.4);
+    pointer-events: none;
+}
+
+.data-heist-card:hover {
+    box-shadow: 0 0 20px rgba(255, 80, 0, 0.4);
+}
+
 @media (max-width: 768px) {
-    .card-banner {
+    .event-card-image {
         height: 90px;
     }
 }
@@ -954,80 +934,6 @@ body::before{
 }
 
 /* Flagship badge — top-left, warm orange→red gradient glow */
-.badge--flagship {
-    top: 12px;
-    left: 12px;
-    padding: 7px 14px;
-    font-size: 0.68rem;
-    letter-spacing: 1px;
-    color: #ffb347;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 122, 0, 0.18),
-        rgba(255, 0, 0, 0.14)
-    );
-    border: 1px solid rgba(255, 100, 0, 0.55);
-    box-shadow:
-        0 0 16px rgba(255, 80, 0, 0.6),
-        inset 0 0 8px rgba(255, 100, 0, 0.08);
-    animation: flagshipPulse 2.8s ease-in-out infinite;
-}
-
-@keyframes flagshipPulse {
-    0%, 100% {
-        box-shadow:
-            0 0 16px rgba(255, 80, 0, 0.6),
-            inset 0 0 8px rgba(255, 100, 0, 0.08);
-        border-color: rgba(255, 100, 0, 0.55);
-    }
-    50% {
-        box-shadow:
-            0 0 26px rgba(255, 80, 0, 0.85),
-            0 0 40px rgba(255, 30, 0, 0.35),
-            inset 0 0 12px rgba(255, 100, 0, 0.14);
-        border-color: rgba(255, 140, 0, 0.85);
-    }
-}
-
-/* CSS-based flame inside flagship badge — replaces emoji */
-.fire-icon {
-    width: 10px;
-    height: 18px;
-    display: inline-block;
-    flex-shrink: 0;
-    margin-right: 5px;
-    vertical-align: middle;
-    position: relative;
-    background: radial-gradient(circle at 50% 80%, #ffcc00, #ff5a00 58%, transparent 72%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    box-shadow: 0 0 12px #ff5a00, 0 0 24px rgba(255, 42, 0, 0.7);
-    animation: fireFlicker 0.6s infinite alternate ease-in-out;
-    transform-origin: bottom center;
-}
-
-.fire-icon::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 9px;
-    background: radial-gradient(circle at 50% 60%, #fff6a0 20%, #ff7a00 80%);
-    border-radius: 50%;
-    animation: fireInner 0.5s infinite alternate ease-in-out;
-}
-
-@keyframes fireFlicker {
-    from { transform: scale(1)   translateY(0);    }
-    to   { transform: scale(1.2) translateY(-2px); }
-}
-
-@keyframes fireInner {
-    from { opacity: 0.8; transform: translateX(-50%) scale(1);   }
-    to   { opacity: 1;   transform: translateX(-50%) scale(1.2); }
-}
-
 /* Reg Open badge — top-right, neon green */
 .badge--reg-open {
     top: 12px;
@@ -1171,7 +1077,7 @@ body::before{
 
 /* Mobile: badges don't overlap, button full width */
 @media (max-width: 720px) {
-    .badge--flagship {
+    .flagship-badge {
         font-size: 0.58rem;
         padding: 5px 10px;
         top: 10px;
@@ -2508,6 +2414,8 @@ body::before{
 }
 
 .btn-register {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2525,15 +2433,40 @@ body::before{
     text-decoration: none;
     border: none;
     box-shadow: 0 4px 20px rgba(255, 200, 0, 0.35);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     will-change: transform;
 }
 
+.btn-register::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.7),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.8s ease;
+    pointer-events: none;
+}
+
+.btn-register:hover::after {
+    left: 120%;
+}
+
 .btn-register:hover {
-    background: linear-gradient(135deg, #ffcc00, #ffaa00);
-    transform: translateY(-2px) scale(1.03);
     box-shadow: 0 0 20px rgba(255, 200, 0, 0.6);
-    filter: brightness(1.07);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.btn-register > * {
+    position: relative;
+    z-index: 1;
 }
 
 .btn-rulebook {
