@@ -14,11 +14,15 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- Preload Fonts -->
+    <!-- Preload Critical Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
+    
+    <!-- Defer Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
     <!-- Inline Critical CSS -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
@@ -43,6 +47,7 @@
 
     <link rel="preload" href="./CSS/speakers.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/speakers.css?v=2"></noscript>
+
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
@@ -52,7 +57,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -80,65 +85,95 @@
                     <!-- Tulshekar first as required -->
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/tulshekar-gangireddy/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Tulshekar.jpeg" alt="Tulshekar Gangireddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Tulshekar.webp" type="image/webp">
+                                <img src="./Assets/Tulshekar.jpeg" alt="Tulshekar Gangireddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Tulshekar Gangireddy</h3>
                             <p class="card__meta speaker-role">Executive Director &amp; Head of Data Strategy • JPMorgan Chase &amp; Co.</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/jpmorgan.png" alt="JPMorgan Chase & Co. Logo" width="80" height="24" loading="lazy" decoding="async">
+                                <picture>
+                                    <source srcset="./Assets/logos/jpmorgan.webp" type="image/webp">
+                                    <img src="./Assets/logos/jpmorgan.png" alt="JPMorgan Chase & Co. Logo" width="80" height="24" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/joybanerjee/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Joy_Banerjee.webp" type="image/webp">
+                                <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Joy Banerjee</h3>
                             <p class="card__meta speaker-role">VP of Design • Blinkit</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/blinkit.svg" alt="Blinkit Logo" width="80" height="24" loading="lazy" decoding="async">
+                                <picture>
+                                    <source srcset="./Assets/logos/blinkit.webp" type="image/webp">
+                                    <img src="./Assets/logos/blinkit.svg" alt="Blinkit Logo" width="80" height="24" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/anildesign/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Anil_Reddy.webp" type="image/webp">
+                                <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Anil Reddy</h3>
                             <p class="card__meta speaker-role">Founder &amp; Design Director • Happy Pet Care</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/happypetcare.jpeg" alt="Happy Pet Care Logo" width="80" height="24" loading="lazy" decoding="async">
+                                <picture>
+                                    <source srcset="./Assets/logos/happypetcare.webp" type="image/webp">
+                                    <img src="./Assets/logos/happypetcare.jpeg" alt="Happy Pet Care Logo" width="80" height="24" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                     </a>
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/priyavrata-mafatlal/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/mafatlali.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/mafatlali.webp" type="image/webp">
+                                <img src="./Assets/mafatlali.jpeg" alt="Priyavrata Mafatlal" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Priyavrata Mafatlal</h3>
                             <p class="card__meta speaker-role">Vice Chairman • Arvind Mafatlal Group</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/Arvind Mafatlal Group.jpeg" alt="Expedia Group Logo" width="80" height="24" loading="lazy" decoding="async">
+                                <picture>
+                                    <source srcset="./Assets/logos/Arvind_Mafatlal_Group.webp" type="image/webp">
+                                    <img src="./Assets/logos/Arvind Mafatlal Group.jpeg" alt="Arvind Mafatlal Group Logo" width="80" height="24" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                     </a>
                     
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/ankit-goswami/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Ankit_Goswami.webp" type="image/webp">
+                                <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Ankit Goswami</h3>
                             <p class="card__meta speaker-role">PM Leader • Expedia Group</p>
                             <div class="company-logo">
-                                <img src="./Assets/logos/expedia.png" alt="Expedia Group Logo" width="80" height="24" loading="lazy" decoding="async">
+                                <picture>
+                                    <source srcset="./Assets/logos/expedia.webp" type="image/webp">
+                                    <img src="./Assets/logos/expedia.png" alt="Expedia Group Logo" width="80" height="24" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                     </a>

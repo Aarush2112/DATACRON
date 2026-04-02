@@ -14,12 +14,16 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- Preload Fonts -->
+    <!-- Preload Critical Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Inline Critical CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
+    
+    <!-- Defer Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+    <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -43,6 +47,7 @@
 
     <link rel="preload" href="./CSS/events.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/events.css?v=3"></noscript>
+
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
@@ -52,7 +57,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -89,7 +94,10 @@
                                  data-register="https://unstop.com/competitions/logic-labs-datacron-rishihood-university-1662257"
                                  data-rules="https://drive.google.com/file/d/17mph_qChzaB0e3qdl6_OwGKXzM2DdDQv/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="Assets/images/logic-labs.jpg" class="event-banner" alt="LOGIC LABS Banner" loading="lazy" decoding="async" width="400" height="225">
+                                <picture>
+                                    <source srcset="Assets/images/logic-labs.webp" type="image/webp">
+                                    <img src="Assets/images/logic-labs.jpg" class="event-banner" alt="LOGIC LABS Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">LOGIC LABS</h3>
@@ -105,7 +113,10 @@
                                  data-register="https://unstop.com/competitions/data-meme-war-datacron26-rishihood-university-1662353"
                                  data-rules="https://drive.google.com/file/d/1EikGuKFknw5_u_rPk7f6_chK8MhAovt5/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="Assets/images/data-meme.jpg" class="event-banner" alt="DATA MEME WAR Banner" loading="lazy" decoding="async" width="400" height="225">
+                                <picture>
+                                    <source srcset="Assets/images/data-meme.webp" type="image/webp">
+                                    <img src="Assets/images/data-meme.jpg" class="event-banner" alt="DATA MEME WAR Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">DATA MEME WAR</h3>
@@ -121,7 +132,10 @@
                                  data-register="https://unstop.com/competitions/cold-case-datacron-rishihood-university-1662283"
                                  data-rules="https://drive.google.com/file/d/1STFAMkm6RayDEoXEUapW0PnxSL_rtfbM/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="Assets/images/cold-case.jpg" class="event-banner" alt="COLD CASE Banner" loading="lazy" decoding="async" width="400" height="225">
+                                <picture>
+                                    <source srcset="Assets/images/cold-case.webp" type="image/webp">
+                                    <img src="Assets/images/cold-case.jpg" class="event-banner" alt="COLD CASE Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">COLD CASE</h3>
@@ -147,7 +161,10 @@
                                  data-register="https://unstop.com/o/3JHsMpT?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
                                  data-rules="https://drive.google.com/file/d/1qzu0_xWhL6ugg1ikk-wGsZixz4QK6jU5/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="./Assets/images/code.png" class="event-banner" alt="Code &amp; Conquer Banner" loading="lazy" decoding="async" width="400" height="225">
+                                <picture>
+                                    <source srcset="./Assets/images/code.webp" type="image/webp">
+                                    <img src="./Assets/images/code.png" class="event-banner" alt="Code &amp; Conquer Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">CODE &amp; CONQUER</h3>
@@ -163,7 +180,10 @@
                                  data-register="https://unstop.com/o/1P7ERc6?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
                                  data-rules="https://drive.google.com/file/d/1wYGbeTJsqEBlEJQ3hv2HbJoKMczWKU8s/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="./Assets/images/Data_Hiest.png" class="event-banner" alt="DATA HEIST Banner" loading="lazy" decoding="async" width="400" height="225">
+                                <picture>
+                                    <source srcset="./Assets/images/Data_Hiest.webp" type="image/webp">
+                                    <img src="./Assets/images/Data_Hiest.png" class="event-banner" alt="DATA HEIST Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">DATA HEIST</h3>
@@ -179,7 +199,10 @@
                                  data-register="https://unstop.com/o/Sc0zVyT?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
                                  data-rules="https://drive.google.com/file/d/19obrXbCdgjmqautewVz2D70HQMr3AWkJ/view?usp=share_link">
                             <div class="banner-container">
-                                <img src="./Assets/images/desk.png" class="event-banner" alt="Data Desk Banner" loading="lazy">
+                                <picture>
+                                    <source srcset="./Assets/images/desk.webp" type="image/webp">
+                                    <img src="./Assets/images/desk.png" class="event-banner" alt="Data Desk Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
                             </div>
                             <div class="event-content">
                                 <h3 class="event-card__title">DATA DESK</h3>

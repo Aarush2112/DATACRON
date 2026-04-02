@@ -6,15 +6,48 @@
     <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
     <title>Sponsors | Datacron 2026</title>
     
-    <!-- Preload Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
-    
+    <!-- Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./CSS/style.css?v=2">
-    <link rel="stylesheet" href="./CSS/sponsors.css?v=2">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload Critical Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
+    
+    <!-- Defer Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+    <!-- Inline Critical CSS -->
+    <style>
+        :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
+        body{font-family:"Poppins",system-ui,sans-serif;background:#03050a;color:var(--text);overflow-x:hidden}
+        .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+        #background-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:#03050a;pointer-events:none}
+        .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:#020202;border-bottom:1px solid rgba(0,255,179,0.15)}
+        .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+        .nav__brand{display:inline-flex;align-items:center}
+        .nav__logo{height:40px;width:auto;margin-right:6px}
+        .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
+        .section__header{text-align:center;margin-bottom:40px}
+        .section__title{font-family:"Orbitron",sans-serif;font-size:clamp(32px,5vw,48px);text-transform:uppercase;letter-spacing:.1em;color:#fff}
+        .reveal{opacity:0;transform:translateY(30px)}
+    </style>
+
+    <!-- Async Load Non-Critical CSS -->
+    <link rel="preload" href="./CSS/style.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/style.css?v=2"></noscript>
+
+    <link rel="preload" href="./CSS/sponsors.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/sponsors.css?v=2"></noscript>
+
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
@@ -24,7 +57,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high">
+                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -53,7 +86,10 @@
         <section class="section" aria-label="Sponsors List">
             <div class="container">
                 <div class="sponsor-logo reveal">
-                    <img src="./Assets/Sponsors/Unstop.png" alt="Unstop Logo" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="./Assets/Sponsors/Unstop.webp" type="image/webp">
+                        <img src="./Assets/Sponsors/Unstop.png" alt="Unstop Logo" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
         </section>
@@ -63,7 +99,10 @@
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
-                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
+                    <picture>
+                        <source srcset="./Assets/RULogo-2.webp" type="image/webp">
+                        <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
+                    </picture>
                 </div>
                 <span class="footer__logo">Datacron 2026</span>
             </div>

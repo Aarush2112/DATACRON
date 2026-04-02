@@ -14,11 +14,15 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- Preload Fonts -->
+    <!-- Preload Critical Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
+    
+    <!-- Defer Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
     <!-- Inline Critical CSS -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
@@ -35,6 +39,7 @@
         .section__header{text-align:center;margin-bottom:40px}
         .section__title{font-family:"Orbitron",sans-serif;font-size:clamp(32px,5vw,48px);text-transform:uppercase;letter-spacing:.1em;color:#fff}
         .reveal{opacity:0;transform:translateY(30px)}
+        .department{content-visibility:auto;contain-intrinsic-size:400px}
     </style>
 
     <!-- Async Load Non-Critical CSS -->
@@ -43,6 +48,7 @@
 
     <link rel="preload" href="./CSS/team.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/team.css?v=2"></noscript>
+
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
@@ -52,7 +58,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
@@ -81,9 +87,12 @@
                         <h2 id="outreach-heading" class="department__title">Sponsorships & Outreach</h2>
                     </div>
                     <div class="team-grid" role="list">
-                        <article class="team-card" role="listitem">
+                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_3921 - Kapish Garg.jpg" alt="Team Member" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Kapish_Garg.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_3921 - Kapish Garg.jpg" alt="Kapish Garg" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kapish Garg</h3>
@@ -101,7 +110,10 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/8ff1db64-51c5-4111-9042-8d919cd1eb4f - Bhavya.jpeg" alt="Team Member" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Bhavya.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/8ff1db64-51c5-4111-9042-8d919cd1eb4f - Bhavya.jpeg" alt="Bhavya" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Bhavya</h3>
@@ -119,7 +131,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260318-WA0005 - Shubh Mehrotra.jpg" alt="Team Member" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Shubh_Mehrotra.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20260318-WA0005 - Shubh Mehrotra.jpg" alt="Shubh Mehrotra" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Shubh Mehrotra</h3>
@@ -137,7 +152,10 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/20260212_165543 - Poorak Pandey.jpg" alt="Team Member" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Poorak_Pandey.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/20260212_165543 - Poorak Pandey.jpg" alt="Poorak Pandey" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Poorak Pandey</h3>
@@ -155,7 +173,10 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260317_235356 - Shivam Mugaji.png" alt="Team Member" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Shivam_Jahane.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_20260317_235356 - Shivam Mugaji.png" alt="Shivam Jahane" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Shivam Jahane</h3>
@@ -183,7 +204,10 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/1761627824082 - Aaditya Prakash.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Aaditya_Prakash.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/1761627824082 - Aaditya Prakash.jpeg" alt="Aaditya Prakash" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Aaditya Prakash</h3>
@@ -201,7 +225,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260222-WA0035~2 - Mannat Bansal.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Mannat_Bansal.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20260222-WA0035~2 - Mannat Bansal.jpg" alt="Mannat Bansal" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Mannat Bansal</h3>
@@ -219,7 +246,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Vansh_jain_pfp - Vansh Jain.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Vansh_Jain.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/Vansh_jain_pfp - Vansh Jain.jpeg" alt="Vansh Jain" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Vansh jain</h3>
@@ -237,7 +267,10 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-18 at 11.01.47 - Sumati Sen.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Sumati_Sen.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/WhatsApp Image 2026-03-18 at 11.01.47 - Sumati Sen.jpeg" alt="Sumati Sen" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sumati Sen</h3>
@@ -255,7 +288,10 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260317_233644 - Nimisha Goyal.png" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Nimisha_Goyal.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_20260317_233644 - Nimisha Goyal.png" alt="Nimisha Goyal" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Nimisha Goyal</h3>
@@ -273,7 +309,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Screenshot 2026-03-17 at 21.57.32 - Sourabh Pal.png" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Sourabh_Pal.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/Screenshot 2026-03-17 at 21.57.32 - Sourabh Pal.png" alt="Sourabh Pal" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sourabh Pal</h3>
@@ -291,7 +330,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260209-WA0016 - Sakshi Patel.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Sakshi_Patel.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20260209-WA0016 - Sakshi Patel.jpg" alt="Sakshi Patel" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sakshi Patel</h3>
@@ -309,7 +351,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/C8357341-7E21-4FC3-A0E1-7F94CF827E1C - Prakriti Rautela.png" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Prakriti_Rautela.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/C8357341-7E21-4FC3-A0E1-7F94CF827E1C - Prakriti Rautela.png" alt="Prakriti Rautela" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Prakriti Rautela</h3>
@@ -327,7 +372,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_1515 - Khushbu Lamboria.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Khushbu_Lamboria.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_1515 - Khushbu Lamboria.jpeg" alt="Khushbu Lamboria" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Khushbu Lamboria</h3>
@@ -355,7 +403,10 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Aarush_Gupta.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Aarush_Gupta.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/Aarush_Gupta.jpeg" alt="Aarush Gupta" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Aarush Gupta</h3>
@@ -373,7 +424,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/Screenshot 2026-03-18 at 10.56.05 AM - Kashish.png" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Kashish.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/Screenshot 2026-03-18 at 10.56.05 AM - Kashish.png" alt="Kashish" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kashish</h3>
@@ -401,7 +455,10 @@
                     <div class="team-grid" role="list">
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20260216_005214_655 - Alok Rawat.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Alok_Rawat.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_20260216_005214_655 - Alok Rawat.jpg" alt="Alok Rawat" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Alok Rawat</h3>
@@ -419,7 +476,10 @@
                         
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/1773770457344 - Sarthak Kumar.png" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Sarthak_Kumar.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/1773770457344 - Sarthak Kumar.png" alt="Sarthak Kumar" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Sarthak Kumar</h3>
@@ -437,7 +497,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260318-WA0000 - Jivika.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Jivika.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20260318-WA0000 - Jivika.jpg" alt="Jivika" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Jivika</h3>
@@ -455,7 +518,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_0215 - Mayank Yadav.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Mayank_Yadav.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_0215 - Mayank Yadav.jpeg" alt="Mayank Yadav" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Mayank Yadav</h3>
@@ -473,7 +539,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG_20251227_211225_898 - Kunal Kumar.webp" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Kunal_Kumar_Optimized.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG_20251227_211225_898 - Kunal Kumar.webp" alt="Kunal Kumar" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Kunal Kumar</h3>
@@ -491,7 +560,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20250122-WA0011 - Shray Upadhyay.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Shray_Upadhyay.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20250122-WA0011 - Shray Upadhyay.jpg" alt="Shray Upadhyay" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Shray Upadhyay</h3>
@@ -509,7 +581,10 @@
 
                         <article class="team-card card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20260323-WA0012 - Moksh Ajmeria.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Moksh_Ajmeria.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20260323-WA0012 - Moksh Ajmeria.jpg" alt="Moksh Ajmeria" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Moksh Ajmeria</h3>
@@ -537,7 +612,10 @@
                     <div class="team-grid" role="list">
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-12 at 20.46.14 - Gunj Tibrewala.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Gunj_Tibrewala.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/WhatsApp Image 2026-03-12 at 20.46.14 - Gunj Tibrewala.jpeg" alt="Gunj Tibrewala" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Gunj Tibrewala</h3>
@@ -555,7 +633,10 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/WhatsApp Image 2026-03-17 at 21.46.14 - Nirav Jain.jpeg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Nirav_Jain.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/WhatsApp Image 2026-03-17 at 21.46.14 - Nirav Jain.jpeg" alt="Nirav Jain" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Nirav Jain</h3>
@@ -573,7 +654,10 @@
 
                         <article class="team-card" role="listitem">
                             <div class="team-card__image-container">
-                                <img src="./Assets/Team Images/IMG-20251205-WA0024 - Yanshika Rana.jpg" alt="Team Member" class="team-card__img loading="lazy" decoding="async" width="260" height="260">
+                                <picture>
+                                    <source srcset="./Assets/Team Images/Yanshika_Rana.webp" type="image/webp">
+                                    <img src="./Assets/Team Images/IMG-20251205-WA0024 - Yanshika Rana.jpg" alt="Yanshika Rana" class="team-card__img" loading="lazy" decoding="async" width="260" height="260">
+                                </picture>
                             </div>
                             <div class="team-card__content">
                                 <h3 class="team-card__title">Yanshika Rana</h3>
@@ -744,7 +828,10 @@
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
-                    <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
+                    <picture>
+                        <source srcset="./Assets/RULogo-2.webp" type="image/webp">
+                        <img src="./Assets/RULogo-2.png" alt="Rishihood University" width="140" height="44" loading="lazy" />
+                    </picture>
                 </div>
                 <span class="footer__logo">Datacron 2026</span>
             </div>
