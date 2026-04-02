@@ -180,16 +180,36 @@
       }
     };
 
-    function tick() {
+    let lastTick = 0;
+    const TICK_FPS = 60;
+    const TICK_INTERVAL = 1000 / TICK_FPS;
+
+    function tick(timestamp) {
+      if (!isRunning) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+
+      rafId = requestAnimationFrame(tick);
+
+      const elapsed = timestamp - lastTick;
+      if (elapsed < TICK_INTERVAL) return;
+      lastTick = timestamp - (elapsed % TICK_INTERVAL);
+
       if (hasMoved) {
         cursorX += (mouseX + magneticX - cursorX) * 0.16;
         cursorY += (mouseY + magneticY - cursorY) * 0.16;
         currentScale += (targetScale - currentScale) * 0.16;
         cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) scale(${currentScale})`;
       }
-      requestAnimationFrame(tick);
     }
-    tick();
+    
+    let isRunning = true;
+    let rafId = requestAnimationFrame(tick);
+
+    document.addEventListener("visibilitychange", () => {
+      isRunning = !document.hidden;
+    });
   }
 
   // ---------- Footer year ----------
@@ -792,11 +812,11 @@
         if (!isTouchDevice) {
            const centerX = rect.width / 2;
            const centerY = rect.height / 2;
-           const rotateX = (y - centerY) / 14;
-           const rotateY = (centerX - x) / 14;
+           const rotateX = (y - centerY) / 20; // Throttled intensity
+           const rotateY = (centerX - x) / 20;
            el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
         }
-      });
+      }, { passive: true });
       
       el.addEventListener('mouseleave', () => {
         el.style.transform = '';

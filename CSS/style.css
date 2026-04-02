@@ -70,6 +70,7 @@ body{
     opacity: 0;
     transition: opacity 0.3s ease, box-shadow 0.3s ease;
     will-change: transform;
+    z-index: 9999;
 }
 
 .custom-cursor.is-hovering {
@@ -432,6 +433,7 @@ body::before{
     color: transparent;
     text-shadow: 0 0 20px rgba(0, 255, 159, 0.4);
     position: relative;
+    will-change: transform, opacity;
 }
 
 .hero__subtitle{
@@ -678,6 +680,8 @@ body::before{
 
 .grid--featured-events{
     align-items: stretch;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
 }
 
 .grid--featured-events .data-heist-card{

@@ -14,13 +14,16 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- Preload Fonts with display=swap equivalent -->
+    <!-- Preload Critical Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
+    
+    <!-- Defer Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
-    <!-- Inline Critical CSS -->
+    <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -33,15 +36,20 @@
         .nav__brand{display:inline-flex;align-items:center}
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
-        .hero{position:relative;min-height:calc(100vh-74px);display:grid;place-items:center;padding:92px 0 70px;background:#03050a;overflow:hidden}
+        .hero{position:relative;z-index:1;min-height:calc(100vh - 74px);display:grid;place-items:center;padding:92px 0 70px;background:#03050a;overflow:hidden}
         .hero__title{font-family:"Orbitron",sans-serif;font-size:clamp(42px,10vw,110px);letter-spacing:.12em;text-transform:uppercase;line-height:1.1;text-align:center;color:transparent;-webkit-background-clip:text;background-clip:text;background:linear-gradient(90deg,#fff 0%,var(--glow) 50%,var(--accent) 100%);text-shadow:0 0 20px rgba(0,255,159,0.4)}
+        .hero__content{position:relative;z-index:1;width:min(860px,calc(100% - 40px));text-align:center;will-change:transform,opacity}
         .reveal{opacity:0;transform:translateY(30px)}
+        .hero__canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;will-change:transform}
     </style>
 
     <!-- Async Load Non-Critical CSS -->
     <link rel="preload" href="./CSS/style.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/style.css?v=2"></noscript>
-    <link rel="stylesheet" href="./CSS/speakers.css?v=2">
+    
+    <link rel="preload" href="./CSS/speakers.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/speakers.css?v=2"></noscript>
+
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
@@ -52,7 +60,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="Datacron 2026 Home">
-                <img src="./Assets/Logo.jpeg" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
 
@@ -202,7 +210,10 @@
                         <!-- Reg Open badge (top-right) -->
                         <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
                         <div class="event-card-image">
-                            <img src="./Assets/images/code.png" class="card-banner" alt="CODE &amp; CONQUER banner" loading="lazy" decoding="async" width="350" height="180">
+                            <picture>
+                                <source srcset="./Assets/images/code.webp" type="image/webp">
+                                <img src="./Assets/images/code.png" class="card-banner" alt="CODE &amp; CONQUER banner" loading="lazy" decoding="async" width="350" height="180">
+                            </picture>
                         </div>
                         <div class="card__body">
                             <h3 class="card__title">CODE &amp; CONQUER</h3>
@@ -217,7 +228,10 @@
                         <!-- Reg Open badge (top-right) -->
                         <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
                         <div class="event-card-image">
-                            <img src="./Assets/images/Data_Hiest.png" class="card-banner" alt="DATA HEIST banner" loading="lazy" decoding="async" width="350" height="180">
+                            <picture>
+                                <source srcset="./Assets/images/Data_Hiest.webp" type="image/webp">
+                                <img src="./Assets/images/Data_Hiest.png" class="card-banner" alt="DATA HEIST banner" loading="lazy" decoding="async" width="350" height="180">
+                            </picture>
                         </div>
                         <div class="card__body">
                             <h3 class="card__title">DATA HEIST</h3>
@@ -231,7 +245,10 @@
                         <!-- Reg Open badge (top-right) -->
                         <span class="badge badge--reg-open" aria-label="Registration Open"><span class="reg-dot"></span>Reg Open</span>
                         <div class="event-card-image">
-                            <img src="./Assets/images/desk.png" class="card-banner" alt="DATA DESK banner" loading="lazy" decoding="async" width="350" height="180">
+                            <picture>
+                                <source srcset="./Assets/images/desk.webp" type="image/webp">
+                                <img src="./Assets/images/desk.png" class="card-banner" alt="DATA DESK banner" loading="lazy" decoding="async" width="350" height="180">
+                            </picture>
                         </div>
                         <div class="card__body">
                             <h3 class="card__title">DATA DESK</h3>
@@ -258,7 +275,10 @@
                 <div class="grid grid--3">
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/joybanerjee/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Joy_Banerjee.webp" type="image/webp">
+                                <img src="./Assets/Joy Banerjee.jpeg" alt="Joy Banerjee" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Joy Banerjee</h3>
@@ -271,7 +291,10 @@
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/anildesign/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Anil_Reddy.webp" type="image/webp">
+                                <img src="./Assets/Anil Reddy.jpeg" alt="Anil Reddy" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Anil Reddy</h3>
@@ -284,7 +307,10 @@
 
                     <a class="card card--speaker reveal speaker-card" href="https://www.linkedin.com/in/ankit-goswami/" target="_blank" rel="noopener noreferrer">
                         <div class="card__media mediaPlaceholder mediaPlaceholder--avatar" role="img" aria-label="Speaker photo placeholder">
-                            <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="./Assets/Ankit_Goswami.webp" type="image/webp">
+                                <img src="./Assets/Ankit Goswami.jpeg" alt="Ankit Goswami" class="speaker-img" width="400" height="400" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="card__body speaker-info">
                             <h3 class="card__title speaker-name">Ankit Goswami</h3>
