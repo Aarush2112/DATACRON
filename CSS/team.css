@@ -67,25 +67,19 @@
 
 /* ---------- Grid Layout ---------- */
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 260px);
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 28px;
     margin: 20px auto 0;
     width: 100%;
+    max-width: 1200px;
     overflow: visible;
 }
 
-@media (max-width: 992px) {
-    .team-grid {
-        grid-template-columns: repeat(2, 260px);
-    }
-}
+/* Removing grid-template-columns media queries because flex-wrap handles them naturally */
 
 @media (max-width: 576px) {
-    .team-grid {
-        grid-template-columns: repeat(1, 260px);
-    }
     .team-divider {
         box-shadow:
             0 0 4px rgba(0, 255, 200, 0.6),
