@@ -8,9 +8,9 @@
     --text: #ffffff;
     --muted: #b8c2bd;
 
-    --glow: #00ffb3;
-    --accent: #e6d5a3;
-    --highlight: #1affc6;
+    --glow: #00FF9F;
+    --accent: #00D4AA;
+    --highlight: #00FF9F;
 
     --glass: rgba(255, 255, 255, 0.03);
     --glassBorder: rgba(255, 255, 255, 0.08);
@@ -380,6 +380,11 @@ body::before{
     to{ transform: translate3d(1.2%, 0.8%, 0) scale(1.06); }
 }
 
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
 .hero__content{
     position: relative;
     z-index: 1;
@@ -393,10 +398,10 @@ body::before{
     font-size: 16px;
     letter-spacing: 0.5em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: #FFD700;
     margin-bottom: 12px;
-    text-shadow: 0 0 10px rgba(230,213,163,0.3);
-    opacity: 0.9;
+    text-shadow: none;
+    opacity: 1;
 }
 
 .hero__kicker{
@@ -427,14 +432,20 @@ body::before{
     overflow-wrap: normal;
     display: inline-block;
     padding: 10px 5px;
-    background: linear-gradient(90deg, #ffffff 0%, var(--glow) 50%, var(--accent) 100%);
+    background: linear-gradient(90deg, #FFFFFF 0%, #00FF9F 50%, #00D4AA 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 20px rgba(0, 255, 159, 0.4);
+    text-shadow: 
+        0 0 10px rgba(0, 255, 159, 0.4), 
+        0 0 25px rgba(0, 255, 159, 0.2), 
+        0 0 45px rgba(0, 212, 170, 0.1);
     position: relative;
     will-change: transform, opacity;
+    animation: floatTitle 6s ease-in-out infinite;
+    transition: filter 0.4s ease, transform 0.4s ease;
 }
+
 
 .hero__subtitle{
     margin-top: 14px;
