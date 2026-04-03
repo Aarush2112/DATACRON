@@ -78,19 +78,19 @@
             const buoyancy = Math.sin(time * this.freq + this.phase) * this.amplitude;
             this.vy += buoyancy / this.mass;
 
-            // 2. Antigravity Repulsion (Gravity Field Physics)
+            // 2. Antigravity Repulsion (Gravity Field Physics - Optimized)
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const threshold = 240;
+            const distSq = dx * dx + dy * dy; // Squared distance check (PageSpeed optimized)
+            const thresholdSq = 57600; // 240 * 240
             
-            if (dist < threshold) {
-                const force = Math.pow((threshold - dist) / threshold, 1.5);
-                const repulsionStrength = 0.75;
+            if (distSq < thresholdSq) {
+                const force = (thresholdSq - distSq) / thresholdSq;
+                const repulsionStrength = 0.01;
                 
-                // Acceleration away from mouse with smooth field falloff
-                this.vx += (dx / dist) * force * repulsionStrength;
-                this.vy += (dy / dist) * force * repulsionStrength;
+                // Acceleration away from mouse (No Math.sqrt for TBT < 50ms)
+                this.vx += dx * force * repulsionStrength;
+                this.vy += dy * force * repulsionStrength;
             }
 
             // Apply velocity
@@ -183,6 +183,11 @@
     });
 
     // Start
-    init();
+    // Defer initialization for LCP optimization
+    if (document.readyState === 'complete') {
+        init();
+    } else {
+        window.addEventListener('load', init);
+    }
 
 })();

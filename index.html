@@ -36,7 +36,7 @@
         .nav__brand{display:inline-flex;align-items:center}
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
-        .hero__event-date{display:block;font-size:16px;letter-spacing:0.5em;text-transform:uppercase;color:#FFD700;margin-bottom:12px;text-shadow:none;opacity:1}
+        .hero__event-date{display:block;font-size:16px;letter-spacing:0.5em;text-transform:uppercase;color:#FFD700;margin-bottom:12px;text-shadow:none;opacity:1;will-change:transform;transform:translate3d(0, 0, 0)}
         .hero{position:relative;z-index:1;min-height:calc(100vh - 74px);display:grid;place-items:center;padding:92px 0 70px;background:#03050a;overflow:hidden}
         .hero__title{
             font-family:"Orbitron",sans-serif;
@@ -53,15 +53,18 @@
                 0 0 10px rgba(0, 255, 159, 0.4), 
                 0 0 25px rgba(0, 255, 159, 0.2), 
                 0 0 45px rgba(0, 212, 170, 0.1);
+            position:relative;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
             animation: floatTitle 6s ease-in-out infinite;
         }
+        .hero__canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;will-change:transform;transform:translate3d(0,0,0);image-rendering:optimizeSpeed}
         @keyframes floatTitle {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
         }
         .hero__content{position:relative;z-index:1;width:min(860px,calc(100% - 40px));text-align:center;will-change:transform,opacity}
-        .reveal{opacity:0;transform:translateY(30px)}
-        .hero__canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;will-change:transform}
+        .reveal{opacity:0;transform:translate3d(0, 30px, 0)}
     </style>
 
     <!-- Async Load Non-Critical CSS -->
