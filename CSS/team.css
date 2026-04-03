@@ -4,15 +4,17 @@
    ========================= */
 
 .team-container {
-    padding: 40px 16px 60px 16px;
-    max-width: 1150px;
+    padding: 40px 24px 60px 24px;
+    max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
     width: 100%;
+    overflow: visible;
 }
 
 .department {
     margin-bottom: 60px;
+    overflow: visible;
 }
 
 .department__title {
@@ -66,15 +68,24 @@
 /* ---------- Grid Layout ---------- */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 260px);
+    justify-content: center;
+    gap: 28px;
     margin: 20px auto 0;
     width: 100%;
-    align-items: stretch;
-    justify-items: center;
+    overflow: visible;
+}
+
+@media (max-width: 992px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 260px);
+    }
 }
 
 @media (max-width: 576px) {
+    .team-grid {
+        grid-template-columns: repeat(1, 260px);
+    }
     .team-divider {
         box-shadow:
             0 0 4px rgba(0, 255, 200, 0.6),
@@ -85,24 +96,26 @@
 
 /* ---------- Team Card ---------- */
 .team-card {
-    width: 100%;
-    max-width: 270px;
-    height: 420px;
+    width: 260px;
+    height: 400px;
     margin: 0 auto;
+    justify-self: center;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    overflow: hidden; /* Keep to round image corners, but no fixed width */
+    overflow: hidden;
     position: relative;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.3s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .team-card:hover {
-    transform: translateY(-10px) scale(1.03);
+    transform: translateY(-6px) scale(1.02);
+    z-index: 20;
     border-color: rgba(0, 242, 255, 0.5);
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.4),
@@ -242,7 +255,6 @@
     border-color: rgba(0, 242, 255, 0.5);
     box-shadow: 0 0 25px rgba(0, 242, 255, 0.2);
 }
-
 .tech-section .team-card:hover {
     border-color: rgba(123, 97, 255, 0.5);
     box-shadow: 0 0 25px rgba(123, 97, 255, 0.2);
