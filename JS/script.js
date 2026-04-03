@@ -693,6 +693,93 @@
       });
     }
   };
+  // ---------- Burning Fire Ember Effect (55 FPS) ----------
+  const initEmberEffect = () => {
+    const heistCards = qsa(".data-heist-card");
+    if (heistCards.length === 0) return;
+
+    const FPS = 55;
+    const FRAME_MIN_TIME = 1000 / FPS;
+    let lastFrameTime = performance.now();
+    const activeCards = new Set();
+    const embers = [];
+
+    class Ember {
+      constructor(card) {
+        this.card = card;
+        this.el = document.createElement("div");
+        this.el.className = "ember";
+        
+        const rect = card.getBoundingClientRect();
+        this.width = rect.width;
+        // Randomized start position at the bottom of the card
+        this.x = Math.random() * (rect.width - 10) + 5;
+        this.y = rect.height - 10; 
+        
+        this.vY = -(0.8 + Math.random() * 1.5);
+        this.vX = (Math.random() - 0.5) * 0.6;
+        this.opacity = 1;
+        this.rotation = Math.random() * 360;
+        this.scale = 0.5 + Math.random() * 0.8;
+        this.life = 1.0;
+        this.decay = 0.01 + Math.random() * 0.015;
+
+        card.appendChild(this.el);
+        this.render();
+      }
+
+      update() {
+        this.y += this.vY;
+        // Add flickering sine drift
+        this.x += this.vX + Math.sin(this.y * 0.08) * 0.4;
+        this.life -= this.decay;
+        this.opacity = Math.max(0, this.life);
+        this.rotation += 3;
+        return this.life > 0;
+      }
+
+      render() {
+        this.el.style.transform = `translate3d(${this.x}px, ${this.y}px, 0) rotate(${this.rotation}deg) scale(${this.scale})`;
+        this.el.style.opacity = this.opacity;
+      }
+
+      remove() {
+        this.el.remove();
+      }
+    }
+
+    const animate = (time) => {
+      requestAnimationFrame(animate);
+      
+      const delta = time - lastFrameTime;
+      if (delta < FRAME_MIN_TIME) return;
+      lastFrameTime = time - (delta % FRAME_MIN_TIME);
+
+      // Spawn new embers if hover is active
+      activeCards.forEach(card => {
+        if (embers.length < 60) { // Global cap for performance
+          embers.push(new Ember(card));
+        }
+      });
+
+      // Update and prune embers
+      for (let i = embers.length - 1; i >= 0; i--) {
+        if (embers[i].update()) {
+          embers[i].render();
+        } else {
+          embers[i].remove();
+          embers.splice(i, 1);
+        }
+      }
+    };
+
+    heistCards.forEach(card => {
+      card.addEventListener("mouseenter", () => activeCards.add(card));
+      card.addEventListener("mouseleave", () => activeCards.delete(card));
+    });
+
+    requestAnimationFrame(animate);
+  };
 
   // ---------- Initialize All ----------
   const initAll = () => {
@@ -703,6 +790,7 @@
     initTypewriter();
     initStaggeredReveal();
     initEventsFlash();
+    initEmberEffect();
   };
 
   if (document.readyState === 'loading') {
