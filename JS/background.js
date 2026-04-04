@@ -12,7 +12,7 @@
 
     let W, H;
     let particles = [];
-    const particleCount = 160; 
+    const particleCount = 128; // Reduced for a cleaner look (was 160)
     const connectionDist = 120;
     
     // Mouse tracking
@@ -69,8 +69,9 @@
             this.freq = 0.001 + Math.random() * 0.002;
             this.amplitude = 0.05 + this.z * 0.1;
             
-            this.color = this.z > 0.6 ? '#00FF9F' : (this.z > 0.3 ? '#00D182' : '#00A365');
-            this.opacity = 0.1 + this.z * 0.6;
+            // Muted emerald tones for a more subtle look
+            this.color = this.z > 0.6 ? '#3A8C6D' : (this.z > 0.3 ? '#2A6650' : '#1A4032');
+            this.opacity = 0.05 + this.z * 0.45; // Reduced opacity range (was 0.1 - 0.7)
         }
 
         update(dt, time) {
@@ -138,7 +139,7 @@
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = '#00FF9F';
+                    ctx.strokeStyle = '#3A8C6D'; // Dull emerald to match particles
                     ctx.lineWidth = 0.5 + (p1.z + p2.z) / 2;
                     ctx.globalAlpha = alpha;
                     ctx.stroke();

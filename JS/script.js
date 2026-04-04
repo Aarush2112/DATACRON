@@ -253,39 +253,34 @@
     });
   }
 
-  // ---------- Scroll reveal ----------
-  const revealEls = qsa(".reveal");
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            // Apply staggered delay if multiple elements are intersecting at once
-            const siblings = Array.from(entry.target.parentElement.children).filter(el => el.classList.contains('reveal'));
-            const staggerIndex = siblings.indexOf(entry.target);
-            
-            if (staggerIndex !== -1) {
-              const isEventCard = entry.target.classList.contains('event-card') || entry.target.classList.contains('speaker-card');
-              entry.target.style.transitionDelay = `${staggerIndex * (isEventCard ? 0.15 : 0.1)}s`;
-            }
+  // ---------- Scroll Reveal (Intersection Observer) ----------
+  const setupReveal = () => {
+    const revealEls = qsa(".reveal");
+    if (!revealEls.length) return;
 
+    if ("IntersectionObserver" in window) {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px" 
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            
-            // Add glow pulse for headings
-            if (entry.target.querySelector('.section__title')) {
-               entry.target.querySelector('.section__title').classList.add('glow-pulse');
-            }
-            
             io.unobserve(entry.target);
           }
         });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-    );
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add("is-visible"));
-  }
+      }, observerOptions);
+
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      // Fallback for older browsers
+      revealEls.forEach((el) => el.classList.add("is-visible"));
+    }
+  };
+
+  setupReveal();
 
   // ---------- Cinematic Scroll Transition ----------
   const heroSection = qs(".hero");

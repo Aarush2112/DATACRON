@@ -37,7 +37,7 @@
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
         .hero__event-date{display:block;font-size:16px;letter-spacing:0.5em;text-transform:uppercase;color:#FFD700;margin-bottom:12px;text-shadow:none;opacity:1;will-change:transform;transform:translate3d(0, 0, 0)}
-        .hero{position:relative;z-index:1;min-height:calc(100vh - 74px);display:grid;place-items:center;padding:92px 0 70px;background:#03050a;overflow:hidden}
+        .hero{position:relative;z-index:1;min-height:calc(100vh - 74px);display:grid;place-items:center;padding:92px 0 70px;background:transparent;overflow:hidden}
         .hero__title{
             font-family:"Orbitron",sans-serif;
             font-size:clamp(42px,10vw,110px);
@@ -64,7 +64,18 @@
             50% { transform: translateY(-4px); }
         }
         .hero__content{position:relative;z-index:1;width:min(860px,calc(100% - 40px));text-align:center;will-change:transform,opacity}
-        .reveal{opacity:0;transform:translate3d(0, 30px, 0)}
+        .reveal{
+            opacity:0;
+            transform:translateY(30px);
+            visibility:hidden;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible{
+            opacity:1;
+            transform:translateY(0);
+            visibility:visible;
+        }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
