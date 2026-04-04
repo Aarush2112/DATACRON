@@ -301,11 +301,12 @@
     });
   };
 
-  /* ── 9.  SECTION TITLE entrance: scale-up bounce ───────────── */
   const initTitleBounce = () => {
     if (prefersRM || !('IntersectionObserver' in window)) return;
 
-    qsa('.section__title, .events-section__title, .department__title, .featured-title').forEach(el => {
+    // Exclude .department__title — team.css centers it with left:50%+translateX(-50%)
+    // which conflicts with the bounce transform. Use only generic section/events titles.
+    qsa('.section__title, .events-section__title').forEach(el => {
       el.style.transformOrigin = 'center bottom';
       el.style.willChange = 'transform';
 

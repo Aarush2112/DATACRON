@@ -20,16 +20,28 @@
        Works on every page: .section__title, .department__title,
        .events-section__title, .featured-title, .section--sponsors-hero .section__title
    ------------------------------------------------------------------ */
+/* Shrink headings to text-width so the ::after underline matches the text.
+   margin-inline:auto re-centres them when the parent uses text-align:center
+   or when they are inside a flex/block container.
+   .department__title is excluded — team.css already sets display:inline-block
+   + left:50% + translateX(-50%) which already shrink-wraps it. */
 .section__title,
-.department__title,
 .events-section__title,
 .featured-title {
   position: relative;
-  display: inline-block;
+  width: fit-content;
+  margin-inline: auto;   /* centres the shrunk block */
+}
+
+/* department__title only needs position:relative (centering comes from team.css) */
+.department__title {
+  position: relative;
 }
 
 .section__title::after,
-.events-section__title::after {
+.events-section__title::after,
+.department__title::after,
+.featured-title::after {
   content: "";
   position: absolute;
   bottom: -6px;
@@ -361,9 +373,10 @@
 
 /* ------------------------------------------------------------------
    17. PAGE HERO TITLES (events / speakers / sponsors / team)
-       — glitch-blink + gradient shimmer on .section__title
+       — glitch-blink + gradient shimmer on .section__title only
+       NOTE: .department__title excluded — uses positional centering
    ------------------------------------------------------------------ */
-.page-main .section__title {
+.page-main .section__title:not(.department__title) {
   animation: heroTitleGlitch 8s step-end infinite,
              titleGlowCycle    4s ease-in-out infinite;
 }
@@ -535,16 +548,8 @@ body::after {
 }
 
 /* ------------------------------------------------------------------
-   26. department__title — sweep underline (variant of section__title)
+   26. department__title — underline already handled by rule 1 above
    ------------------------------------------------------------------ */
-.department__title {
-  position: relative;
-}
-
-.department__title::after {
-  background-size: 200% 100%;
-  animation: scanUnderline 2.8s linear infinite;
-}
 
 /* ------------------------------------------------------------------
    MOBILE: disable expensive effects on small screens
