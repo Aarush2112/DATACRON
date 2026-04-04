@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATACRON 2026</title>
+    <!-- Assuming your Tailwind CSS is built to output.css -->
+    <link href="/css/output.css" rel="stylesheet">
+    <!-- Google Fonts as established in styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-bg text-white font-body overflow-x-hidden antialiased">
+
+    <!-- Performance Canvas: Placed at `inset-0 z-0` to guarantee a fixed, isolated background layer -->
+    <canvas id="galaxy-canvas" class="fixed inset-0 z-0 w-full h-full pointer-events-none" style="will-change: transform;"></canvas>
+
+    <!-- Seamless Flex Layout Wrapper for content -->
+    <main class="relative z-10 w-full flex flex-col items-center">
+        
+        <!-- SECTION TEMPLATE -->
+        <!-- p-0 and border-none remove visual partitions, layout uses flex-col -->
+        <section id="events" class="w-full max-w-[1120px] mx-auto flex flex-col items-center justify-center p-0 border-none my-24 lg:my-32">
+            
+            <!-- Section Header (Animated Reveal wrapper) -->
+            <!-- Tailwind transition setup: translate-y-10 opacity-0 to start, modified by intersecting observer -->
+            <div class="reveal opacity-0 translate-y-10 transition-all duration-700 ease-out text-center mb-16">
+                <!-- Using Tailwind configured clamp size and font-family -->
+                <h2 class="font-heading text-section-title uppercase tracking-widest text-glow drop-shadow-[0_0_18px_rgba(0,255,179,0.22)]">Our Events</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Prepare yourselves for an intense competition. Show your skill and reign supreme.</p>
+            </div>
+
+            <!-- Card Grid (Animated Reveal wrapper) -->
+            <div class="reveal opacity-0 translate-y-10 transition-all duration-700 delay-150 ease-out w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-0">
+                
+                <!-- Burning Card Demo (Data Heist) -->
+                <!-- The custom plugin utility `.data-heist-card` handles the heavy lifting of glowing animations -->
+                <div class="data-heist-card relative z-20 rounded-[18px] p-6 flex flex-col group hover:-translate-y-2 hover:scale-[1.02] transition-transform duration-300">
+                    <h3 class="font-heading text-xl text-white mb-2">Data Heist</h3>
+                    <p class="text-sm text-gray-300">Crack the codes and bypass security. Speed and accuracy mean everything here.</p>
+                </div>
+                
+                <!-- Standard regular card sample -->
+                <div class="rounded-[18px] bg-white/5 border border-white/10 p-6 flex flex-col backdrop-blur-md hover:-translate-y-2 hover:scale-[1.02] hover:border-glow/40 hover:shadow-[0_0_30px_rgba(0,255,179,0.2)] transition-all duration-300">
+                    <h3 class="font-heading text-xl text-white mb-2">Code Conquer</h3>
+                    <p class="text-sm text-gray-300">A rigorous competitive programming event that tests logical intuition.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Intersection Observer Script for Reveal Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    
+                    // Trigger the opacity-100 translate-y-0 classes mapping your scroll reveal design
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>
