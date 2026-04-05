@@ -776,17 +776,62 @@
     requestAnimationFrame(animate);
   };
 
-  // ---------- Initialize All ----------
-  const initAll = () => {
-    initLenis();
-    initCardInteractions();
-    triggerHeroEntrance();
-    updateScrollProgress();
-    initTypewriter();
-    initStaggeredReveal();
-    initEventsFlash();
-    initEmberEffect();
+  // ---------- Preloader Logic ----------
+  const initPreloader = () => {
+    const preloader = qs("#video-preloader");
+    const video = qs("#preloader-video");
+    const percentEl = qs("#preloader-percent");
+    const barEl = qs("#preloader-bar");
+    if (!preloader || !video) return;
+
+    // Force scroll to top while preloader is active
+    window.scrollTo(0, 0);
+
+    const hidePreloader = () => {
+      if (preloader.classList.contains("hidden")) return;
+      window.scrollTo(0, 0); // Snap to top right before reveal
+      if (percentEl) percentEl.textContent = "100%";
+      if (barEl) barEl.style.width = "100%";
+      preloader.classList.add("hidden");
+      document.body.classList.remove("loading");
+      setTimeout(() => preloader.remove(), 700);
+    };
+
+    const updateProgress = () => {
+      if (video.duration) {
+        const progress = Math.min((video.currentTime / video.duration) * 100, 100);
+        if (percentEl) percentEl.textContent = Math.floor(progress) + "%";
+        if (barEl) barEl.style.width = progress + "%";
+      }
+      if (!preloader.classList.contains("hidden")) {
+        requestAnimationFrame(updateProgress);
+      }
+    };
+    requestAnimationFrame(updateProgress);
+
+    video.addEventListener("ended", hidePreloader);
+    
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => hidePreloader());
+    }
+    
+    // Fallback: Max 10s just in case it's a long logo
+    setTimeout(hidePreloader, 10000);
   };
+
+  // ---------- Initialize All ----------
+    const initAll = () => {
+      initPreloader();
+      initLenis();
+      initCardInteractions();
+      triggerHeroEntrance();
+      updateScrollProgress();
+      initTypewriter();
+      initStaggeredReveal();
+      initEventsFlash();
+      initEmberEffect();
+    };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAll);
