@@ -570,9 +570,29 @@ body::before{
     -webkit-backdrop-filter: blur(10px);
 }
 
+/* Flagship Badge */
+
+
+@keyframes badgeGlow {
+    from { 
+        box-shadow: 0 0 15px rgba(0, 255, 159, 0.15), inset 0 0 10px rgba(0, 255, 159, 0.05); 
+        border-color: rgba(0, 255, 159, 0.4); 
+    }
+    to { 
+        box-shadow: 0 0 25px rgba(0, 255, 159, 0.3), inset 0 0 15px rgba(0, 255, 159, 0.1); 
+        border-color: var(--glow); 
+    }
+}
+
+
+.flagship-badge i {
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px var(--glow));
+}
+
 /* =========================
-   Sections
-   ========================= */
+    Sections
+    ========================= */
 .section{
     position: relative;
     z-index: 1;
@@ -1708,10 +1728,12 @@ body::before{
     width: 90%;
     max-width: 700px;
     padding: 40px 50px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 20px;
-    border: none;
-    box-shadow: 0 0 30px rgba(0, 255, 200, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .countdown-heading {
@@ -1733,8 +1755,10 @@ body::before{
 .countdown-box {
     width: 110px;
     height: 110px;
-    background: rgba(255, 255, 255, 0.03);
-    border: none;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     text-align: center;
     transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s;
@@ -2264,6 +2288,19 @@ body::before{
     margin-bottom: 18px;
 }
 
+/* Flagship specific badge styling */
+.event-type-badge.badge--flagship {
+    color: #ff9d00;
+    border-color: rgba(255, 157, 0, 0.4);
+    background: rgba(255, 157, 0, 0.08);
+    box-shadow: 0 0 15px rgba(255, 157, 0, 0.15);
+}
+
+.event-type-badge.badge--flagship i {
+    color: #ff5000;
+    filter: drop-shadow(0 0 5px rgba(255, 80, 0, 0.6));
+}
+
 .event-detail-hero__title {
     font-family: 'Orbitron', sans-serif;
     font-size: clamp(30px, 6.5vw, 60px);
@@ -2555,4 +2592,29 @@ body::before{
 @media (max-width: 640px) {
     .event-detail-hero { min-height: 260px; }
     .event-detail-body { padding: 48px 0 64px; }
+}
+
+/* --- Flagship Badge & Backlink Layout Fix --- */
+.event-detail-hero__content .event-hero-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-bottom: 24px !important;
+    flex-wrap: nowrap !important;
+}
+
+.event-hero-header .back-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.event-hero-header .flagship-badge {
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    padding: 6px 16px !important; /* Slightly smaller for horizontal layout */
+    font-size: 12px !important;
 }
