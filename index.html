@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
+    <link rel="icon" type="image/jpeg" href="./Assets/Logo.png">
     <title>Datacron 2026</title>
     
     <!-- Resource Hints -->
@@ -14,7 +14,8 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <!-- Preload Critical Fonts -->
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="./Assets/Logo.png" as="image" fetchpriority="high">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
@@ -26,7 +27,17 @@
     <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00FF9F;--accent:#00D4AA;--highlight:#00FF9F;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
-        *{margin:0;padding:0;box-sizing:border-box}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
         html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
         body{font-family:"Poppins",system-ui,sans-serif;background:#03050a;color:var(--text);overflow-x:hidden}
         .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
@@ -117,7 +128,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="DATACRON 2026">
-                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.png" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
 

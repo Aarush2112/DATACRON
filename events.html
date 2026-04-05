@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpeg" href="./Assets/Linkedin_logo.png">
+    <link rel="icon" type="image/jpeg" href="./Assets/Logo.png">
     <title>Events | Datacron 2026</title>
     <meta name="description" content="Explore the full lineup of events at Datacron 2026 — from flagship challenges like Data Heist to specialized tracks in AI and logic.">
 
@@ -28,7 +28,17 @@
     <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
         :root{--bg:#03050a;--text:#ffffff;--muted:#b8c2bd;--glow:#00ffb3;--accent:#e6d5a3;--highlight:#1affc6;--glass:rgba(255,255,255,0.03);--glassBorder:rgba(255,255,255,0.08);--shadow:0 18px 40px rgba(0,0,0,0.6);--radius:18px;--max:1120px}
-        *{margin:0;padding:0;box-sizing:border-box}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
         html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
         body{font-family:"Poppins",system-ui,sans-serif;background:#03050a;color:var(--text);overflow-x:hidden}
         .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
@@ -62,7 +72,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
             <a class="nav__brand" href="index.html" aria-label="DATACRON 2026">
-                <img src="./Assets/Logo.webp" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
+                <img src="./Assets/Logo.png" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
             <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">

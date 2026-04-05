@@ -28,11 +28,18 @@
     image-rendering: optimizeSpeed;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
 
 html{
     scroll-behavior: smooth;
@@ -171,7 +178,8 @@ body::before{
 
 .nav__logo {
     height: 40px;
-    width: auto;
+    width: 40px;
+    aspect-ratio: 1 / 1;
     margin-right: 6px;
     transition: filter 0.3s ease, transform 0.3s ease;
     opacity: 0.975;
@@ -348,12 +356,15 @@ body::before{
 .hero{
     position: relative;
     z-index: 1;
+    height: auto;
     min-height: calc(100vh - 74px);
     display: grid;
     place-items: center;
     padding: 92px 0 70px;
     background: transparent;
     overflow: hidden;
+    /* Reserve space for hero content to prevent layout shift */
+    contain: layout size;
 }
 
 .hero__canvas{
@@ -399,6 +410,8 @@ body::before{
 .hero__event-date{
     display: block;
     font-size: 16px;
+    line-height: 1.5;
+    min-height: 24px; /* Matches 16px * 1.5 */
     letter-spacing: 0.5em;
     text-transform: uppercase;
     color: #FFD700;
@@ -431,6 +444,7 @@ body::before{
     letter-spacing: 0.12em;
     text-transform: uppercase;
     line-height: 1.1;
+    min-height: 1.1em; /* Prevent shift during font swap or reveal */
     width: 100%;
     text-align: center;
     word-break: keep-all;
@@ -597,6 +611,7 @@ body::before{
     position: relative;
     z-index: 1;
     padding: 84px 0;
+    min-height: 200px; /* Base min-height for sections */
     background: transparent;
     border: none;
     box-shadow: none;
@@ -625,6 +640,7 @@ body::before{
     text-transform: uppercase;
     font-size: clamp(24px, 3.2vw, 36px);
     text-shadow: 0 0 18px rgba(0,255,179,0.22);
+    min-height: 1.2em; /* Prevent shift during staggered reveal */
 }
 
 .section__lead{
@@ -794,6 +810,7 @@ body::before{
 
 .card__media{
     height: 180px;
+    aspect-ratio: 350 / 180;
     background: rgba(255,255,255,0.05);
     border-bottom: none;
     overflow: hidden;
@@ -1818,6 +1835,7 @@ body::before{
     text-transform: uppercase;
     text-shadow: 0 0 18px rgba(0, 255, 179, 0.22);
     margin-bottom: 16px;
+    min-height: 1.2em; /* Prevent shift during staggered reveal */
 }
 
 .featured-text {

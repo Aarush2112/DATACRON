@@ -882,7 +882,7 @@
             "entity": "datacron.co.in"
           },
           {
-            "url": "https://datacron.co.in/Assets/Logo.webp",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "sessionTargetType": "page",
             "protocol": "h2",
             "rendererStartTime": 287.36600000038743,
@@ -984,7 +984,7 @@
             "entity": "Google Fonts"
           },
           {
-            "url": "https://datacron.co.in/Assets/Linkedin_logo.png",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "sessionTargetType": "page",
             "protocol": "h2",
             "rendererStartTime": 478.1550000011921,
@@ -3226,11 +3226,11 @@
         ],
         "items": [
           {
-            "url": "https://datacron.co.in/Assets/Linkedin_logo.png",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "totalBytes": 36352
           },
           {
-            "url": "https://datacron.co.in/Assets/Logo.webp",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "totalBytes": 21039
           },
           {
@@ -3679,10 +3679,10 @@
                 "width": 48,
                 "height": 32
               },
-              "snippet": "<img src=\"./Assets/Logo.webp\" alt=\"Datacron Logo\" class=\"nav__logo\" width=\"40\" height=\"40\" fetchpriority=\"high\" decoding=\"async\">",
+              "snippet": "<img src=\"./Assets/Logo.png\" alt=\"Datacron Logo\" class=\"nav__logo\" width=\"40\" height=\"40\" fetchpriority=\"high\" decoding=\"async\">",
               "nodeLabel": "Datacron Logo"
             },
-            "url": "https://datacron.co.in/Assets/Logo.webp",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "totalBytes": 20854,
             "wastedBytes": 20792,
             "wastedPercent": 99.700927734375
@@ -4561,7 +4561,7 @@
         ],
         "items": [
           {
-            "url": "https://datacron.co.in/Assets/Logo.webp",
+            "url": "https://datacron.co.in/Assets/Logo.png",
             "totalBytes": 20854,
             "wastedBytes": 20834,
             "subItems": {
