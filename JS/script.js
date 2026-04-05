@@ -811,13 +811,16 @@
 
     video.addEventListener("ended", hidePreloader);
     
+    // Increase playback speed to make the bar finish faster
+    video.playbackRate = 1.6;
+    
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => hidePreloader());
     }
     
-    // Fallback: Max 10s just in case it's a long logo
-    setTimeout(hidePreloader, 10000);
+    // Fallback: Max 5s just in case it's a long logo
+    setTimeout(hidePreloader, 5000);
   };
 
   // ---------- Initialize All ----------
