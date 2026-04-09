@@ -361,10 +361,14 @@
             // Set dynamic event data
             if (eventId === 'whizzes') {
                 eventTitle.textContent = 'War of the Whizzes';
-                eventNameInput.value = 'whizzes'; // internal ID for table selection
-            } else {
+                eventNameInput.value = 'whizzes';
+            } else if (eventId === 'logify') {
                 eventTitle.textContent = 'Logify';
-                eventNameInput.value = 'logify'; // internal ID for table selection
+                eventNameInput.value = 'logify';
+            } else {
+                // Default or error handling
+                eventTitle.textContent = 'Registration';
+                eventNameInput.value = '';
             }
 
             // Helper to handle member field requirements
@@ -388,17 +392,10 @@
                 updateRequiredFields(size);
             });
 
-            // Reusable submit functions
-            async function submitLogify(data) {
+            // Unified submit function
+            async function submitRegistration(data) {
                 const { error } = await _supabase
-                    .from('logify_registrations')
-                    .insert([data]);
-                return { error };
-            }
-
-            async function submitWhizzes(data) {
-                const { error } = await _supabase
-                    .from('whizzes_registrations')
+                    .from('registrations')
                     .insert([data]);
                 return { error };
             }
@@ -419,6 +416,7 @@
 
                 // Prepare insertion data with field mapping and optional handling
                 const registrationData = {
+                    event_name: currentEvent,
                     team_name: rawData.teamName.trim(),
                     institute_name: rawData.instituteName.trim(),
                     team_size: size,
@@ -431,22 +429,40 @@
                     member_3_email: size >= 3 ? (rawData.member3Email?.trim() || null) : null
                 };
 
-                console.log(`[DEBUG] Submitting to ${currentEvent}:`, registrationData);
+                // Simple validation for event_name
+                if (!currentEvent) {
+                    alert("System Error: Event context missing. Please return to the events page and try again.");
+                    submitBtn.textContent = 'COMPLETE REGISTRATION';
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                console.log(`[DEBUG] Submitting to registrations table for event: ${currentEvent}`, registrationData);
 
                 try {
-                    let result;
-                    if (currentEvent === 'whizzes') {
-                        result = await submitWhizzes(registrationData);
-                    } else {
-                        result = await submitLogify(registrationData);
-                    }
+                    // Step 1: Insert into Database
+                    const result = await submitRegistration(registrationData);
 
                     if (result.error) {
                         throw result.error;
                     }
+                    console.log('[SUCCESS] Registration recorded in database.');
 
-                    // Success
-                    console.log('[SUCCESS] Registration recorded.');
+                    // Step 2: Trigger Edge Function for Email Confirmation
+                    console.log('[DEBUG] Triggering email automation...');
+                    const { data: emailData, error: emailError } = await _supabase.functions.invoke('send-confirmation-email', {
+                        body: registrationData
+                    });
+                    const actualError = emailError || (emailData && emailData.error ? emailData.error : null);
+
+                    if (actualError) {
+                        console.error('[ERROR] Email automation failed:', actualError);
+                        alert("Your registration was successful, but there was an issue sending the confirmation email: " + (actualError.message || typeof actualError === 'string' ? actualError : JSON.stringify(actualError)));
+                    } else {
+                        console.log('[SUCCESS] Confirmation email triggered.', emailData);
+                    }
+
+                    // Complete Success Flow
                     successOverlay.classList.add('is-visible');
                     regForm.reset();
                     
@@ -456,6 +472,7 @@
                     updateRequiredFields(1);
                     
                 } catch (error) {
+                    // Error Handling
                     console.error('[ERROR] Registration failed:', error);
                     
                     let errorMsg = "Transmission failed. Please check your signal and try again.";
@@ -468,6 +485,8 @@
                     }
                     
                     alert(errorMsg);
+                } finally {
+                    // Reset button state
                     submitBtn.textContent = 'COMPLETE REGISTRATION';
                     submitBtn.disabled = false;
                 }
