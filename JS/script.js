@@ -603,47 +603,71 @@
     }
   });
 
-  // ---------- Card Interactions (Tilt & Spotlight) ----------
-  const initCardInteractions = () => {
-    const interactiveEls = qsa(".card, .feature-card, .event-card, .speaker-card, .cube-wrapper, .nav__register-btn");
-    
-    interactiveEls.forEach(el => {
-      // Add spotlight div
-      const spotlight = document.createElement('div');
-      spotlight.className = 'spotlight';
-      el.appendChild(spotlight);
-      
-      // Add shimmer div for event cards and register button
-      if (el.classList.contains('event-card') || el.classList.contains('nav__register-btn')) {
-        const shimmer = document.createElement('div');
-        shimmer.className = 'card-shimmer';
-        el.appendChild(shimmer);
-      }
-
-      el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Spotlight position
-        el.style.setProperty('--mouse-x', `${x}px`);
-        el.style.setProperty('--mouse-y', `${y}px`);
-        
-        // 3D Tilt calculation
-        if (!isTouchDevice) {
-           const centerX = rect.width / 2;
-           const centerY = rect.height / 2;
-           const rotateX = (y - centerY) / 20; // Throttled intensity
-           const rotateY = (centerX - x) / 20;
-           el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+    // ---------- Throttling Utility ----------
+    const throttle = (func, limit) => {
+      let inThrottle;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
         }
-      }, { passive: true });
+      }
+    };
+
+    const interactiveSelector = ".card, .feature-card, .event-card, .speaker-card, .cube-wrapper, .nav__register-btn";
+
+    // Handle spotlight and 3D tilt
+    const handleCardMove = (e) => {
+      const el = e.target.closest(interactiveSelector);
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
       
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = '';
+      el.style.setProperty('--mouse-x', `${x}px`);
+      el.style.setProperty('--mouse-y', `${y}px`);
+      
+      if (!isTouchDevice) {
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      }
+    };
+
+    const handleCardLeave = (e) => {
+      const el = e.target.closest(interactiveSelector);
+      if (el) el.style.transform = '';
+    };
+
+    const initCardInteractions = () => {
+      const interactiveEls = qsa(interactiveSelector);
+      
+      interactiveEls.forEach(el => {
+        // Add spotlight div
+        if (!qs('.spotlight', el)) {
+          const spotlight = document.createElement('div');
+          spotlight.className = 'spotlight';
+          el.appendChild(spotlight);
+        }
+        
+        // Add shimmer div for event cards and register button
+        if ((el.classList.contains('event-card') || el.classList.contains('nav__register-btn')) && !qs('.card-shimmer', el)) {
+          const shimmer = document.createElement('div');
+          shimmer.className = 'card-shimmer';
+          el.appendChild(shimmer);
+        }
       });
-    });
-  };
+
+      // Use delegation for better performance
+      document.addEventListener('mousemove', throttle(handleCardMove, 16), { passive: true });
+      document.addEventListener('mouseout', handleCardLeave, { passive: true });
+    };
 
   // ---------- Hero Cinematic Entrance ----------
   const triggerHeroEntrance = () => {

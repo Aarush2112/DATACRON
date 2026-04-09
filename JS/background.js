@@ -36,7 +36,7 @@
         canvas.style.height = H + 'px';
     }
 
-    window.addEventListener('mousemove', (e) => {
+    const handleMouseMove = (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         mouse.vx = mouse.x - mouse.lastX;
@@ -48,7 +48,17 @@
         isMouseMoving = true;
         clearTimeout(mouseTimer);
         mouseTimer = setTimeout(() => { isMouseMoving = false; mouse.vx = 0; mouse.vy = 0; }, 100);
-    });
+    };
+
+    // Throttle move listener to ~60fps (16ms)
+    let moveTicking = false;
+    window.addEventListener('mousemove', (e) => {
+        if (!moveTicking) {
+            handleMouseMove(e);
+            moveTicking = true;
+            requestAnimationFrame(() => moveTicking = false);
+        }
+    }, { passive: true });
 
     class Particle {
         constructor() {
@@ -123,6 +133,8 @@
         for (let i = 0; i < particleCount; i++) {
             particles.push(new Particle());
         }
+        // Sort once at creation for correct depth layering
+        particles.sort((a, b) => a.z - b.z);
     }
 
     function drawConnections() {
@@ -158,11 +170,8 @@
 
             ctx.clearRect(0, 0, W, H);
             
-            // Sort particles by Z once in a while or just draw in order
-            // Drawing in order of Z (back to front) for correct layering
-            // To optimize, we don't sort every frame, but the initial creation was random
-            // If we want true depth, we'd sort. Let's sort for premium feel.
-            particles.sort((a, b) => a.z - b.z);
+            // NOTE: particles.sort() removed from here. 
+            // It is now called once in createParticles() since this.z is constant.
 
             particles.forEach(p => {
                 p.update(delta, now);
