@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="./Assets/Logo.png">
-    <title>Sponsors | Datacron 2026</title>
-    <meta name="description" content="Our partners in progress. Discover the organizations supporting innovation and skill-building at Datacron 2026.">
+    <title>War of the Whizzes | Datacron 2026</title>
+    <meta name="description" content="War of the Whizzes — A fast-paced knowledge battle where quick thinking and data intuition are your only weapons. Join the ultimate showdown at Datacron 2026.">
 
-    
     <!-- Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,17 +47,15 @@
         .nav__brand{display:inline-flex;align-items:center}
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
-        .section__header{text-align:center;margin-bottom:40px}
-        .section__title{font-family:"Orbitron",sans-serif;font-size:clamp(32px,5vw,48px);text-transform:uppercase;letter-spacing:.1em;color:#fff}
-        .reveal{opacity:0;transform:translateY(30px)}
+        .event-detail-hero{position:relative;height:50vh;min-height:350px;display:flex;align-items:center;overflow:hidden;background:#000}
+        .event-detail-hero__img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.4}
+        .event-detail-hero__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(3,5,10,0.4) 0%,rgba(3,5,10,0.9) 100%);z-index:1}
+        .event-detail-hero__title{font-family:"Orbitron",sans-serif;font-size:clamp(32px,5vw,64px);line-height:1.1;margin-bottom:15px;color:#fff;text-transform:uppercase;letter-spacing:2px;position:relative;z-index:2}
     </style>
 
     <!-- Async Load Non-Critical CSS -->
     <link rel="preload" href="./CSS/style.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/style.css?v=3"></noscript>
-
-    <link rel="preload" href="./CSS/sponsors.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/sponsors.css?v=2"></noscript>
 
     <link rel="preload" href="./CSS/animations.css?v=1" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./CSS/animations.css?v=1"></noscript>
@@ -66,7 +63,6 @@
 </head>
 <body>
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
-    <!-- Galaxy Background -->
     <div id="background-container"><canvas id="galaxy-canvas" aria-hidden="true"></canvas></div>
 
     <header class="site-header">
@@ -80,37 +76,118 @@
             </button>
             <div class="nav__menu" id="navMenu">
                 <a class="nav__link" href="index.html">Home</a>
-                <a class="nav__link" href="events.html">Events</a>
+                <a class="nav__link is-active" href="events.html">Events</a>
                 <a class="nav__link" href="speakers.html">Speakers</a>
-                <a class="nav__link is-active" href="sponsors.html">Sponsors</a>
+                <a class="nav__link" href="sponsors.html">Sponsors</a>
                 <a class="nav__link" href="team.html">Team</a>
                 <a class="nav__register-btn" href="https://unstop.com/college-fests/datacron-rishihood-university-450778" target="_blank" rel="noopener noreferrer">Register</a>
             </div>
         </nav>
     </header>
 
-    <main id="top" class="page-main">
-        <section class="section section--sponsors-hero" aria-label="Sponsors Hero">
-            <div class="container">
-                <div class="section__header reveal">
-                    <h1 class="section__title">Our Sponsors</h1>
-                    <p class="section__lead">The organizations supporting Datacron.</p>
+    <main id="top">
+        <!-- Hero -->
+        <section class="event-detail-hero" aria-label="War of the Whizzes hero">
+            <picture>
+                <source srcset="./Assets/images/war.jpg" type="image/webp">
+                <img src="./Assets/images/war.jpg" alt="" class="event-detail-hero__img" aria-hidden="true" fetchpriority="high" decoding="async" width="1600" height="900">
+            </picture>
+            <div class="event-detail-hero__overlay" aria-hidden="true"></div>
+            <div class="event-detail-hero__content container">
+                <a href="events.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All Events</a>
+                <div class="event-type-badge">
+                    <i class="fas fa-bolt" aria-hidden="true"></i> Mini Event
                 </div>
+                <h1 class="event-detail-hero__title">War of the Whizzes</h1>
+                <p class="event-detail-hero__tagline">The ultimate showdown of wits and wisdom.</p>
             </div>
         </section>
-        <section class="section" aria-label="Sponsors List">
+
+        <!-- Body -->
+        <section class="event-detail-body">
             <div class="container">
-                <div class="sponsor-logo reveal group hover:-translate-y-2 hover:scale-[1.05] hover:drop-shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300 cursor-pointer">
-                    <picture>
-                        <source srcset="./Assets/Sponsors/Unstop.webp" type="image/webp">
-                        <img src="./Assets/Sponsors/Unstop.png" alt="Unstop Logo" loading="lazy" decoding="async" width="250" height="100">
-                    </picture>
+                <div class="event-detail-grid">
+
+                    <!-- Left: Description + Chips + Rules -->
+                    <div>
+                        <p class="event-desc__label">About the Event</p>
+                        <h2 class="event-desc__heading">What is War of the Whizzes?</h2>
+                        <p class="event-desc__text">
+                            War of the Whizzes is a fast-paced knowledge battle where quick thinking and data intuition are your only weapons. 
+                        </p>
+                        <p class="event-desc__text">
+                            Teams will compete in multiple rapid-fire rounds covering a vast range of topics from data trends to technological history. It's a test of both breadth of knowledge and the speed of retrieval. Only the smartest and quickest will survive this intellectual battlefield.
+                        </p>
+
+                        <!-- Meta chips -->
+                        <div class="event-meta-chips" aria-label="Event details">
+                            <span class="meta-chip"><i class="fas fa-tag" aria-hidden="true"></i> Quiz / Strategy</span>
+                            <span class="meta-chip"><i class="fas fa-users" aria-hidden="true"></i> 1 to 3</span>
+                            <span class="meta-chip"><i class="fas fa-signal" aria-hidden="true"></i> Dynamic Difficulty</span>
+                            <span class="meta-chip"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Mini Event</span>
+                        </div>
+
+                        <div class="rules-block">
+                            <h3 class="rules-block__title">Rules &amp; Guidelines</h3>
+                            <ul class="rules-list">
+                                <li>Participation allowed individually or in teams of up to 3.</li>
+                                <li>All participants must be currently enrolled students.</li>
+                                <li>The quiz consists of multiple elimination rounds.</li>
+                                <li>Use of mobile phones or any external resources is strictly forbidden.</li>
+                                <li>In case of a tie, a sudden-death round will determine the winner.</li>
+                                <li>The quizmaster's word is final.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right: Sidebar -->
+                    <aside class="event-sidebar" aria-label="Event quick info">
+                        <div class="event-sidebar-card">
+                            <p class="event-sidebar-card__title">Event Details</p>
+
+                            <div class="event-meta-row">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span><strong>Date:</strong> 17th April 2026</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span><strong>Venue:</strong> <a href="https://maps.app.goo.gl/GcZoGqU6YBBVwSnD9" target="_blank" rel="noopener noreferrer" class="venue-link">Rishihood University</a></span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span><strong>Team Size:</strong> 1 to 3</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-layer-group" aria-hidden="true"></i>
+                                <span><strong>Type:</strong> Mini Event</span>
+                            </div>
+                            <div class="event-meta-row">
+                                <i class="fas fa-trophy" aria-hidden="true"></i>
+                                <span><strong>Prizes:</strong> Winner Certificates & Goodies</span>
+                            </div>
+
+                            <div class="event-cta-btns">
+                                <a href="register.html?event=whizzes"
+                                   class="btn-register"
+                                   id="whizzes-register-btn">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
+                                </a>
+                                <a href="#"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="btn-rulebook"
+                                   id="whizzes-rulebook-btn">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i> Rulebook Coming Soon
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+
                 </div>
             </div>
         </section>
     </main>
 
-                <footer class="footer" aria-label="Footer">
+            <footer class="footer" aria-label="Footer">
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">

@@ -48,6 +48,7 @@
         .nav__logo{height:40px;width:auto;margin-right:6px}
         .nav__brandText{font-family:"Orbitron",sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;color:var(--text)}
         .event-detail-hero{position:relative;height:50vh;min-height:350px;display:flex;align-items:center;overflow:hidden;background:#000}
+        .event-detail-hero__img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.4}
         .event-detail-hero__overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(3,5,10,0.4) 0%,rgba(3,5,10,0.9) 100%);z-index:1}
         .event-detail-hero__title{font-family:"Orbitron",sans-serif;font-size:clamp(32px,5vw,64px);line-height:1.1;margin-bottom:15px;color:#fff;text-transform:uppercase;letter-spacing:2px;position:relative;z-index:2}
     </style>
@@ -87,6 +88,10 @@
     <main id="top">
         <!-- Hero -->
         <section class="event-detail-hero" aria-label="Cold Case hero">
+            <picture>
+                <source srcset="./Assets/images/cold-case.jpg" type="image/webp">
+                <img src="./Assets/images/cold-case.jpg" alt="" class="event-detail-hero__img" aria-hidden="true" fetchpriority="high" decoding="async" width="1600" height="900">
+            </picture>
             <div class="event-detail-hero__overlay" aria-hidden="true"></div>
             <div class="event-detail-hero__content container">
                 <a href="events.html" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All Events</a>
@@ -149,7 +154,7 @@
                             </div>
                             <div class="event-meta-row">
                                 <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                <span><strong>Venue:</strong> Rishihood University Campus</span>
+                                <span><strong>Venue:</strong> Online</span>
                             </div>
                             <div class="event-meta-row">
                                 <i class="fas fa-users" aria-hidden="true"></i>
@@ -186,7 +191,7 @@
         </section>
     </main>
 
-        <footer class="footer" aria-label="Footer">
+                <footer class="footer" aria-label="Footer">
         <div class="container footer-container">
             <div class="left-section">
                 <div class="university-badge">
@@ -221,7 +226,7 @@
                     <p class="footer__text">Phone: +91 94147 12228</p>
                     <p class="footer__contact-person">Kapish Garg - Outreach & Sponsorship Head</p>
                     <p class="footer__text">
-                        <a class="footer__location" href="https://maps.app.goo.gl/PZGfSiCdk2HM8J666" target="_blank" rel="noopener noreferrer">Location: Rishihood University Campus</a>
+                        <a class="footer__location" href="https://maps.app.goo.gl/GcZoGqU6YBBVwSnD9" target="_blank" rel="noopener noreferrer">Location: Rishihood University</a>
                     </p>
                 </div>
             </div>

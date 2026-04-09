@@ -36,7 +36,7 @@ footer_template = """    <footer class="footer" aria-label="Footer">
                     <p class="footer__text">Phone: +91 94147 12228</p>
                     <p class="footer__contact-person">Kapish Garg - Outreach & Sponsorship Head</p>
                     <p class="footer__text">
-                        <a class="footer__location" href="https://maps.app.goo.gl/PZGfSiCdk2HM8J666" target="_blank" rel="noopener noreferrer">Location: Rishihood University Campus</a>
+                        <a class="footer__location" href="https://maps.app.goo.gl/GcZoGqU6YBBVwSnD9" target="_blank" rel="noopener noreferrer">Location: Rishihood University</a>
                     </p>
                 </div>
             </div>

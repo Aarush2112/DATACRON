@@ -10,6 +10,27 @@ a.card--speaker {
     cursor: pointer;
 }
 
+/* Speaker Grid Centering */
+.speakers-grid {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 2rem;
+}
+
+.speakers-grid > .card--speaker {
+    flex: 0 1 350px;
+    min-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .speakers-grid > .card--speaker {
+        flex: 1 1 300px;
+    }
+}
+
+
 /* Hover: lift + emerald glow */
 .card--speaker:hover {
     transform: translateY(-8px);
