@@ -19,8 +19,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
     
     <!-- Defer Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
+    </noscript>
 
     <!-- Inline Critical CSS -->
     <style>
@@ -52,11 +58,11 @@
     </style>
 
     <!-- Async Load Non-Critical CSS -->
-    <link rel="preload" href="./CSS/style.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/style.css?v=3"></noscript>
+    <link rel="preload" href="./CSS/style.css?v=4" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/style.css?v=4"></noscript>
 
-    <link rel="preload" href="./CSS/animations.css?v=1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=1"></noscript>
+    <link rel="preload" href="./CSS/animations.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=2"></noscript>
 
 </head>
 <body>
@@ -65,7 +71,7 @@
 
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
-            <a class="nav__brand" href="index.html" aria-label="DATACRON 2026">
+            <a class="nav__brand" href="index.html">
                 <img src="./Assets/Logo.png" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
@@ -208,7 +214,7 @@
             </nav>
             <div class="right-section">
                 <div class="footer__block">
-                    <h3 class="footer__title">Connect</h3>
+                    <p class="footer__title">Connect</p>
                     <div class="social">
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -218,7 +224,7 @@
                     </div>
                 </div>
                 <div class="footer__block">
-                    <h3 class="footer__title">Contact Us</h3>
+                    <p class="footer__title">Contact Us</p>
                     <p class="footer__text">Email: datacron@rishihood.edu.in</p>
                     <p class="footer__text">Phone: +91 94147 12228</p>
                     <p class="footer__contact-person">Kapish Garg - Outreach & Sponsorship Head</p>

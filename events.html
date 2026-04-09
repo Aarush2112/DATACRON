@@ -20,8 +20,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
     
     <!-- Defer Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
+    </noscript>
 
     <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
@@ -52,14 +58,14 @@
     </style>
 
     <!-- Async Load Non-Critical CSS -->
-    <link rel="preload" href="./CSS/style.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/style.css?v=3"></noscript>
+    <link rel="preload" href="./CSS/style.css?v=4" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/style.css?v=4"></noscript>
 
-    <link rel="preload" href="./CSS/events.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/events.css?v=3"></noscript>
+    <link rel="preload" href="./CSS/events.css?v=4" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/events.css?v=4"></noscript>
 
-    <link rel="preload" href="./CSS/animations.css?v=1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=1"></noscript>
+    <link rel="preload" href="./CSS/animations.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=2"></noscript>
 
 </head>
 <body>
@@ -69,7 +75,7 @@
 
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
-            <a class="nav__brand" href="index.html" aria-label="DATACRON 2026">
+            <a class="nav__brand" href="index.html">
                 <img src="./Assets/Logo.png" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
@@ -93,73 +99,6 @@
                 <div class="section__header reveal">
                     <h1 class="section__title">Events</h1>
                 </div>
-
-                <section class="events-section pre-fest-section reveal" aria-labelledby="prefest-heading">
-                    <div class="events-section__header">
-                        <h2 id="prefest-heading" class="events-section__title">Pre-Fest Events</h2>
-                    </div>
-
-                    <div class="events-grid events-grid--prefest" role="list">
-                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
-                                 data-title="LOGIC LABS"
-                                 data-brief="An intense problem-solving competition where teams tackle logic puzzles, debugging challenges, and strategic tasks to test their analytical thinking, pattern recognition, and smart decision-making across multiple rounds."
-                                 data-banner="Assets/images/logic-labs.jpg"
-                                 data-register="https://unstop.com/competitions/logic-labs-datacron-rishihood-university-1662257"
-                                 data-rules="https://drive.google.com/file/d/17mph_qChzaB0e3qdl6_OwGKXzM2DdDQv/view?usp=share_link">
-                            <div class="banner-container">
-                                <picture>
-                                    <source srcset="Assets/images/logic-labs.webp" type="image/webp">
-                                    <img src="Assets/images/logic-labs.jpg" class="event-banner" alt="LOGIC LABS Banner" loading="lazy" decoding="async" width="400" height="225">
-                                </picture>
-                            </div>
-                            <div class="event-content">
-                                <h3 class="event-card__title">LOGIC LABS</h3>
-                                <p class="event-card__desc">Analyse deep. Decide smart. Conquer challenges.</p>
-                                <a href="logic-labs.html" class="details-btn">View details →</a>
-                            </div>
-                        </article>
-
-                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
-                                 data-title="DATA MEME WAR"
-                                 data-brief="A fun and fast-paced creativity showdown where participants turn data science struggles, coding chaos, and analytics situations into original, relatable memes to win audience votes."
-                                 data-banner="Assets/images/data-meme.jpg"
-                                 data-register="https://unstop.com/competitions/data-meme-war-datacron26-rishihood-university-1662353"
-                                 data-rules="https://drive.google.com/file/d/1EikGuKFknw5_u_rPk7f6_chK8MhAovt5/view?usp=share_link">
-                            <div class="banner-container">
-                                <picture>
-                                    <source srcset="Assets/images/data-meme.webp" type="image/webp">
-                                    <img src="Assets/images/data-meme.jpg" class="event-banner" alt="DATA MEME WAR Banner" loading="lazy" decoding="async" width="400" height="225">
-                                </picture>
-                            </div>
-                            <div class="event-content">
-                                <h3 class="event-card__title">DATA MEME WAR</h3>
-                                <p class="event-card__desc">Laugh, create, and trend with data.</p>
-                                <a href="data-meme-war.html" class="details-btn">View details →</a>
-                            </div>
-                        </article>
-
-                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
-                                 data-title="COLD CASE"
-                                 data-brief="A data detective challenge where teams analyse a failed startup, uncover data-driven mistakes, and present strategic insights to show how it could have been saved."
-                                 data-banner="Assets/images/cold-case.jpg"
-                                 data-register="https://unstop.com/competitions/cold-case-datacron-rishihood-university-1662283"
-                                 data-rules="https://drive.google.com/file/d/1STFAMkm6RayDEoXEUapW0PnxSL_rtfbM/view?usp=share_link">
-                            <div class="banner-container">
-                                <picture>
-                                    <source srcset="Assets/images/cold-case.webp" type="image/webp">
-                                    <img src="Assets/images/cold-case.jpg" class="event-banner" alt="COLD CASE Banner" loading="lazy" decoding="async" width="400" height="225">
-                                </picture>
-                            </div>
-                            <div class="event-content">
-                                <h3 class="event-card__title">COLD CASE</h3>
-                                <p class="event-card__desc">Analyse failures. Decode data. Present solutions.</p>
-                                <a href="cold-case.html" class="details-btn">View details →</a>
-                            </div>
-                        </article>
-                    </div>
-                </section>
-
-                <div class="events-divider" aria-hidden="true"></div>
 
                 <section class="events-section main-fest-section reveal" aria-labelledby="mainfest-heading">
                     <div class="events-section__header">
@@ -272,6 +211,73 @@
                     </div>
                 </section>
 
+                <div class="events-divider" aria-hidden="true"></div>
+
+                <section class="events-section pre-fest-section reveal" aria-labelledby="prefest-heading">
+                    <div class="events-section__header">
+                        <h2 id="prefest-heading" class="events-section__title">Pre-Fest Events</h2>
+                    </div>
+
+                    <div class="events-grid events-grid--prefest" role="list">
+                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
+                                 data-title="LOGIC LABS"
+                                 data-brief="An intense problem-solving competition where teams tackle logic puzzles, debugging challenges, and strategic tasks to test their analytical thinking, pattern recognition, and smart decision-making across multiple rounds."
+                                 data-banner="Assets/images/logic-labs.jpg"
+                                 data-register="https://unstop.com/competitions/logic-labs-datacron-rishihood-university-1662257"
+                                 data-rules="https://drive.google.com/file/d/17mph_qChzaB0e3qdl6_OwGKXzM2DdDQv/view?usp=share_link">
+                            <div class="banner-container">
+                                <picture>
+                                    <source srcset="Assets/images/logic-labs.webp" type="image/webp">
+                                    <img src="Assets/images/logic-labs.jpg" class="event-banner" alt="LOGIC LABS Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-card__title">LOGIC LABS</h3>
+                                <p class="event-card__desc">Analyse deep. Decide smart. Conquer challenges.</p>
+                                <a href="logic-labs.html" class="details-btn">View details →</a>
+                            </div>
+                        </article>
+
+                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
+                                 data-title="DATA MEME WAR"
+                                 data-brief="A fun and fast-paced creativity showdown where participants turn data science struggles, coding chaos, and analytics situations into original, relatable memes to win audience votes."
+                                 data-banner="Assets/images/data-meme.jpg"
+                                 data-register="https://unstop.com/competitions/data-meme-war-datacron26-rishihood-university-1662353"
+                                 data-rules="https://drive.google.com/file/d/1EikGuKFknw5_u_rPk7f6_chK8MhAovt5/view?usp=share_link">
+                            <div class="banner-container">
+                                <picture>
+                                    <source srcset="Assets/images/data-meme.webp" type="image/webp">
+                                    <img src="Assets/images/data-meme.jpg" class="event-banner" alt="DATA MEME WAR Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-card__title">DATA MEME WAR</h3>
+                                <p class="event-card__desc">Laugh, create, and trend with data.</p>
+                                <a href="data-meme-war.html" class="details-btn">View details →</a>
+                            </div>
+                        </article>
+
+                        <article class="event-card event-card--prefest group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
+                                 data-title="COLD CASE"
+                                 data-brief="A data detective challenge where teams analyse a failed startup, uncover data-driven mistakes, and present strategic insights to show how it could have been saved."
+                                 data-banner="Assets/images/cold-case.jpg"
+                                 data-register="https://unstop.com/competitions/cold-case-datacron-rishihood-university-1662283"
+                                 data-rules="https://drive.google.com/file/d/1STFAMkm6RayDEoXEUapW0PnxSL_rtfbM/view?usp=share_link">
+                            <div class="banner-container">
+                                <picture>
+                                    <source srcset="Assets/images/cold-case.webp" type="image/webp">
+                                    <img src="Assets/images/cold-case.jpg" class="event-banner" alt="COLD CASE Banner" loading="lazy" decoding="async" width="400" height="225">
+                                </picture>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-card__title">COLD CASE</h3>
+                                <p class="event-card__desc">Analyse failures. Decode data. Present solutions.</p>
+                                <a href="cold-case.html" class="details-btn">View details →</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
             </div>
         </section>
     </main>
@@ -296,7 +302,7 @@
             </nav>
             <div class="right-section">
                 <div class="footer__block">
-                    <h3 class="footer__title">Connect</h3>
+                    <p class="footer__title">Connect</p>
                     <div class="social">
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -306,7 +312,7 @@
                     </div>
                 </div>
                 <div class="footer__block">
-                    <h3 class="footer__title">Contact Us</h3>
+                    <p class="footer__title">Contact Us</p>
                     <p class="footer__text">Email: datacron@rishihood.edu.in</p>
                     <p class="footer__text">Phone: +91 94147 12228</p>
                     <p class="footer__contact-person">Kapish Garg - Outreach & Sponsorship Head</p>

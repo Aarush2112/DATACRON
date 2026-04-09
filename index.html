@@ -20,9 +20,15 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
     
-    <!-- Defer Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <!-- Defer Font Awesome - solid + brands subsets only (saves ~18KB unused CSS) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
+    </noscript>
 
     <!-- Inline Critical CSS (Refined for LCP) -->
     <style>
@@ -90,22 +96,24 @@
         body.loading { overflow: hidden !important; }
         #video-preloader { position: fixed; inset: 0; width: 100vw; height: 100vh; background: #000; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; pointer-events: none; }
         #video-preloader.hidden { opacity: 0; visibility: hidden; }
-        #preloader-video { width: min(90%, 800px); height: auto; max-height: 75vh; object-fit: contain; pointer-events: none; opacity: 1; }
-        .preloader-ui { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: min(400px, 80%); display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 2; }
-        .preloader-percent { font-family: "Orbitron", sans-serif; font-size: 24px; font-weight: 600; color: #00FF9F; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(0,255,159,0.5); }
-        .preloader-bar-wrap { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; position: relative; }
-        .preloader-bar { height: 100%; width: 0%; background: #00FF9F; box-shadow: 0 0 10px #00FF9F; transition: width 0.1s linear; }
+        #video-preloader { position: fixed; inset: 0; width: 100vw; height: 100vh; background: #000; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; pointer-events: none; contain: layout style; }
+        #video-preloader.hidden { opacity: 0; visibility: hidden; }
+        #preloader-video { width: min(90%, 800px); height: auto; max-height: 75vh; object-fit: contain; pointer-events: none; opacity: 1; aspect-ratio: 16/9; }
+        .preloader-ui { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: min(400px, 80%); display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 2; contain: layout; }
+        .preloader-percent { font-family: "Orbitron", sans-serif; font-size: 24px; font-weight: 600; color: #00FF9F; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(0,255,159,0.5); min-width: 5ch; text-align: center; font-variant-numeric: tabular-nums; will-change: contents; }
+        .preloader-bar-wrap { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; position: relative; contain: strict; }
+        .preloader-bar { height: 100%; width: 0%; background: #00FF9F; box-shadow: 0 0 10px #00FF9F; transition: width 0.1s linear; will-change: width; }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
-    <link rel="preload" href="./CSS/style.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/style.css?v=3"></noscript>
+    <link rel="preload" href="./CSS/style.css?v=4" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/style.css?v=4"></noscript>
     
-    <link rel="preload" href="./CSS/speakers.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/speakers.css?v=2"></noscript>
+    <link rel="preload" href="./CSS/speakers.css?v=3" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/speakers.css?v=3"></noscript>
 
-    <link rel="preload" href="./CSS/animations.css?v=1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=1"></noscript>
+    <link rel="preload" href="./CSS/animations.css?v=2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./CSS/animations.css?v=2"></noscript>
 
 </head>
 <body class="loading">
@@ -127,7 +135,7 @@
     <!-- Sticky Glass Navbar -->
     <header class="site-header">
         <nav class="nav" aria-label="Primary">
-            <a class="nav__brand" href="index.html" aria-label="DATACRON 2026">
+            <a class="nav__brand" href="index.html">
                 <img src="./Assets/Logo.png" alt="Datacron Logo" class="nav__logo" width="40" height="40" fetchpriority="high" decoding="async">
                 <span class="nav__brandText">DATACRON 2026</span>
             </a>
@@ -431,7 +439,7 @@
             </nav>
             <div class="right-section">
                 <div class="footer__block">
-                    <h3 class="footer__title">Connect</h3>
+                    <p class="footer__title">Connect</p>
                     <div class="social">
                         <a class="social__icon" href="https://www.instagram.com/datacron.fest?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a class="social__icon" href="https://www.linkedin.com/company/datacron-fest/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -441,7 +449,7 @@
                     </div>
                 </div>
                 <div class="footer__block">
-                    <h3 class="footer__title">Contact Us</h3>
+                    <p class="footer__title">Contact Us</p>
                     <p class="footer__text">Email: datacron@rishihood.edu.in</p>
                     <p class="footer__text">Phone: +91 94147 12228</p>
                     <p class="footer__contact-person">Kapish Garg - Outreach & Sponsorship Head</p>
