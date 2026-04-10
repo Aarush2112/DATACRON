@@ -1,1 +1,612 @@
-@media (prefers-reduced-motion:reduce){*,::after,::before{animation-play-state:paused!important;transition-duration:0s!important}}.events-section__title,.featured-title,.section__title{position:relative;width:fit-content;margin-inline:auto}.department__title{position:relative}.department__title::after,.events-section__title::after,.featured-title::after,.section__title::after{content:"";position:absolute;bottom:-6px;left:0;width:100%;height:2px;border-radius:4px;background:linear-gradient(90deg,transparent,var(--glow),var(--accent),var(--glow),transparent);background-size:200% 100%;animation:scanUnderline 2.6s linear infinite;box-shadow:0 0 8px var(--glow)}@keyframes scanUnderline{0%{background-position:200% 0}100%{background-position:-200% 0}}.hero::after{content:"";position:absolute;top:50%;left:50%;width:min(70vw,700px);height:min(70vw,700px);margin-left:calc(min(70vw,700px)/ -2);margin-top:calc(min(70vw,700px)/ -2);border-radius:50%;border:1px solid rgba(0,255,159,.08);box-shadow:0 0 40px rgba(0,255,159,.04) inset,0 0 16px rgba(0,255,159,.04);animation:orbitRing 14s linear infinite;pointer-events:none;z-index:0}@keyframes orbitRing{from{transform:rotate(0) scale(1)}to{transform:rotate(360deg) scale(1.04)}}.hero__title{background-size:300% 100%;animation:titleGradientSweep 5s ease-in-out infinite,floatTitle 6s ease-in-out infinite}@keyframes titleGradientSweep{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}.scroll-progress{background:linear-gradient(90deg,var(--glow),var(--accent),var(--highlight),#00d4aa,var(--glow));background-size:300% 100%;animation:progressShimmer 2s linear infinite}@keyframes progressShimmer{0%{background-position:0 0}100%{background-position:200% 0}}.nav__logo:hover{filter:drop-shadow(0 0 6px rgba(0,255,159,.55))}.nav__brandText{animation:brandPulse 4s ease-in-out infinite}@keyframes brandPulse{0%,100%{text-shadow:0 0 14px rgba(0,255,179,.4),0 0 26px rgba(230,213,163,.2)}50%{text-shadow:0 0 22px rgba(0,255,179,.7),0 0 40px rgba(230,213,163,.35)}}.reg-dot{animation:regDotPulse 1.2s ease-in-out infinite}.event-card{overflow:hidden}.event-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from var(--angle,0deg),transparent 10%,rgba(0,255,159,.6) 30%,rgba(0,212,170,.4) 50%,transparent 70%);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:-1;animation:borderSpin 3s linear infinite}.event-card:hover::before{opacity:1}@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}@keyframes borderSpin{to{--angle:360deg}}.events-grid .event-card:first-child,.grid--featured-events .event-card:first-child{animation-delay:0s}.events-grid .event-card:nth-child(2),.grid--featured-events .event-card:nth-child(2){animation-delay:80ms}.events-grid .event-card:nth-child(3),.grid--featured-events .event-card:nth-child(3){animation-delay:.16s}.speaker-card{position:relative;overflow:hidden}.speaker-card::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(105deg,transparent,rgba(0,255,159,.1),rgba(255,255,255,.08),transparent);transform:skewX(-15deg);transition:left .7s cubic-bezier(.23, 1, .32, 1);pointer-events:none;z-index:6}.speaker-card:hover::after{left:140%}.speaker-card:hover .card__media img{transform:scale(1.07);transition:transform .55s ease}.team-card{transition:transform .35s cubic-bezier(.2, .8, .2, 1),box-shadow .35s ease,border-color .35s ease}.team-card:hover .team-card__img{transform:scale(1.12)}.team-card{animation:teamCardIdle 5s ease-in-out infinite}@keyframes teamCardIdle{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.3)}50%{box-shadow:0 4px 28px rgba(0,242,255,.08),0 0 10px rgba(0,242,255,.05)}}.outreach-section .department__title::after{background:linear-gradient(90deg,transparent,gold,transparent);box-shadow:0 0 8px gold}.competition-section .department__title::after{background:linear-gradient(90deg,transparent,#00f2ff,transparent);box-shadow:0 0 8px #00f2ff}.tech-section .department__title::after{background:linear-gradient(90deg,transparent,#7b61ff,transparent);box-shadow:0 0 8px #7b61ff}.branding-section .department__title::after{background:linear-gradient(90deg,transparent,#ff00e6,transparent);box-shadow:0 0 8px #ff00e6}.operations-section .department__title::after{background:linear-gradient(90deg,transparent,#00ff9f,transparent);box-shadow:0 0 8px #00ff9f}.sponsor-logo img{animation:sponsorBreathe 3.5s ease-in-out infinite}@keyframes sponsorBreathe{0%,100%{filter:drop-shadow(0 0 6px rgba(0,255,159,.3));transform:translateY(0)}50%{filter:drop-shadow(0 0 18px rgba(0,255,159,.65));transform:translateY(-6px)}}.feature-card__icon{animation:iconBounce 3s ease-in-out infinite}@keyframes iconBounce{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-6px) scale(1.08)}60%{transform:translateY(-3px) scale(1.04)}}@keyframes countdownTick{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}.countdown-num.is-ticking{animation:countdownTick .25s ease-out forwards}.events-divider,.team-divider{position:relative;overflow:hidden}.events-divider::after,.team-divider::after{content:"";position:absolute;top:-2px;left:-6%;width:12%;height:6px;border-radius:4px;background:radial-gradient(circle,rgba(255,255,255,.95) 0,transparent 70%);animation:dividerDot 3s linear infinite;pointer-events:none}@keyframes dividerDot{from{left:-12%}to{left:108%}}.glass-card{animation:glassGlow 4s ease-in-out infinite}@keyframes glassGlow{0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.3)}50%{box-shadow:0 10px 40px rgba(0,255,179,.14),0 0 20px rgba(230,213,163,.08)}}.data-heist-card{animation:flicker 1.8s infinite alternate ease-in-out,heistGlow 3s ease-in-out infinite}@keyframes heistGlow{0%,100%{outline:0}50%{outline:1px solid rgba(255,120,0,.25);outline-offset:3px}}.page-main .section__title:not(.department__title){animation:heroTitleGlitch 8s step-end infinite,titleGlowCycle 4s ease-in-out infinite}@keyframes heroTitleGlitch{0%,100%,4.9%,49%,5.8%,50.2%,95%{clip-path:none;transform:translate(0,0)}5%{clip-path:polygon(0 25%,100% 25%,100% 30%,0 30%);transform:translate(-2px,0)}5.2%{clip-path:polygon(0 60%,100% 60%,100% 65%,0 65%);transform:translate(2px,0)}5.5%{clip-path:none;transform:translate(0,0)}50%{clip-path:polygon(0 42%,100% 42%,100% 44%,0 44%);transform:translate(1px,0)}}@keyframes titleGlowCycle{0%,100%{text-shadow:0 0 18px rgba(0,255,179,.22)}50%{text-shadow:0 0 30px rgba(0,255,179,.5),0 0 50px rgba(0,255,179,.2)}}.social__icon:hover{animation:socialSpin .5s ease-out}@keyframes socialSpin{from{transform:rotate(-15deg) translateY(-2px)}to{transform:rotate(0) translateY(-2px)}}.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s cubic-bezier(.2, .8, .2, 1),transform .7s cubic-bezier(.2, .8, .2, 1);will-change:opacity,transform}.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s cubic-bezier(.2, .8, .2, 1),transform .7s cubic-bezier(.2, .8, .2, 1);will-change:opacity,transform}.reveal-left.is-visible,.reveal-right.is-visible{opacity:1;transform:translateX(0)}.view-more-btn{position:relative;overflow:hidden}.view-more-btn::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from var(--btn-angle,0deg),transparent 10%,#00f2ff 40%,transparent 60%);opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:-1;animation:borderSpin 2s linear infinite}.view-more-btn:hover::before{opacity:1}.speaker-card:hover .speaker-name{text-shadow:0 0 12px rgba(0,255,179,.5),0 0 24px rgba(0,255,179,.25);transition:text-shadow .3s ease}.stagger-child{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .55s cubic-bezier(.2, .8, .2, 1),transform .55s cubic-bezier(.2, .8, .2, 1);will-change:opacity,transform}.stagger-child.is-visible{opacity:1;transform:translateY(0) scale(1)}.event-btn{animation:btnIdleGlow 4s ease-in-out infinite}@keyframes btnIdleGlow{0%,100%{border-color:rgba(0,242,255,.22)}50%{border-color:rgba(0,242,255,.5);box-shadow:0 0 12px rgba(0,242,255,.25)}}body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);pointer-events:none;z-index:9990;mix-blend-mode:multiply;animation:scanlineDrift 12s linear infinite}@keyframes scanlineDrift{from{background-position:0 0}to{background-position:0 60px}}.site-header::after{content:"";position:absolute;top:0;right:0;width:30vw;height:100%;background:linear-gradient(90deg,transparent,rgba(0,255,159,.04));pointer-events:none;animation:headerGlint 6s ease-in-out infinite alternate}@keyframes headerGlint{from{opacity:.4}to{opacity:1}}@media (max-width:768px){body::after{display:none}.hero::after{display:none}.event-card::before{display:none}.speaker-card::after{display:none}.events-divider::after,.team-divider::after{display:none}.feature-card__icon{animation:none}.sponsor-logo img{animation:none}.glass-card{animation:none}.site-header::after{display:none}.events-section__title::after,.section__title::after{display:none}.nav__brandText{animation:none}}
+/* =================================================================
+   Reduced Motion Accessibility
+   ================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::after,
+    ::before {
+        animation-play-state: paused !important;
+        transition-duration: 0s !important;
+    }
+}
+
+/* =================================================================
+   Section Titles & Headers
+   ================================================================= */
+.events-section__title,
+.featured-title,
+.section__title {
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.department__title {
+    position: relative;
+}
+
+.department__title::after,
+.events-section__title::after,
+.featured-title::after,
+.section__title::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, transparent, var(--glow), var(--accent), var(--glow), transparent);
+    background-size: 200% 100%;
+    animation: scanUnderline 2.6s linear infinite;
+    box-shadow: 0 0 8px var(--glow);
+}
+
+@keyframes scanUnderline {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* =================================================================
+   Hero Animations
+   ================================================================= */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(70vw, 700px);
+    height: min(70vw, 700px);
+    margin-left: calc(min(70vw, 700px) / -2);
+    margin-top: calc(min(70vw, 700px) / -2);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 159, 0.08);
+    box-shadow: 0 0 40px rgba(0, 255, 159, 0.04) inset, 0 0 16px rgba(0, 255, 159, 0.04);
+    animation: orbitRing 14s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes orbitRing {
+    from {
+        transform: rotate(0) scale(1);
+    }
+    to {
+        transform: rotate(360deg) scale(1.04);
+    }
+}
+
+.hero__title {
+    background-size: 300% 100%;
+    animation: titleGradientSweep 5s ease-in-out infinite, floatTitle 6s ease-in-out infinite;
+}
+
+@keyframes titleGradientSweep {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes floatTitle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* =================================================================
+   Navigation & UI Elements
+   ================================================================= */
+.scroll-progress {
+    background: linear-gradient(90deg, var(--glow), var(--accent), var(--highlight), #00d4aa, var(--glow));
+    background-size: 300% 100%;
+    animation: progressShimmer 2s linear infinite;
+}
+
+@keyframes progressShimmer {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.nav__logo:hover {
+    filter: drop-shadow(0 0 6px rgba(0, 255, 159, 0.55));
+}
+
+.nav__brandText {
+    animation: brandPulse 4s ease-in-out infinite;
+}
+
+@keyframes brandPulse {
+    0%, 100% {
+        text-shadow: 0 0 14px rgba(0, 255, 179, 0.4), 0 0 26px rgba(230, 213, 163, 0.2);
+    }
+    50% {
+        text-shadow: 0 0 22px rgba(0, 255, 179, 0.7), 0 0 40px rgba(230, 213, 163, 0.35);
+    }
+}
+
+.reg-dot {
+    animation: regDotPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes regDotPulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 6px #00ff9f, 0 0 12px rgba(0, 255, 159, 0.6);
+    }
+    50% {
+        opacity: 0.55;
+        box-shadow: 0 0 4px #00ff9f, 0 0 6px rgba(0, 255, 159, 0.3);
+    }
+}
+
+/* =================================================================
+   Card Animations
+   ================================================================= */
+.event-card {
+    overflow: hidden;
+}
+
+.event-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--angle, 0deg), transparent 10%, rgba(0, 255, 159, 0.6) 30%, rgba(0, 212, 170, 0.4) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+    animation: borderSpin 3s linear infinite;
+}
+
+.event-card:hover::before {
+    opacity: 1;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes borderSpin {
+    to {
+        --angle: 360deg;
+    }
+}
+
+.events-grid .event-card:first-child,
+.grid--featured-events .event-card:first-child {
+    animation-delay: 0s;
+}
+
+.events-grid .event-card:nth-child(2),
+.grid--featured-events .event-card:nth-child(2) {
+    animation-delay: 80ms;
+}
+
+.events-grid .event-card:nth-child(3),
+.grid--featured-events .event-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+/* =================================================================
+   Speaker & Team Cards
+   ================================================================= */
+.speaker-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.speaker-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(0, 255, 159, 0.1), rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+    z-index: 6;
+}
+
+.speaker-card:hover::after {
+    left: 140%;
+}
+
+.speaker-card:hover .card__media img {
+    transform: scale(1.07);
+    transition: transform 0.55s ease;
+}
+
+.team-card {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    animation: teamCardIdle 5s ease-in-out infinite;
+}
+
+.team-card:hover .team-card__img {
+    transform: scale(1.12);
+}
+
+@keyframes teamCardIdle {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 28px rgba(0, 242, 255, 0.08), 0 0 10px rgba(0, 242, 255, 0.05);
+    }
+}
+
+/* =================================================================
+   Department Styles
+   ================================================================= */
+.outreach-section .department__title::after {
+    background: linear-gradient(90deg, transparent, gold, transparent);
+    box-shadow: 0 0 8px gold;
+}
+
+.competition-section .department__title::after {
+    background: linear-gradient(90deg, transparent, #00f2ff, transparent);
+    box-shadow: 0 0 8px #00f2ff;
+}
+
+.tech-section .department__title::after {
+    background: linear-gradient(90deg, transparent, #7b61ff, transparent);
+    box-shadow: 0 0 8px #7b61ff;
+}
+
+.branding-section .department__title::after {
+    background: linear-gradient(90deg, transparent, #ff00e6, transparent);
+    box-shadow: 0 0 8px #ff00e6;
+}
+
+.operations-section .department__title::after {
+    background: linear-gradient(90deg, transparent, #00ff9f, transparent);
+    box-shadow: 0 0 8px #00ff9f;
+}
+
+/* =================================================================
+   Sponsor & Feature Icons
+   ================================================================= */
+.sponsor-logo img {
+    animation: sponsorBreathe 3.5s ease-in-out infinite;
+}
+
+@keyframes sponsorBreathe {
+    0%, 100% {
+        filter: drop-shadow(0 0 6px rgba(0, 255, 159, 0.3));
+        transform: translateY(0);
+    }
+    50% {
+        filter: drop-shadow(0 0 18px rgba(0, 255, 159, 0.65));
+        transform: translateY(-6px);
+    }
+}
+
+.feature-card__icon {
+    animation: iconBounce 3s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    40% {
+        transform: translateY(-6px) scale(1.08);
+    }
+    60% {
+        transform: translateY(-3px) scale(1.04);
+    }
+}
+
+/* =================================================================
+   Countdown & Dividers
+   ================================================================= */
+@keyframes countdownTick {
+    0% {
+        transform: translateY(-8px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.countdown-num.is-ticking {
+    animation: countdownTick 0.25s ease-out forwards;
+}
+
+.events-divider,
+.team-divider {
+    position: relative;
+    overflow: hidden;
+}
+
+.events-divider::after,
+.team-divider::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -6%;
+    width: 12%;
+    height: 6px;
+    border-radius: 4px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0, transparent 70%);
+    animation: dividerDot 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes dividerDot {
+    from {
+        left: -12%;
+    }
+    to {
+        left: 108%;
+    }
+}
+
+/* =================================================================
+   Glass & Heist Effects
+   ================================================================= */
+.glass-card {
+    animation: glassGlow 4s ease-in-out infinite;
+}
+
+@keyframes glassGlow {
+    0%, 100% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 10px 40px rgba(0, 255, 179, 0.14), 0 0 20px rgba(230, 213, 163, 0.08);
+    }
+}
+
+.data-heist-card {
+    animation: flicker 1.8s infinite alternate ease-in-out, heistGlow 3s ease-in-out infinite;
+}
+
+@keyframes heistGlow {
+    0%, 100% {
+        outline: 0;
+    }
+    50% {
+        outline: 1px solid rgba(255, 120, 0, 0.25);
+        outline-offset: 3px;
+    }
+}
+
+/* =================================================================
+   Page Glitch Effects
+   ================================================================= */
+.page-main .section__title:not(.department__title) {
+    animation: heroTitleGlitch 8s step-end infinite, titleGlowCycle 4s ease-in-out infinite;
+}
+
+@keyframes heroTitleGlitch {
+    0%, 100%, 4.9%, 49%, 5.8%, 50.2%, 95% {
+        clip-path: none;
+        transform: translate(0, 0);
+    }
+    5% {
+        clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%);
+        transform: translate(-2px, 0);
+    }
+    5.2% {
+        clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+        transform: translate(2px, 0);
+    }
+    5.5% {
+        clip-path: none;
+        transform: translate(0, 0);
+    }
+    50% {
+        clip-path: polygon(0 42%, 100% 42%, 100% 44%, 0 44%);
+        transform: translate(1px, 0);
+    }
+}
+
+@keyframes titleGlowCycle {
+    0%, 100% {
+        text-shadow: 0 0 18px rgba(0, 255, 179, 0.22);
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(0, 255, 179, 0.5), 0 0 50px rgba(0, 255, 179, 0.2);
+    }
+}
+
+/* =================================================================
+   Interaction Reveals
+   ================================================================= */
+.social__icon:hover {
+    animation: socialSpin 0.5s ease-out;
+}
+
+@keyframes socialSpin {
+    from {
+        transform: rotate(-15deg) translateY(-2px);
+    }
+    to {
+        transform: rotate(0) translateY(-2px);
+    }
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.view-more-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.view-more-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--btn-angle, 0deg), transparent 10%, #00f2ff 40%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+    animation: borderSpin 2s linear infinite;
+}
+
+.view-more-btn:hover::before {
+    opacity: 1;
+}
+
+.speaker-card:hover .speaker-name {
+    text-shadow: 0 0 12px rgba(0, 255, 179, 0.5), 0 0 24px rgba(0, 255, 179, 0.25);
+    transition: text-shadow 0.3s ease;
+}
+
+.stagger-child {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+    transition: opacity 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.stagger-child.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.event-btn {
+    animation: btnIdleGlow 4s ease-in-out infinite;
+}
+
+@keyframes btnIdleGlow {
+    0%, 100% {
+        border-color: rgba(0, 242, 255, 0.22);
+    }
+    50% {
+        border-color: rgba(0, 242, 255, 0.5);
+        box-shadow: 0 0 12px rgba(0, 242, 255, 0.25);
+    }
+}
+
+/* =================================================================
+   Global Decorative Scanlines
+   ================================================================= */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0, 0, 0, 0.04) 3px, rgba(0, 0, 0, 0.04) 4px);
+    pointer-events: none;
+    z-index: 9990;
+    mix-blend-mode: multiply;
+    animation: scanlineDrift 12s linear infinite;
+}
+
+@keyframes scanlineDrift {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 60px;
+    }
+}
+
+/* =================================================================
+   Header Visual Effects
+   ================================================================= */
+.site-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 159, 0.04));
+    pointer-events: none;
+    animation: headerGlint 6s ease-in-out infinite alternate;
+}
+
+@keyframes headerGlint {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* =================================================================
+   Mobile Animation Overrides
+   ================================================================= */
+@media (max-width: 768px) {
+    body::after {
+        display: none;
+    }
+    .hero::after {
+        display: none;
+    }
+    .event-card::before {
+        display: none;
+    }
+    .speaker-card::after {
+        display: none;
+    }
+    .events-divider::after,
+    .team-divider::after {
+        display: none;
+    }
+    .feature-card__icon {
+        animation: none;
+    }
+    .sponsor-logo img {
+        animation: none;
+    }
+    .glass-card {
+        animation: none;
+    }
+    .site-header::after {
+        display: none;
+    }
+    .events-section__title::after,
+    .section__title::after {
+        display: none;
+    }
+    .nav__brandText {
+        animation: none;
+    }
+}
