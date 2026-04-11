@@ -568,7 +568,7 @@
                     
                     // Handle unique constraint error (usually code 23505)
                     if (error.code === '23505') {
-                        errorMsg = "A team with this name already exists in our records.";
+                        errorMsg = "You have already registered for this event with this email address!";
                     } else if (error.message) {
                         errorMsg = `System Error: ${error.message}`;
                     }
