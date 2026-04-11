@@ -419,6 +419,16 @@
         </div>
     </main>
 
+    <div class="success-overlay" id="otp-overlay">
+        <div class="success-content">
+            <h2 class="success-title" style="color: #00ffb3;">Verify Email</h2>
+            <p style="margin-bottom: 20px;">We've sent a 6-digit verification code to your email. Enter it below to complete registration.</p>
+            <input type="text" id="otp-input" class="form-input" placeholder="000000" style="text-align: center; font-size: 24px; letter-spacing: 5px; margin-bottom: 20px;" maxlength="6" pattern="\d{6}">
+            <button type="button" class="submit-btn" id="verify-otp-btn">Verify & Complete</button>
+            <button type="button" class="back-home" id="cancel-otp-btn" style="border: none; margin-top: 15px; cursor:pointer;">Cancel</button>
+        </div>
+    </div>
+
     <div class="success-overlay" id="success-overlay">
         <div class="success-content">
             <div class="success-icon"><i class="fas fa-check-circle"></i></div>
@@ -446,6 +456,11 @@
             const regForm = document.getElementById('registration-form');
             const successOverlay = document.getElementById('success-overlay');
             const submitBtn = document.getElementById('reg-submit-btn');
+
+            const otpOverlay = document.getElementById('otp-overlay');
+            const otpInput = document.getElementById('otp-input');
+            const verifyOtpBtn = document.getElementById('verify-otp-btn');
+            const cancelOtpBtn = document.getElementById('cancel-otp-btn');
 
             // Set dynamic event data
             if (eventId === 'whizzes') {
@@ -489,6 +504,8 @@
                 return { error };
             }
 
+            let pendingRegistrationData = null;
+
             // Form submission logic
             regForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -503,8 +520,8 @@
                 submitBtn.textContent = 'TRANSMITTING...';
                 submitBtn.disabled = true;
 
-                // Prepare insertion data with field mapping and optional handling
-                const registrationData = {
+                // Prepare insertion data
+                pendingRegistrationData = {
                     event_name: currentEvent,
                     team_name: rawData.teamName.trim(),
                     institute_name: rawData.instituteName.trim(),
@@ -518,7 +535,6 @@
                     member_3_email: size >= 3 ? (rawData.member3Email?.trim() || null) : null
                 };
 
-                // Simple validation for event_name
                 if (!currentEvent) {
                     alert("System Error: Event context missing. Please return to the events page and try again.");
                     submitBtn.textContent = 'COMPLETE REGISTRATION';
@@ -526,58 +542,109 @@
                     return;
                 }
 
-                console.log(`[DEBUG] Submitting to registrations table for event: ${currentEvent}`, registrationData);
+                console.log(`[DEBUG] Attempting OTP verification for event: ${currentEvent}`);
 
                 try {
-                    // Step 1: Insert into Database
-                    const result = await submitRegistration(registrationData);
+                    // Send OTP request
+                    const { data: otpData, error: otpError } = await _supabase.functions.invoke('otp-handler', {
+                        body: { action: 'SEND', email: pendingRegistrationData.leader_email }
+                    });
 
-                    if (result.error) {
-                        throw result.error;
+                    const actOtpErr = otpError || (otpData && otpData.error ? otpData.error : null);
+                    if (actOtpErr) {
+                        throw new Error(actOtpErr.message || (typeof actOtpErr === 'string' ? actOtpErr : JSON.stringify(actOtpErr)));
                     }
+
+                    // Show OTP modal
+                    otpOverlay.classList.add('is-visible');
+                    otpInput.value = '';
+                    otpInput.focus();
+
+                } catch (error) {
+                    console.error('[ERROR] Failed to send OTP:', error);
+                    alert("Could not send verification email. " + (error.message || "Please check your network and try again."));
+                    submitBtn.textContent = 'COMPLETE REGISTRATION';
+                    submitBtn.disabled = false;
+                }
+            });
+
+            cancelOtpBtn.addEventListener('click', () => {
+                otpOverlay.classList.remove('is-visible');
+                submitBtn.textContent = 'COMPLETE REGISTRATION';
+                submitBtn.disabled = false;
+                pendingRegistrationData = null;
+            });
+
+            verifyOtpBtn.addEventListener('click', async () => {
+                const otpCode = otpInput.value.trim();
+                if (otpCode.length !== 6) {
+                    alert("Please enter the 6-digit code.");
+                    return;
+                }
+
+                verifyOtpBtn.textContent = 'VERIFYING...';
+                verifyOtpBtn.disabled = true;
+
+                try {
+                    // Verify OTP via Edge Function
+                    const { data: verifyData, error: verifyError } = await _supabase.functions.invoke('otp-handler', {
+                        body: { action: 'VERIFY', email: pendingRegistrationData.leader_email, otp: otpCode }
+                    });
+
+                    const actVerErr = verifyError || (verifyData && verifyData.error ? verifyData.error : null);
+                    if (actVerErr) {
+                        throw new Error(actVerErr.message || (typeof actVerErr === 'string' ? actVerErr : JSON.stringify(actVerErr)));
+                    }
+
+                    // OTP is valid! Proceed to db insertion.
+                    otpOverlay.classList.remove('is-visible');
+                    
+                    const result = await submitRegistration(pendingRegistrationData);
+                    if (result.error) throw result.error;
                     console.log('[SUCCESS] Registration recorded in database.');
 
-                    // Step 2: Trigger Edge Function for Email Confirmation
+                    // Trigger email confirmation automation
                     console.log('[DEBUG] Triggering email automation...');
                     const { data: emailData, error: emailError } = await _supabase.functions.invoke('send-confirmation-email', {
-                        body: registrationData
+                        body: pendingRegistrationData
                     });
+                    
                     const actualError = emailError || (emailData && emailData.error ? emailData.error : null);
-
                     if (actualError) {
                         console.error('[ERROR] Email automation failed:', actualError);
-                        alert("Your registration was successful, but there was an issue sending the confirmation email: " + (actualError.message || typeof actualError === 'string' ? actualError : JSON.stringify(actualError)));
+                        alert("Your registration was successful, but there was an issue sending the confirmation email.");
                     } else {
-                        console.log('[SUCCESS] Confirmation email triggered.', emailData);
+                         console.log('[SUCCESS] Confirmation email triggered.');
                     }
 
-                    // Complete Success Flow
+                    // Complete overall flow
                     successOverlay.classList.add('is-visible');
                     regForm.reset();
-                    
-                    // Reset UI and requirements after reset
                     m2Field.style.display = 'none';
                     m3Field.style.display = 'none';
                     updateRequiredFields(1);
-                    
+
                 } catch (error) {
-                    // Error Handling
-                    console.error('[ERROR] Registration failed:', error);
+                    console.error('[ERROR] Verification/Registration failed:', error);
+                    let errorMsg = "Verification failed. Check the code and try again.";
                     
-                    let errorMsg = "Transmission failed. Please check your signal and try again.";
-                    
-                    // Handle unique constraint error (usually code 23505)
-                    if (error.code === '23505') {
+                    if (error.code === '23505' || (error.message && error.message.includes('duplicate key'))) {
                         errorMsg = "You have already registered for this event with this email address!";
+                        otpOverlay.classList.remove('is-visible');
                     } else if (error.message) {
-                        errorMsg = `System Error: ${error.message}`;
+                        errorMsg = error.message;
                     }
                     
                     alert(errorMsg);
                 } finally {
-                    // Reset button state
-                    submitBtn.textContent = 'COMPLETE REGISTRATION';
-                    submitBtn.disabled = false;
+                    verifyOtpBtn.textContent = 'Verify & Complete';
+                    verifyOtpBtn.disabled = false;
+                    // Note: If successful, we don't re-enable submitBtn because the successOverlay is shown.
+                    // If failed, and we hide modal (e.g. 23505), re-enable it:
+                    if (!otpOverlay.classList.contains('is-visible') && !successOverlay.classList.contains('is-visible')) {
+                        submitBtn.textContent = 'COMPLETE REGISTRATION';
+                        submitBtn.disabled = false;
+                    }
                 }
             });
         });
