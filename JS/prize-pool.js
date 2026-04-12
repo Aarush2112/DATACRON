@@ -6,7 +6,7 @@
 (() => {
     'use strict';
 
-    const DURATION = 3000; // 3 seconds exactly
+    const DURATION = 2000; // 2 seconds
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     // Easing function: easeOutExpo
@@ -141,7 +141,7 @@
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 // Small delay for better impact after reveal animation
-                setTimeout(() => startCountUp(numberEl), 400);
+                setTimeout(() => startCountUp(numberEl), 200);
                 observer.unobserve(section);
             }
         }, { threshold: 0.3 });
