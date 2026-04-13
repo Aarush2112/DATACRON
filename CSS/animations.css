@@ -59,14 +59,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: min(70vw, 700px);
-    height: min(70vw, 700px);
-    margin-left: calc(min(70vw, 700px) / -2);
-    margin-top: calc(min(70vw, 700px) / -2);
+    width: min(75vw, 750px);
+    height: min(75vw, 750px);
+    margin-left: calc(min(75vw, 750px) / -2);
+    margin-top: calc(min(75vw, 750px) / -2);
     border-radius: 50%;
-    border: 1px solid rgba(0, 255, 159, 0.08);
-    box-shadow: 0 0 40px rgba(0, 255, 159, 0.04) inset, 0 0 16px rgba(0, 255, 159, 0.04);
-    animation: orbitRing 14s linear infinite;
+    border: 1.5px solid rgba(0, 255, 159, 0.15);
+    background: radial-gradient(circle, rgba(0, 255, 159, 0.05) 0%, transparent 70%);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 159, 0.08) inset, 
+        0 0 30px rgba(0, 255, 159, 0.08);
+    animation: orbitRing 20s linear infinite;
     pointer-events: none;
     z-index: 0;
 }
