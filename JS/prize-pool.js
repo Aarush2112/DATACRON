@@ -109,17 +109,17 @@
             if (percentage < 0.85) {
                 // Randomly flicker digits
                 const randomVal = Math.floor(Math.random() * target);
-                el.innerText = formatNumber(randomVal);
+                el.innerText = formatNumber(randomVal) + '+';
             } else {
                 // Smoothly settle into the final value
                 const current = Math.floor(easedProgress * target);
-                el.innerText = formatNumber(current);
+                el.innerText = formatNumber(current) + '+';
             }
 
             if (percentage < 1) {
                 requestAnimationFrame(animate);
             } else {
-                el.innerText = formatNumber(target);
+                el.innerText = formatNumber(target) + '+';
                 el.classList.add('celebrate');
                 
                 const canvas = document.getElementById('prize-particles');
