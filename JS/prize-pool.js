@@ -144,7 +144,7 @@
                 setTimeout(() => startCountUp(numberEl), 200);
                 observer.unobserve(section);
             }
-        }, { threshold: 0.3 });
+        }, { threshold: 0.8 });
 
         observer.observe(section);
     };
