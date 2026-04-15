@@ -545,9 +545,14 @@
                 console.log(`[DEBUG] Attempting OTP verification for event: ${currentEvent}`);
 
                 try {
-                    // Send OTP request
+                    // Send OTP request (It will block and return error if Team Name or Email is already registered)
                     const { data: otpData, error: otpError } = await _supabase.functions.invoke('otp-handler', {
-                        body: { action: 'SEND', email: pendingRegistrationData.leader_email }
+                        body: { 
+                            action: 'SEND', 
+                            email: pendingRegistrationData.leader_email,
+                            event_name: pendingRegistrationData.event_name,
+                            team_name: pendingRegistrationData.team_name
+                        }
                     });
 
                     const actOtpErr = otpError || (otpData && otpData.error ? otpData.error : null);
@@ -629,7 +634,7 @@
                     let errorMsg = "Verification failed. Check the code and try again.";
                     
                     if (error.code === '23505' || (error.message && error.message.includes('duplicate key'))) {
-                        errorMsg = "You have already registered for this event with this email address!";
+                        errorMsg = "Registration rejected: This email address or Team Name is already registered for this event!";
                         otpOverlay.classList.remove('is-visible');
                     } else if (error.message) {
                         errorMsg = error.message;
