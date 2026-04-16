@@ -365,9 +365,26 @@
             const distance = targetDate - now;
 
             if (distance <= 0) {
-                Object.values(timeUnits).forEach(el => {
-                    if (el) el.textContent = "00";
-                });
+                const wrapper = countdownEl.closest('.event-countdown');
+                if (wrapper && !wrapper.classList.contains('fest-started')) {
+                    wrapper.classList.add('fest-started');
+                    wrapper.innerHTML = `
+                        <div class="fest-started-message">
+                            <div class="fest-initiated-text glow-pulse" data-text="DATACRON IS LIVE">DATACRON IS LIVE</div>
+                            <p style="color: var(--muted); margin-top: 15px; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">The data realm is now open</p>
+                        </div>
+                    `;
+
+                    // Show live ticker
+                    const liveTicker = document.getElementById('live-ticker');
+                    if (liveTicker) {
+                        liveTicker.style.display = 'flex';
+                        // Short delay to allow display change to apply before fading in
+                        setTimeout(() => {
+                            liveTicker.style.opacity = '1';
+                        }, 50);
+                    }
+                }
                 return;
             }
 

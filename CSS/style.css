@@ -402,6 +402,64 @@ body::before {
 }
 
 /* =================================================================
+   Live Now Ticker (Post-Countdown)
+   ================================================================= */
+.live-ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255, 0, 50, 0.1);
+    border-bottom: 1px solid rgba(255, 0, 50, 0.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    height: 35px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 105px;
+    z-index: 48;
+    transition: opacity 1s ease;
+}
+
+.live-ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker-scroll 10s linear infinite;
+    gap: 4rem;
+    padding-left: 4rem;
+}
+
+.live-ticker-item {
+    font-family: Orbitron, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ff3366;
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+}
+
+.live-ticker-item::after {
+    content: "•";
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 0 0 12px #fff;
+}
+
+@media (max-width: 768px) {
+    .live-ticker-wrap {
+        height: 32px;
+        top: 96px;
+    }
+    .live-ticker-item {
+        font-size: 11px;
+        gap: 1rem;
+    }
+}
+
+/* =================================================================
    Hero Section
    ================================================================= */
 .hero {
@@ -1850,6 +1908,74 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--muted);
+}
+
+/* =================================================================
+   Fest Initiated Animation (Post-Countdown)
+   ================================================================= */
+.fest-started-message {
+    animation: festInitiatedBox 1s ease-out forwards;
+    padding: 20px;
+    text-align: center;
+}
+
+@keyframes festInitiatedBox {
+    0% { transform: scale(0.8); opacity: 0; filter: blur(10px); }
+    50% { transform: scale(1.05); opacity: 1; filter: brightness(1.5) blur(2px); }
+    100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+.fest-initiated-text {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(24px, 4.5vw, 42px);
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    text-shadow: 0 0 10px rgba(0, 255, 179, 0.4), 0 0 20px rgba(0, 255, 179, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+.fest-initiated-text::before,
+.fest-initiated-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.fest-initiated-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.fest-initiated-text::after {
+    left: -2px;
+    text-shadow: -2px 0 #00fff9;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(40% 0 50% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(10% 0 70% 0); }
+  100% { clip-path: inset(30% 0 50% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 60% 0); }
+  20% { clip-path: inset(30% 0 20% 0); }
+  40% { clip-path: inset(70% 0 10% 0); }
+  60% { clip-path: inset(20% 0 50% 0); }
+  80% { clip-path: inset(50% 0 30% 0); }
+  100% { clip-path: inset(5% 0 80% 0); }
 }
 
 /* =================================================================
