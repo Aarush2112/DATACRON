@@ -557,11 +557,38 @@
                     member_3_email: size >= 3 ? (rawData.member3Email?.trim() || null) : null
                 };
 
-                // Validate no college emails
-                const emailFields = [pendingRegistrationData.leader_email, pendingRegistrationData.member_2_email, pendingRegistrationData.member_3_email];
-                for (const email of emailFields) {
-                    if (email && (email.toLowerCase().endsWith('.edu') || email.toLowerCase().includes('.edu.') || email.toLowerCase().includes('.ac.in'))) {
-                        alert("⚠️ Please use a personal email ID (like Gmail, Outlook, Yahoo) instead of a college/university email ID.\\n\\nCollege firewalls often block our automated verification emails.");
+                // Validate that all emails are personal (not institutional/college)
+                const personalDomains = [
+                    'gmail.com', 'googlemail.com',
+                    'yahoo.com', 'yahoo.co.in', 'yahoo.in',
+                    'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+                    'icloud.com', 'me.com', 'mac.com',
+                    'protonmail.com', 'pm.me',
+                    'rediffmail.com', 'ymail.com'
+                ];
+
+                function isPersonalEmail(email) {
+                    if (!email) return true; // optional fields that are empty are fine
+                    const domain = email.toLowerCase().split('@')[1];
+                    return personalDomains.includes(domain);
+                }
+
+                function getEmailLabel(email) {
+                    if (email === pendingRegistrationData.leader_email) return 'Leader';
+                    if (email === pendingRegistrationData.member_2_email) return 'Member 2';
+                    if (email === pendingRegistrationData.member_3_email) return 'Member 3';
+                    return '';
+                }
+
+                const allEmails = [
+                    pendingRegistrationData.leader_email,
+                    pendingRegistrationData.member_2_email,
+                    pendingRegistrationData.member_3_email
+                ];
+
+                for (const email of allEmails) {
+                    if (email && !isPersonalEmail(email)) {
+                        alert(`⚠️ Invalid Email: ${getEmailLabel(email)} email "${email}" does not appear to be a personal email address.\n\nPlease use a personal email ID (Gmail, Yahoo, Outlook, iCloud, etc.) for all team members so that our verification emails reach you successfully.`);
                         submitBtn.textContent = 'COMPLETE REGISTRATION';
                         submitBtn.disabled = false;
                         return;
@@ -575,10 +602,31 @@
                     return;
                 }
 
+                // Check for duplicate registration BEFORE sending OTP
+                submitBtn.textContent = 'CHECKING...';
+                try {
+                    const { data: existing, error: dupErr } = await _supabase
+                        .from('registrations')
+                        .select('id')
+                        .eq('event_name', currentEvent)
+                        .or(`leader_email.eq.${pendingRegistrationData.leader_email},team_name.eq.${pendingRegistrationData.team_name}`)
+                        .limit(1);
+
+                    if (!dupErr && existing && existing.length > 0) {
+                        alert("❌ Registration Rejected: This email address or Team Name is already registered for this event.");
+                        submitBtn.textContent = 'COMPLETE REGISTRATION';
+                        submitBtn.disabled = false;
+                        return;
+                    }
+                } catch (dupCheckErr) {
+                    console.warn('[WARN] Could not perform duplicate pre-check:', dupCheckErr);
+                    // Non-fatal: fall through and let the OTP handler catch it
+                }
+
                 console.log(`[DEBUG] Attempting OTP verification for event: ${currentEvent}`);
 
                 try {
-                    // Send OTP request (It will block and return error if Team Name or Email is already registered)
+                    // Send OTP (duplicate pre-check already passed above)
                     const { data: otpData, error: otpError } = await _supabase.functions.invoke('otp-handler', {
                         body: { 
                             action: 'SEND', 
@@ -596,6 +644,7 @@
                     // Show OTP modal
                     otpOverlay.classList.add('is-visible');
                     otpInput.value = '';
+
                     otpInput.focus();
 
                 } catch (error) {
