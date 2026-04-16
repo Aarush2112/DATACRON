@@ -16,6 +16,7 @@
     
     <!-- Preload Critical Assets -->
     <link rel="preload" href="./Assets/Logo.png" as="image" fetchpriority="high">
+    <link rel="preload" href="./Assets/Logo Datacron.mp4" as="video" type="video/mp4" fetchpriority="high">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" media="all">
@@ -279,11 +280,12 @@
 
         .preloader-bar {
             height: 100%;
-            width: 0%;
+            width: 100%;
             background: #00FF9F;
             box-shadow: 0 0 10px #00FF9F;
-            transition: width 0.1s linear;
-            will-change: width;
+            transform-origin: left;
+            transform: scaleX(0);
+            will-change: transform;
         }
     </style>
 
@@ -300,7 +302,7 @@
 </head>
 <body class="loading">
     <div id="video-preloader" aria-hidden="true">
-        <video id="preloader-video" autoplay muted playsinline>
+        <video id="preloader-video" autoplay muted playsinline preload="auto">
             <source src="./Assets/Logo Datacron.mp4" type="video/mp4">
         </video>
         <div class="preloader-ui">

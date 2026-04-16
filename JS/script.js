@@ -647,11 +647,16 @@
                 setTimeout(() => preloader.remove(), 700);
             };
 
+            let lastPercent = -1;
             const updateProgress = () => {
                 if (video.duration) {
                     const progress = Math.min((video.currentTime / video.duration) * 100, 100);
-                    if (percentEl) percentEl.textContent = Math.floor(progress) + "%";
-                    if (barEl) barEl.style.width = progress + "%";
+                    const currentPercent = Math.floor(progress);
+                    if (currentPercent !== lastPercent) {
+                        if (percentEl) percentEl.textContent = currentPercent + "%";
+                        lastPercent = currentPercent;
+                    }
+                    if (barEl) barEl.style.transform = `scaleX(${progress / 100})`;
                 }
                 if (!preloader.classList.contains("hidden")) {
                     requestAnimationFrame(updateProgress);
@@ -660,6 +665,10 @@
 
             requestAnimationFrame(updateProgress);
             video.addEventListener("ended", hidePreloader);
+            
+            video.addEventListener("canplay", () => {
+                video.playbackRate = 2.2;
+            }, { once: true });
             video.playbackRate = 2.2;
 
             const playPromise = video.play();
@@ -667,7 +676,7 @@
                 playPromise.catch(() => hidePreloader());
             }
 
-            setTimeout(hidePreloader, 2500);
+            setTimeout(hidePreloader, 3000);
         })();
 
         /* Smooth Scrolling Initialization */
