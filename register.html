@@ -447,6 +447,28 @@
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const eventId = params.get('event');
+
+            // Deadline Check for Mini Events
+            const miniEvents = ['whizzes', 'logify'];
+            const deadline = new Date('2026-04-17T12:15:00+05:30'); // 17th April 2026, 12:15 PM IST
+            
+            if (miniEvents.includes(eventId) && new Date() > deadline) {
+                const regCard = document.querySelector('.reg-card');
+                if (regCard) {
+                    let displayEvent = eventId === 'whizzes' ? 'WAR OF THE WHIZZES' : 'LOGIFY';
+                    regCard.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <h2 style="color: #00ffb3; margin-bottom: 20px; font-family: 'Orbitron', sans-serif; font-size: 24px; text-transform: uppercase;">${displayEvent}</h2>
+                            <p style="color: #e2e8f0; line-height: 1.6; font-size: 16px; margin-bottom: 30px;">
+                                Registration for this event has officially concluded.<br><br>
+                                Thank you for your overwhelming response! Please join our WhatsApp community for upcoming announcements and future events.
+                            </p>
+                            <a href="events.html" style="display: inline-block; padding: 12px 24px; background: rgba(0, 255, 179, 0.1); border: 1px solid #00ffb3; color: #00ffb3; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; text-transform: uppercase; transition: all 0.3s ease;">Explore Other Events</a>
+                        </div>
+                    `;
+                }
+                return; // Stop form initialization
+            }
             
             const eventTitle = document.getElementById('event-title');
             const eventNameInput = document.getElementById('event-name-input');
