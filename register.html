@@ -557,6 +557,17 @@
                     member_3_email: size >= 3 ? (rawData.member3Email?.trim() || null) : null
                 };
 
+                // Validate no college emails
+                const emailFields = [pendingRegistrationData.leader_email, pendingRegistrationData.member_2_email, pendingRegistrationData.member_3_email];
+                for (const email of emailFields) {
+                    if (email && (email.toLowerCase().endsWith('.edu') || email.toLowerCase().includes('.edu.') || email.toLowerCase().includes('.ac.in'))) {
+                        alert("⚠️ Please use a personal email ID (like Gmail, Outlook, Yahoo) instead of a college/university email ID.\\n\\nCollege firewalls often block our automated verification emails.");
+                        submitBtn.textContent = 'COMPLETE REGISTRATION';
+                        submitBtn.disabled = false;
+                        return;
+                    }
+                }
+
                 if (!currentEvent) {
                     alert("System Error: Event context missing. Please return to the events page and try again.");
                     submitBtn.textContent = 'COMPLETE REGISTRATION';
