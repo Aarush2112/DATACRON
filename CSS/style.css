@@ -341,15 +341,15 @@ body::before {
 .event-ticker-wrap {
     width: 100%;
     overflow: hidden;
-    background: rgba(2, 2, 2, 0.8);
-    border-bottom: 1px solid rgba(0, 255, 179, 0.15);
+    background: rgba(2, 2, 2, 0.95);
+    border-bottom: 1px solid rgba(0, 255, 179, 0.2);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     height: 40px;
     display: flex;
     align-items: center;
     position: sticky;
-    top: 100px;
+    top: 109px;
     z-index: 48;
 }
 
@@ -389,7 +389,7 @@ body::before {
 @media (max-width: 768px) {
     .event-ticker-wrap {
         height: 36px;
-        top: 92px;
+        top: 96px;
     }
     .ticker-item {
         font-size: 11px;
@@ -407,16 +407,18 @@ body::before {
 .live-ticker-wrap {
     width: 100%;
     overflow: hidden;
-    background: rgba(255, 0, 50, 0.15);
-    border-bottom: 1px solid rgba(255, 0, 50, 0.4);
+    background: rgba(255, 0, 50, 0.85);
+    border-bottom: 1px solid rgba(255, 0, 50, 0.6);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     height: 35px;
     display: flex;
     align-items: center;
     position: sticky;
-    top: 65px;
+    top: 74px;
     z-index: 49;
+    opacity: 1 !important;
+    visibility: visible !important;
     transition: opacity 1s ease;
 }
 
@@ -451,7 +453,7 @@ body::before {
 @media (max-width: 768px) {
     .live-ticker-wrap {
         height: 32px;
-        top: 60px;
+        top: 64px;
     }
     .live-ticker-item {
         font-size: 11px;
