@@ -70,11 +70,11 @@ body {
     border: 2px solid var(--glow);
     box-shadow: 0 0 10px var(--glow), 0 0 20px rgba(0, 255, 179, .4);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 100001;
     opacity: 0;
     transition: opacity .3s ease, box-shadow .3s ease;
     will-change: transform;
-    z-index: 9999;
+    z-index: 100001;
 }
 
 .custom-cursor.is-hovering {
@@ -1142,6 +1142,23 @@ body::before {
     background: rgba(0, 255, 159, .08);
     border: 1px solid rgba(0, 255, 159, .35);
     box-shadow: 0 0 8px rgba(0, 255, 159, .25);
+}
+
+.badge--results {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    font-size: 0.58rem;
+    color: #fff;
+    background: linear-gradient(135deg, #00ffb3, #008a61);
+    border: 1px solid rgba(0, 255, 179, 0.4);
+    box-shadow: 0 0 12px rgba(0, 255, 179, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    z-index: 10;
 }
 
 .reg-dot {
@@ -2230,7 +2247,7 @@ body::before {
     height: 4px;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9998;
+    z-index: 100000;
     will-change: transform, opacity;
 }
 
