@@ -230,6 +230,32 @@
             text-decoration: none;
             letter-spacing: 0.5px;
         }
+
+        .btn-results-soon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px 24px;
+            border-radius: 10px;
+            font-family: "Poppins", sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(230, 180, 50, 0.12), rgba(255, 200, 60, 0.06));
+            border: 1px solid rgba(230, 180, 50, 0.35);
+            color: rgba(230, 180, 50, 0.9);
+            cursor: default;
+            pointer-events: none;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            animation: resultsPulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes resultsPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(230, 180, 50, 0); }
+            50%       { box-shadow: 0 0 14px 2px rgba(230, 180, 50, 0.22); }
+        }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
@@ -350,6 +376,9 @@
                             <div class="event-cta-btns">
                                 <span class="btn-closed" id="data-heist-register-btn" aria-disabled="true">
                                     <i class="fas fa-lock" aria-hidden="true"></i> Registrations Closed
+                                </span>
+                                <span class="btn-results-soon" id="data-heist-results-btn" aria-label="Results coming soon">
+                                    <i class="fas fa-hourglass-half" aria-hidden="true"></i> Results Coming Soon
                                 </span>
                                 <a href="https://drive.google.com/file/d/1lBIdLnkYDP0j70kuwZ7-7fMn49ldVRGW/view?usp=share_link"
                                    target="_blank" rel="noopener noreferrer"
