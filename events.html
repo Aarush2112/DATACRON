@@ -140,6 +140,57 @@
             transform: translateY(30px);
             will-change: opacity, transform;
         }
+
+        .event-card--completed {
+            position: relative;
+        }
+
+        .event-completed-overlay {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            pointer-events: none;
+        }
+
+        .badge--completed {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, rgba(255, 80, 80, 0.85), rgba(200, 50, 50, 0.9));
+            color: #fff;
+            border: 1px solid rgba(255, 100, 100, 0.5);
+            box-shadow: 0 2px 10px rgba(255, 80, 80, 0.3);
+        }
+
+        .badge--reg-closed {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.65);
+            color: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .event-card--completed .event-banner {
+            opacity: 0.65;
+        }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
@@ -241,12 +292,16 @@
                             </div>
                         </article>
 
-                        <article class="event-card event-card--main data-heist-card group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
+                        <article class="event-card event-card--main event-card--completed data-heist-card group hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,255,159,0.3)] transition-all duration-300" role="listitem"
                                  data-title="DATA HEIST"
                                  data-brief="A thrilling multi-stage team challenge where participants decode clues, strategize in a live auction, and analyse real datasets to outsmart rivals and win."
                                  data-banner="Assets/images/Data_heist.jpg"
-                                 data-register="https://unstop.com/o/1P7ERc6?utm_medium=Share&utm_source=competitions&utm_campaign=Logged_out_user"
+                                 data-register="#"
                                  data-rules="https://drive.google.com/file/d/1wYGbeTJsqEBlEJQ3hv2HbJoKMczWKU8s/view?usp=share_link">
+                            <div class="event-completed-overlay" aria-label="Event status">
+                                <span class="badge--completed"><i class="fas fa-check-circle" aria-hidden="true"></i> Completed</span>
+                                <span class="badge--reg-closed"><i class="fas fa-lock" aria-hidden="true"></i> Registrations Closed</span>
+                            </div>
                             <div class="banner-container">
                                 <picture>
                                     <source srcset="./Assets/images/Data_heist.jpg" type="image/webp">
