@@ -3226,6 +3226,62 @@ body::before {
     color: var(--muted);
     letter-spacing: 1px;
     text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.results-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    border-radius: 999px;
+    font-family: Orbitron, system-ui, sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #03050a;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--glow), var(--accent));
+    box-shadow: 0 0 20px rgba(0, 255, 159, 0.3);
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.results-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.results-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.results-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 35px rgba(0, 255, 159, 0.5);
+    filter: brightness(1.1);
+}
+
+.results-btn:hover::after {
+    left: 160%;
+}
+
+.results-btn:active {
+    transform: translateY(-1px) scale(1.02);
 }
 
 @media (max-width: 480px) {
