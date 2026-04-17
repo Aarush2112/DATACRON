@@ -375,15 +375,6 @@
                         </div>
                     `;
 
-                    // Show live ticker
-                    const liveTicker = document.getElementById('live-ticker');
-                    if (liveTicker) {
-                        liveTicker.style.display = 'flex';
-                        // Short delay to allow display change to apply before fading in
-                        setTimeout(() => {
-                            liveTicker.style.opacity = '1';
-                        }, 50);
-                    }
                 }
                 return;
             }
