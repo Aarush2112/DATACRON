@@ -687,6 +687,57 @@
             setTimeout(hidePreloader, 3000);
         })();
 
+        /* =================================================================
+           Results Modal
+           ================================================================= */
+        (function initResultsModal() {
+            const modal = qS("#results-modal");
+            const closeBtn = qS("#close-results");
+
+            if (!modal || !closeBtn) return;
+
+            const showModal = () => {
+                // Short delay to let the preloader transition finish
+                setTimeout(() => {
+                    modal.classList.add("is-visible");
+                    modal.setAttribute("aria-hidden", "false");
+                    document.body.style.overflow = "hidden"; // Prevent scrolling while modal is open
+                }, 1000);
+            };
+
+            const hideModal = () => {
+                modal.classList.remove("is-visible");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = ""; // Re-enable scrolling
+            };
+
+            closeBtn.addEventListener("click", hideModal);
+
+            // Close on backdrop click
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) hideModal();
+            });
+
+            // Trigger showModal after page load (wrapped in a check for preloader)
+            const preloader = qS("#video-preloader");
+            if (preloader) {
+                // If preloader exists, wait for it to be removed
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        mutation.removedNodes.forEach((node) => {
+                            if (node === preloader || (node.id === "video-preloader")) {
+                                showModal();
+                                observer.disconnect();
+                            }
+                        });
+                    });
+                });
+                observer.observe(document.body, { childList: true });
+            } else {
+                showModal();
+            }
+        })();
+
         /* Smooth Scrolling Initialization */
         (function initLenis() {
             if (typeof Lenis !== 'undefined') {
