@@ -162,6 +162,192 @@
             position: relative;
             z-index: 2;
         }
+
+        .event-status-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, rgba(0, 255, 179, 0.1), rgba(0, 200, 120, 0.05));
+            border: 1px solid rgba(0, 255, 179, 0.35);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .event-status-banner:hover {
+            transform: scale(1.02);
+        }
+
+        .event-status-banner__icon {
+            font-size: 20px;
+            color: var(--glow);
+            flex-shrink: 0;
+        }
+
+        .event-status-banner__text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .event-status-banner__label {
+            font-family: "Orbitron", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--glow);
+            text-transform: uppercase;
+        }
+
+        .event-status-banner__sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Results Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            width: min(600px, 90vw);
+            background: #0a0d14;
+            border: 1px solid rgba(0, 255, 179, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 179, 0.1);
+        }
+
+        .modal-overlay.is-active .modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            font-family: "Orbitron", sans-serif;
+            font-size: 24px;
+            color: var(--glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .modal-results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .modal-results-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-results-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 179, 0.2);
+            border-radius: 10px;
+        }
+
+        .results-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .results-rank {
+            font-family: "Orbitron", sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent);
+            width: 24px;
+        }
+
+        .results-team {
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* Top 3 Stylings */
+        .results-item:nth-child(1) {
+            border-color: rgba(255, 215, 0, 0.4);
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+        .results-item:nth-child(1) .results-rank { color: #ffd700; font-size: 18px; }
+        .results-item:nth-child(1) .results-team { font-weight: 700; color: #ffd700; }
+
+        .results-item:nth-child(2) {
+            border-color: rgba(192, 192, 192, 0.4);
+            background: linear-gradient(90deg, rgba(192, 192, 192, 0.1), transparent);
+        }
+        .results-item:nth-child(2) .results-rank { color: #c0c0c0; font-size: 16px; }
+        .results-item:nth-child(2) .results-team { font-weight: 600; color: #e0e0e0; }
+
+        .results-item:nth-child(3) {
+            border-color: rgba(205, 127, 50, 0.4);
+            background: linear-gradient(90deg, rgba(205, 127, 50, 0.1), transparent);
+        }
+        .results-item:nth-child(3) .results-rank { color: #cd7f32; font-size: 15px; }
+        .results-item:nth-child(3) .results-team { font-weight: 600; color: #d79c6b; }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
@@ -275,12 +461,16 @@
                                 <span><strong>Prizes:</strong> Exciting Rewards</span>
                             </div>
 
+                             <div class="event-status-banner" id="trigger-results-modal" role="button" aria-label="View results" tabindex="0">
+                                <i class="fas fa-trophy event-status-banner__icon" aria-hidden="true"></i>
+                                <div class="event-status-banner__text">
+                                    <span class="event-status-banner__label">Results Declared</span>
+                                    <span class="event-status-banner__sub">Final standings are now available</span>
+                                </div>
+                            </div>
+
                             <div class="event-cta-btns">
-                                <a href="register.html?event=logify"
-                                   class="btn-register"
-                                   id="logify-register-btn">
-                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
-                                </a>
+
                                 <a href="https://drive.google.com/file/d/18DmwzKjm4G2qcBjQRdXsPwHSA3Vux4lS/view?usp=share_link"
                                    target="_blank" rel="noopener noreferrer"
                                    class="btn-rulebook"
@@ -341,7 +531,63 @@
         </div>
     </footer>
 
+    <div class="modal-overlay" id="results-modal">
+        <div class="modal-container">
+            <button class="modal-close" id="close-modal" aria-label="Close results">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title">Final Standings</h2>
+                <p class="modal-subtitle">Logify 2026</p>
+            </div>
+            <div class="modal-results-list">
+                <div class="results-item">
+                    <span class="results-rank">1</span>
+                    <span class="results-team">CheckMate</span>
+                </div>
+                <div class="results-item">
+                    <span class="results-rank">2</span>
+                    <span class="results-team">Pokemon</span>
+                </div>
+                <div class="results-item">
+                    <span class="results-rank">3</span>
+                    <span class="results-team">505</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="./JS/script.js" defer></script>
     <script src="./JS/animations.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.getElementById('trigger-results-modal');
+            const modal = document.getElementById('results-modal');
+            const close = document.getElementById('close-modal');
+
+            if (trigger && modal && close) {
+                trigger.addEventListener('click', () => {
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                const closeModal = () => {
+                    modal.classList.remove('is-active');
+                    document.body.style.overflow = '';
+                };
+
+                close.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                        closeModal();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
