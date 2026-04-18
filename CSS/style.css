@@ -1164,8 +1164,8 @@ body::before {
 
 .badge--results {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
     padding: 4px 10px;
     font-size: 0.58rem;
     color: #fff;
