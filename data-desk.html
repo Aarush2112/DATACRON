@@ -150,6 +150,63 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+
+        .event-status-banner {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(255, 80, 80, 0.12), rgba(255, 140, 0, 0.08));
+            border: 1px solid rgba(255, 80, 80, 0.35);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+        }
+
+        .event-status-banner__icon {
+            font-size: 20px;
+            color: #ff6b6b;
+            flex-shrink: 0;
+        }
+
+        .event-status-banner__text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .event-status-banner__label {
+            font-family: "Orbitron", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ff6b6b;
+            text-transform: uppercase;
+        }
+
+        .event-status-banner__sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-closed {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px 24px;
+            border-radius: 10px;
+            font-family: "Poppins", sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.35);
+            cursor: not-allowed;
+            pointer-events: none;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
     </style>
 
     <!-- Async Load Non-Critical CSS -->
@@ -251,12 +308,17 @@
                                 <i class="fas fa-trophy" aria-hidden="true"></i>
                                 <span><strong>Prizes:</strong> Cash + Goodies</span>
                             </div>
+                            <div class="event-status-banner" role="alert">
+                                <i class="fas fa-calendar-times event-status-banner__icon" aria-hidden="true"></i>
+                                <div class="event-status-banner__text">
+                                    <span class="event-status-banner__label">Registrations Closed</span>
+                                    <span class="event-status-banner__sub">Capacity reached for this event</span>
+                                </div>
+                            </div>
+
                             <div class="event-cta-btns">
-                                <a href="https://unstop.com/competitions/data-desk-datacron26-rishihood-university-1669079"
-                                   target="_blank" rel="noopener noreferrer"
-                                   class="btn-register"
-                                   id="data-desk-register-btn">
-                                    <i class="fas fa-rocket" aria-hidden="true"></i> Register Now
+                                <a href="#" class="btn-closed" id="data-desk-register-btn">
+                                    <i class="fas fa-lock" aria-hidden="true"></i> Registrations Closed
                                 </a>
                                 <a href="https://drive.google.com/file/d/1IEK2kFU4modD6_2yvPBReMdcvbcSewB7/view?usp=share_link"
                                    target="_blank" rel="noopener noreferrer"
